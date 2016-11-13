@@ -19,7 +19,7 @@ public class KwejkController {
     @Autowired
     private KwejkScrapper kwejkScrapper;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
         return kwejkScrapper.scrap(KWEJK_ROOT_URL);

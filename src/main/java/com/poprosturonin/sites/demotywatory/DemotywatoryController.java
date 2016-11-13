@@ -19,7 +19,7 @@ public class DemotywatoryController {
     @Autowired
     private DemotywatoryScrapper demotywatoryScrapper;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
         return demotywatoryScrapper.scrap(ROOT_URL);
