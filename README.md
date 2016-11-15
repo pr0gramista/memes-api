@@ -1,0 +1,54 @@
+﻿# Memes API
+API for scrapping common meme sites.
+Currently supports:
+* [demotywatory.pl](http://demotywatory.pl)
+* [kwejk.pl](http://kwejk.pl)
+* [mistrzowie.org](http://mistrzowie.org)
+
+Will be supported:
+* [thecodinglove.com](http://thecodinglove.com)
+
+## API
+`/`
+
+Response: available sites
+```
+[
+  "/demotywatory",
+  "/kwejk",
+  "/mistrzowie"
+]
+```
+
+Then you can access them by accessing fe. `/kwejk`
+```
+//shortened response
+{
+  "title": "KWEJK.pl - Najlepszy zbiór obrazków z Internetu!",
+  "memes": [
+    {
+      "title": "Dziewczyna z piłką",
+      "content": {
+        "url": "http://i1.kwejk.pl/k/obrazki/2016/11/7479f6497e46508ab0d515fcc7047b72.mp4",
+        "contentType": "VIDEO"
+      },
+      "url": "http://kwejk.pl/obrazek/2814335/dziewczyna-z-pilka.html",
+      "description": null,
+      "comments": 6,
+      "points": 125
+    },
+    {
+      "title": "Ma szansę być prezydentem",
+      "content": {
+        "url": "http://i1.kwejk.pl/k/obrazki/2016/11/09100a20e1dd607694e91f408e15c761.jpg",
+        "contentType": "IMAGE"
+      },
+      "url": "http://kwejk.pl/obrazek/2814963/ma-szanse-byc-prezydentem.html",
+      "description": null,
+      "comments": 6,
+      "points": 126
+    }
+  ],
+  "nextPage": "/kwejk/31310"
+}
+```
