@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Demotywatory tests
+ * Mistrzowie tests
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
