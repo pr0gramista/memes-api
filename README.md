@@ -4,9 +4,10 @@ Currently supports:
 * [demotywatory.pl](http://demotywatory.pl)
 * [kwejk.pl](http://kwejk.pl)
 * [mistrzowie.org](http://mistrzowie.org)
+* [thecodinglove.com](http://thecodinglove.com)
 
 Will be supported:
-* [thecodinglove.com](http://thecodinglove.com)
+* [9gag.com](http://9gag.com)
 
 ## API
 `/`
@@ -17,6 +18,7 @@ Response: available sites
   "/demotywatory",
   "/kwejk",
   "/mistrzowie"
+  "/thecodinglove"
 ]
 ```
 
