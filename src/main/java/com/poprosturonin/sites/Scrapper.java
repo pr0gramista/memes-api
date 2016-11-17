@@ -1,7 +1,12 @@
 package com.poprosturonin.sites;
 
 import com.poprosturonin.data.Page;
+import com.poprosturonin.exceptions.PageIsEmptyException;
+import org.jsoup.HttpStatusException;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 
 /**
  * Scrapper is being used to retrieve information
@@ -15,7 +20,16 @@ public interface Scrapper {
      * @param url given URL
      * @return parsed page if possible, otherwise empty page
      */
-    Page scrap(String url);
+    default Page scrap(String url) {
+        try {
+            return parse(Jsoup.connect(url).get());
+        } catch (HttpStatusException e) {
+            throw new PageIsEmptyException();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        throw new PageIsEmptyException();
+    }
 
     /**
      * Parses given document

@@ -7,7 +7,6 @@ import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,17 +28,6 @@ public class KwejkScrapper implements Scrapper {
 
     private boolean is404(String title) {
         return title.contains(SEQUENCE_404);
-    }
-
-    public Page scrap(String url) {
-        try {
-            return parse(Jsoup.connect(url).get());
-        } catch (HttpStatusException e) {
-            throw new PageIsEmptyException();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new PageIsEmptyException();
     }
 
     private List<String> parseGallery(String url) {

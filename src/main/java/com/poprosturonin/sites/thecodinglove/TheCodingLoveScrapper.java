@@ -5,14 +5,11 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.GIFContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
-import org.jsoup.HttpStatusException;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,17 +19,6 @@ import java.util.stream.Collectors;
  */
 @Component
 public class TheCodingLoveScrapper implements Scrapper {
-
-    public Page scrap(String url) {
-        try {
-            return parse(Jsoup.connect(url).get());
-        } catch (HttpStatusException e) {
-            throw new PageIsEmptyException();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new PageIsEmptyException();
-    }
 
     private Optional<Meme> parsePicture(Element post) {
         Element titleAsLink = post.select("h3 > a").first();

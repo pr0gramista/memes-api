@@ -6,14 +6,11 @@ import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
-import org.jsoup.HttpStatusException;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -29,17 +26,6 @@ import static com.poprosturonin.sites.mistrzowie.MistrzowieController.ROOT_URL;
 @Component
 public class MistrzowieScrapper implements Scrapper {
     private Pattern commentPattern = Pattern.compile("Skomentuj \\(([0-9]+)\\)");
-
-    public Page scrap(String url) {
-        try {
-            return parse(Jsoup.connect(url).get());
-        } catch (HttpStatusException e) {
-            throw new PageIsEmptyException();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new PageIsEmptyException();
-    }
 
     private Optional<Meme> parsePicture(Element mistrz) {
         Elements realImage = mistrz.select("img.pic");

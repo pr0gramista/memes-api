@@ -5,7 +5,6 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.*;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,16 +25,6 @@ import static com.poprosturonin.sites.demotywatory.DemotywatoryController.ROOT_U
  */
 @Component
 public class DemotywatoryScrapper implements Scrapper {
-    public Page scrap(String url) {
-        try {
-            return parse(Jsoup.connect(url).get());
-        } catch (HttpStatusException e) {
-            throw new PageIsEmptyException();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new PageIsEmptyException();
-    }
 
     private Optional<Meme> parsePicture(Element demot) {
         if (demot.hasClass("image"))
