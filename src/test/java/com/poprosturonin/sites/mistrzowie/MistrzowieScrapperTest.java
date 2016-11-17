@@ -30,14 +30,15 @@ import static org.junit.Assert.*;
 public class MistrzowieScrapperTest {
 
     private static String CHARSET = "UTF-8";
-    private static Document testFile;
+
+    private static Document testDocument;
 
     @Autowired
     private MistrzowieScrapper mistrzowieScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testFile = Jsoup.parse(new File(MistrzowieScrapperTest.class
+        testDocument = Jsoup.parse(new File(MistrzowieScrapperTest.class
                 .getClassLoader()
                 .getResource("sites/mistrzowie.html")
                 .toURI()), CHARSET);
@@ -51,7 +52,7 @@ public class MistrzowieScrapperTest {
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = mistrzowieScrapper.parse(testFile);
+        Page page = mistrzowieScrapper.parse(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -62,19 +63,22 @@ public class MistrzowieScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = mistrzowieScrapper.parse(testFile);
+        Page page = mistrzowieScrapper.parse(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("Kim jest?")),
                         hasProperty("url", equalTo("http://mistrzowie.org/679961/Kim-jest")),
                         hasProperty("comments", is(3)),
-                        hasProperty("points", is(233))),
+                        hasProperty("points", is(233)),
+                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071055_by_Nightstalker.jpg?1479071055")))
+                ),
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("Satyrycy oglądają youtuberów")),
                         hasProperty("url", equalTo("http://mistrzowie.org/679963/Satyrycy-ogladaja-youtuberow")),
                         hasProperty("comments", is(3)),
-                        hasProperty("points", is(216))
+                        hasProperty("points", is(216)),
+                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071999_by_bartekkk1.jpg?1479071999")))
                 )
         ));
     }

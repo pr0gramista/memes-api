@@ -23,6 +23,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
@@ -107,6 +112,29 @@ public class KwejkScrapperTest {
                 .collect(Collectors.toList());
 
         assertEquals(5, images.size());
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void gotMemesProperly() throws Exception {
+        Page page = kwejkScrapper.parse(testDocument);
+
+        assertThat(page.getMemes(), hasItems(
+                allOf(
+                        hasProperty("title", equalToIgnoringWhiteSpace("IMPREZA :)")),
+                        hasProperty("url", equalTo("http://kwejk.pl/obrazek/2803669/impreza.html")),
+                        hasProperty("comments", is(1)),
+                        hasProperty("points", is(96)),
+                        hasProperty("content", hasProperty("url", equalTo("http://i1.kwejk.pl/k/obrazki/2016/10/nX5hTD3AjRz0vEoKkH4CZ5GzBy0VyCao.jpg")))
+                ),
+                allOf(
+                        hasProperty("title", equalToIgnoringWhiteSpace("NIGDY NIE MA TWOJEGO TATY")),
+                        hasProperty("url", equalTo("http://kwejk.pl/obrazek/2803727/nigdy-nie-ma-twojego-taty.html")),
+                        hasProperty("comments", is(6)),
+                        hasProperty("points", is(64)),
+                        hasProperty("content", hasProperty("url", equalTo("http://i1.kwejk.pl/k/obrazki/2016/10/782db6afb8715ca8d43da021749cd212.jpg")))
+                )
+        ));
     }
 
     @Test

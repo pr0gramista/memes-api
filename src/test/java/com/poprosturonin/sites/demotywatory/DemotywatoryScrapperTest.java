@@ -22,6 +22,11 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
@@ -35,21 +40,22 @@ public class DemotywatoryScrapperTest {
     /**
      * This site contains 3 galleries and 7 images
      */
-    private static Document testFile;
+    private static Document testDocument;
     /**
      * This page contains 1 video, 1 gif, no galleries and 8 images
      */
-    private static Document testFile2;
+    private static Document testDocument2;
+
     @Autowired
     private DemotywatoryScrapper demotywatoryScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testFile = Jsoup.parse(new File(DemotywatoryScrapperTest.class.
+        testDocument = Jsoup.parse(new File(DemotywatoryScrapperTest.class.
                 getClassLoader()
                 .getResource("sites/demotywatory.html")
                 .toURI()), CHARSET);
-        testFile2 = Jsoup.parse(new File(DemotywatoryScrapperTest.class
+        testDocument2 = Jsoup.parse(new File(DemotywatoryScrapperTest.class
                 .getClassLoader()
                 .getResource("sites/demotywatory2.html")
                 .toURI()), CHARSET);
@@ -63,7 +69,7 @@ public class DemotywatoryScrapperTest {
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = demotywatoryScrapper.parse(testFile);
+        Page page = demotywatoryScrapper.parse(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -73,7 +79,7 @@ public class DemotywatoryScrapperTest {
 
     @Test
     public void gotVideoAndGif() throws Exception {
-        Page page = demotywatoryScrapper.parse(testFile2);
+        Page page = demotywatoryScrapper.parse(testDocument2);
 
         List<Content> contents = page.getMemes().stream()
                 .map(Meme::getContent)
@@ -99,8 +105,31 @@ public class DemotywatoryScrapperTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
+    public void gotMemesProperly() throws Exception {
+        Page page = demotywatoryScrapper.parse(testDocument);
+
+        assertThat(page.getMemes(), hasItems(
+                allOf(
+                        hasProperty("title", equalToIgnoringWhiteSpace("Zwykli bohaterowie są wśród nas")),
+                        hasProperty("url", equalTo("http://m.demotywatory.pl/4704634")),
+                        hasProperty("comments", is(33)),
+                        hasProperty("points", is(965)),
+                        hasProperty("content", hasProperty("url", equalTo("http://img6.demotywatoryfb.pl//uploads/201610/1477871536_dduner_600.jpg")))
+                ),
+                allOf(
+                        hasProperty("title", equalToIgnoringWhiteSpace("Takie Halloween to ja rozumiem")),
+                        hasProperty("url", equalTo("http://m.demotywatory.pl/4704722")),
+                        hasProperty("comments", is(23)),
+                        hasProperty("points", is(597)),
+                        hasProperty("content", hasProperty("url", equalTo("http://img6.demotywatoryfb.pl//uploads/201610/1477925937_gsxf0u_600.jpg")))
+                )
+        ));
+    }
+
+    @Test
     public void isGalleryPresentAndOk() throws Exception {
-        Page page = demotywatoryScrapper.parse(testFile);
+        Page page = demotywatoryScrapper.parse(testDocument);
 
         List<Meme> memes = page.getMemes()
                 .stream()

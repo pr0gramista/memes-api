@@ -29,14 +29,14 @@ import static org.junit.Assert.*;
 public class TheCodingLoveScrapperTest {
 
     private static String CHARSET = "UTF-8";
-    private static Document testFile;
+    private static Document testDocument;
 
     @Autowired
     private TheCodingLoveScrapper theCodingLoveScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testFile = Jsoup.parse(new File(TheCodingLoveScrapperTest.class
+        testDocument = Jsoup.parse(new File(TheCodingLoveScrapperTest.class
                 .getClassLoader()
                 .getResource("sites/thecodinglove.html")
                 .toURI()), CHARSET);
@@ -50,7 +50,7 @@ public class TheCodingLoveScrapperTest {
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = theCodingLoveScrapper.parse(testFile);
+        Page page = theCodingLoveScrapper.parse(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -61,7 +61,7 @@ public class TheCodingLoveScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = theCodingLoveScrapper.parse(testFile);
+        Page page = theCodingLoveScrapper.parse(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
