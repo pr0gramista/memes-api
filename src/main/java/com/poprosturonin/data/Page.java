@@ -1,6 +1,7 @@
 package com.poprosturonin.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Single page of supported sites
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Page {
     /**
      * Title of the page

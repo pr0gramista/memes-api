@@ -1,14 +1,17 @@
 package com.poprosturonin.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.poprosturonin.data.contents.Content;
 
 /**
  * Single meme with some content
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Meme {
     private String title;
     private Content content;
     private String url;
+
     private String description;
     private int comments;
     private int points;

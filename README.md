@@ -35,7 +35,6 @@ Then you can access them by accessing fe. `/kwejk`
         "contentType": "VIDEO"
       },
       "url": "http://kwejk.pl/obrazek/2814335/dziewczyna-z-pilka.html",
-      "description": null,
       "comments": 6,
       "points": 125
     },
@@ -46,7 +45,6 @@ Then you can access them by accessing fe. `/kwejk`
         "contentType": "IMAGE"
       },
       "url": "http://kwejk.pl/obrazek/2814963/ma-szanse-byc-prezydentem.html",
-      "description": null,
       "comments": 6,
       "points": 126
     }
