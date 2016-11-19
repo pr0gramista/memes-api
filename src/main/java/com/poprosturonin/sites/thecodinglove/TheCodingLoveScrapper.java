@@ -40,7 +40,7 @@ public class TheCodingLoveScrapper implements Scrapper {
         //Get next link page
         Element nextPageElement = document.select("a.previouslink").last();
         if (nextPageElement != null)
-            page.setNextPage("/thecodinglove" + nextPageElement.attr("href"));
+            page.setNextPage("/thecodinglove" + nextPageElement.attr("href").replace("/page", ""));
 
         //Get content
         Elements pictures = document.select("div.post");

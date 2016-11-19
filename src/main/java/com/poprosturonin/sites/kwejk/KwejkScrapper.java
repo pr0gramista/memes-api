@@ -78,13 +78,13 @@ public class KwejkScrapper implements Scrapper {
         if (galleryContent.isPresent())
             return Optional.of(new Meme(title, galleryContent.get(), url, comments, votes));
 
-        Optional<ImageContent> imageContent = tryToParseAsImageContent(article);
-        if (imageContent.isPresent())
-            return Optional.of(new Meme(title, imageContent.get(), url, comments, votes));
-
         Optional<VideoContent> videoContent = tryToParseAsVideoContent(article);
         if (videoContent.isPresent())
             return Optional.of(new Meme(title, videoContent.get(), url, comments, votes));
+
+        Optional<ImageContent> imageContent = tryToParseAsImageContent(article);
+        if (imageContent.isPresent())
+            return Optional.of(new Meme(title, imageContent.get(), url, comments, votes));
 
         return Optional.empty();
     }
