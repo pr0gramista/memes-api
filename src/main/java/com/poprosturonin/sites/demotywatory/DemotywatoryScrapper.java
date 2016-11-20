@@ -118,7 +118,7 @@ public class DemotywatoryScrapper implements Scrapper {
 
         //Put slides
         try {
-            Document document = Jsoup.connect(url).get();
+            Document document = Jsoup.connect(url).userAgent(USER_AGENT).get();
             Elements slides = document.select("div.rsSlideContent");
             slides.forEach((Element slide) ->
                     singles.add(new CaptionedGalleryContent.CaptionedGallerySlide(

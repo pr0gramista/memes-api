@@ -14,6 +14,11 @@ import java.io.IOException;
  */
 public interface Scrapper {
     /**
+     * Because some sites apparently do not like bots, we need to pretend... to be most popular web browser
+     */
+    String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
+
+    /**
      * Scraps the website accessible from given URL.
      * Executes {@link #parse(Document)}
      *
@@ -22,8 +27,9 @@ public interface Scrapper {
      */
     default Page scrap(String url) {
         try {
-            return parse(Jsoup.connect(url).get());
+            return parse(Jsoup.connect(url).userAgent(USER_AGENT).get());
         } catch (HttpStatusException e) {
+            e.printStackTrace();
             throw new PageIsEmptyException();
         } catch (IOException e) {
             e.printStackTrace();

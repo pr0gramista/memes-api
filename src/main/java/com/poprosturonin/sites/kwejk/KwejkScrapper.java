@@ -33,7 +33,7 @@ public class KwejkScrapper implements Scrapper {
     private List<String> parseGallery(String url) {
         List<String> list = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(url).get();
+            Document document = Jsoup.connect(url).userAgent(USER_AGENT).get();
             Elements thumbnails = document.select(".jcarousel img");
             thumbnails.forEach((Element thumbnail) -> list.add(thumbnail.attr("src").replace("_thumb", "")));
         } catch (IOException e) {
