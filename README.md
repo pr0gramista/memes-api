@@ -17,8 +17,9 @@ Response: available sites
 [
   "/demotywatory",
   "/kwejk",
-  "/mistrzowie"
-  "/thecodinglove"
+  "/mistrzowie",
+  "/thecodinglove",
+  "/jbzd"
 ]
 ```
 
