@@ -40,7 +40,7 @@ public class JbzdScrapper implements Scrapper {
             page.setNextPage(nextPageElement.get(0).attr("href").replace("http://jbzd.pl/strona", "/jbzd"));
 
         //Get content
-        Elements listElements = document.select("ul.listing > li");
+        Elements listElements = document.select("section[role=listing] > article");
         List<Meme> memes = listElements.stream()
                 .map(this::parseListElement)
                 .filter(Optional::isPresent)

@@ -72,16 +72,16 @@ public class JbzdScrapperTest {
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("chyba nie")),
-                        hasProperty("url", equalTo("http://jbzd.pl/obr/213493/chyba-nie")),
-                        hasProperty("points", is(77)),
-                        hasProperty("content", hasProperty("url", equalTo("http://img.jbzd.pl/2014/09/794d99be99c1c069cb8e783b844586ba.jpg")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("Idealnie")),
+                        hasProperty("url", equalTo("http://jbzd.pl/obr/518889/idealnie")),
+                        hasProperty("points", is(246)),
+                        hasProperty("content", hasProperty("url", equalTo("http://i1.jbzd.pl/contents/2017/01/4e2cc4a9ac76b4fe7776dc28d935d3c7.gif")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("Piękny drift")),
-                        hasProperty("url", equalTo("http://jbzd.pl/obr/213466/piekny-drift")),
-                        hasProperty("points", is(103)),
-                        hasProperty("content", hasProperty("url", equalTo("http://img.jbzd.pl/2014/09/2681846cf39b5ed534392b755f1d752d.gif")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("NFS")),
+                        hasProperty("url", equalTo("http://jbzd.pl/obr/519096/nfs")),
+                        hasProperty("points", is(199)),
+                        hasProperty("content", hasProperty("url", equalTo("http://i1.jbzd.pl/contents/2017/01/6dde374abf0e009c738539117dc08de3.jpg")))
                 )
         ));
     }
@@ -99,9 +99,9 @@ public class JbzdScrapperTest {
         Meme video = videoOptional.get();
         VideoContent videoContent = (VideoContent) video.getContent();
 
-        assertEquals("Więcej gazu!", video.getTitle());
-        assertEquals("http://jbzd.pl/obr/213469/wiecej-gazu", video.getUrl());
-        assertEquals("http://img.jbzd.pl/2014/09/c10ccf20af5dd03fca6ecf3d8fab4e0a.webm", videoContent.getUrl());
+        assertEquals("Jest moc", video.getTitle());
+        assertEquals("http://jbzd.pl/obr/519066/jest-moc", video.getUrl());
+        assertEquals("http://i1.jbzd.pl/contents/2017/01/6cc205fbab78f4f678b8a1f5096137da.mp4", videoContent.getUrl());
     }
 
     @Configuration
