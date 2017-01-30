@@ -125,7 +125,7 @@ public class KwejkScrapper implements Scrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("btn-next-page");
         if (nextPageElement.size() > 0)
-            page.setNextPage(nextPageElement.get(0).attr("href").replace("http://kwejk.pl/strona", "/kwejk"));
+            page.setNextPage(nextPageElement.get(0).attr("href").replace("https://kwejk.pl/strona", "/kwejk"));
 
         //Get content
         Elements articles = document.getElementsByTag("article");
