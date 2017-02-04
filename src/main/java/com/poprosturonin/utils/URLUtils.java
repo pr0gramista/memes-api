@@ -1,0 +1,36 @@
+package com.poprosturonin.utils;
+
+import java.util.Optional;
+
+public class URLUtils {
+    public static String CUT_URL_PATTERN = "([^\\s]+)/(\\d+)";
+
+    /**
+     * Cuts the part of the url before second slash
+     * Fe. http://example.org/foo/wow will be cut to /wow
+     * <p>
+     * If url doesn't contain 4 slashes (note the protocol slashes) null will be returned
+     *
+     * @param url url to cut
+     * @return cut url or empty optional
+     */
+    public static Optional<String> cutToSecondSlash(String url) {
+        int index = -1;
+        int slash = 0;
+        for (int i = 0; i < url.length(); i++) {
+            if (url.charAt(i) == '/') {
+                if (slash == 3) {
+                    index = i; //the 4th slash
+                    break;
+                } else {
+                    slash++;
+                }
+            }
+        }
+
+        if (index == -1)
+            return Optional.empty();
+
+        return Optional.of(url.substring(index));
+    }
+}
