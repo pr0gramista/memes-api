@@ -8,6 +8,7 @@ import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -37,7 +38,7 @@ public class JbzdScrapper implements Scrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("btn-next-page");
         if (nextPageElement.size() > 0)
-            page.setNextPage(nextPageElement.get(0).attr("href").replace("http://jbzd.pl/strona", "/jbzd"));
+            page.setNextPage("/jbzd" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
         //Get content
         Elements listElements = document.select("section[role=listing] > article");

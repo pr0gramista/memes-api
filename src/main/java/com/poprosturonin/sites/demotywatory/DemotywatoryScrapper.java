@@ -5,6 +5,7 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.*;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.utils.URLUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.poprosturonin.sites.demotywatory.DemotywatoryController.PAGE_URL;
 import static com.poprosturonin.sites.demotywatory.DemotywatoryController.ROOT_URL;
 
 /**
@@ -162,7 +162,7 @@ public class DemotywatoryScrapper implements Scrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("next-page");
         if (nextPageElement.size() > 0)
-            page.setNextPage(nextPageElement.get(0).attr("href").replace(ROOT_URL + PAGE_URL, "/demotywatory/"));
+            page.setNextPage("/demotywatory" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
         //Get content
         Elements pictures = document.getElementsByClass("demot_pic");

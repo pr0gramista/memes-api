@@ -5,6 +5,7 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.GIFContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -40,7 +41,7 @@ public class TheCodingLoveScrapper implements Scrapper {
         //Get next link page
         Element nextPageElement = document.select("a.previouslink").last();
         if (nextPageElement != null)
-            page.setNextPage("/thecodinglove" + nextPageElement.attr("href").replace("/page", ""));
+            page.setNextPage("/thecodinglove" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.attr("href"))).get());
 
         //Get content
         Elements pictures = document.select("div.post");

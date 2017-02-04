@@ -7,6 +7,7 @@ import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.utils.URLUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -124,8 +125,9 @@ public class KwejkScrapper implements Scrapper {
 
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("btn-next-page");
-        if (nextPageElement.size() > 0)
-            page.setNextPage(nextPageElement.get(0).attr("href").replace("https://kwejk.pl/strona", "/kwejk"));
+        if (nextPageElement.size() > 0) {
+            page.setNextPage("/kwejk" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
+        }
 
         //Get content
         Elements articles = document.getElementsByTag("article");

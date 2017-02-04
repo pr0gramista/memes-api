@@ -6,6 +6,7 @@ import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,7 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static com.poprosturonin.sites.mistrzowie.MistrzowieController.PAGE_URL;
 import static com.poprosturonin.sites.mistrzowie.MistrzowieController.ROOT_URL;
 
 /**
@@ -83,7 +83,7 @@ public class MistrzowieScrapper implements Scrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("prefetch list_next_page_button");
         if (nextPageElement.size() > 0)
-            page.setNextPage(nextPageElement.get(0).attr("href").replace(ROOT_URL + PAGE_URL, "/mistrzowie/"));
+            page.setNextPage("/mistrzowie" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
         //Get content
         Elements pictures = document.select("div.pic");
