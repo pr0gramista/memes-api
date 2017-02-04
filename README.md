@@ -1,4 +1,5 @@
-﻿# Memes API
+﻿# Memes API [![Build Status](http://me.poprosturonin.com:8004/buildStatus/icon?job=memes-api)](http://me.poprosturonin.com:8004/job/memes-api/)
+
 API for scrapping common meme sites.
 Currently supports:
 * [demotywatory.pl](http://demotywatory.pl)
