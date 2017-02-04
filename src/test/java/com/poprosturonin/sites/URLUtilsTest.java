@@ -33,4 +33,12 @@ public class URLUtilsTest {
 
         assertThat(result.get(), equalTo("/wow"));
     }
+
+    @Test
+    public void parameterCutWorks() throws Exception {
+        String url = "http://example.org/wow?id=123&wow=false";
+        String cutUrl = URLUtils.cutOffParameters(url);
+
+        assertThat(cutUrl, equalTo("http://example.org/wow"));
+    }
 }

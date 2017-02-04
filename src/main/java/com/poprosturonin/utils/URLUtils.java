@@ -3,7 +3,7 @@ package com.poprosturonin.utils;
 import java.util.Optional;
 
 public class URLUtils {
-    public static String CUT_URL_PATTERN = "([^\\s]+)/(\\d+)";
+    public static String CUT_URL_PATTERN = "^/([^\\s/]+)/(\\d+)";
 
     /**
      * Cuts the part of the url before second slash
@@ -32,5 +32,20 @@ public class URLUtils {
             return Optional.empty();
 
         return Optional.of(url.substring(index));
+    }
+
+    /**
+     * Cuts of the GET parameters from url
+     * Fe. http://example.org/wow?id=123 will be cut to http://example.org/wow
+     *
+     * @param url url to cut
+     * @return url without parameters
+     */
+    public static String cutOffParameters(String url) {
+        int index = url.lastIndexOf('?');
+        if (index != -1)
+            return url.substring(0, index);
+        else
+            return url;
     }
 }
