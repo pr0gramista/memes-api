@@ -6,6 +6,7 @@ Currently supports:
 * [kwejk.pl](http://kwejk.pl)
 * [mistrzowie.org](http://mistrzowie.org)
 * [thecodinglove.com](http://thecodinglove.com)
+* [jbzd.pl](https://jbzdy.pl)
 
 Will be supported:
 * [9gag.com](http://9gag.com)
