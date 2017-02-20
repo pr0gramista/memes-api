@@ -6,9 +6,9 @@ Currently supports:
 * [kwejk.pl](http://kwejk.pl)
 * [mistrzowie.org](http://mistrzowie.org)
 * [thecodinglove.com](http://thecodinglove.com)
-
-Will be supported:
 * [9gag.com](http://9gag.com)
+
+No sites to be supported, suggest one?
 
 ## API
 `/`
@@ -20,7 +20,8 @@ Response: available sites
   "/kwejk",
   "/mistrzowie",
   "/thecodinglove",
-  "/jbzd"
+  "/jbzd",
+  "/9gag"
 ]
 ```
 
