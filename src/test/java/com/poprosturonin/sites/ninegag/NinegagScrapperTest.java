@@ -2,6 +2,7 @@ package com.poprosturonin.sites.ninegag;
 
 import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.PageIsEmptyException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.BeforeClass;
@@ -13,7 +14,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -38,10 +41,23 @@ public class NinegagScrapperTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(NinegagScrapperTest.class
+        //Read file from disk
+        File file = new File(NinegagScrapperTest.class
                 .getClassLoader()
-                .getResource("sites/mistrzowie.html")
-                .toURI()), CHARSET);
+                .getResource("sites/9gag.json")
+                .toURI());
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+        StringBuffer buffer = new StringBuffer();
+        int read;
+        char[] chars = new char[1024];
+        while ((read = reader.read(chars)) != -1)
+            buffer.append(chars, 0, read);
+
+        String json = buffer.toString();
+        testDocument = Jsoup.parse(NinegagScrapper.getHTML(new JSONObject(json)));
+
     }
 
     @Test(expected = PageIsEmptyException.class)
@@ -69,7 +85,7 @@ public class NinegagScrapperTest {
                 allOf(
                         hasProperty("title", equalTo("I see no difference")),
                         hasProperty("url", equalTo("http://9gag.com/gag/aAdPmE9")),
-                        hasProperty("comments", is(157)),
+                        hasProperty("comments", is(156)),
                         hasProperty("points", is(4030)),
                         hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/aAdPmE9_460s.jpg")))
                 ),

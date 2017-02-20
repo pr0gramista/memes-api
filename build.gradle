@@ -29,10 +29,12 @@ targetCompatibility = 1.8
 
 dependencies {
     compile 'org.jsoup:jsoup:1.10.1'
+    compile group: 'org.json', name: 'json', version: '20140107'
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter-security')
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-devtools")
+
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
     testCompile("junit:junit")
