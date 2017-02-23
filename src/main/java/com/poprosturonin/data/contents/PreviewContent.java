@@ -11,6 +11,6 @@ public class PreviewContent extends ImageContent {
 
     @Override
     public ContentType getContentType() {
-        return ContentType.IMAGE;
+        return ContentType.PREVIEW;
     }
 }

@@ -4,6 +4,7 @@ import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
+import com.poprosturonin.data.contents.PreviewContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
@@ -94,7 +95,19 @@ public class NinegagScrapper implements Scrapper {
             content = new VideoContent(videoSrcElement.attr("data-mp4"));
         } else {
             Elements imageElement = element.select("img.badge-item-img");
-            content = new ImageContent(imageElement.attr("src"));
+
+            String image_src = imageElement.attr("src");
+
+            //Check if it is a preview
+            Elements previewElement = element.select("a.post-read-more");
+            if(previewElement.size() > 0) {
+                System.out.println("It's gas.");
+                System.out.println(element.text());
+                content = new PreviewContent(image_src);
+            }
+            else {
+                content = new ImageContent(image_src);
+            }
         }
 
         //Get comments, points
