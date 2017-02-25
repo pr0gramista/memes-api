@@ -2,6 +2,8 @@ package com.poprosturonin.sites.ninegag;
 
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
+import com.poprosturonin.exceptions.LoginFailedException;
+import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
@@ -88,7 +90,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
             return false;
         } catch (IOException e) {
             e.printStackTrace();
-            throw new PageIsEmptyException();
+            throw new MemeSiteResponseFailedException();
         }
     }
 
@@ -101,7 +103,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
         try {
             if (!isLoggedIn()) {
                 if (!login())
-                    throw new PageIsEmptyException();
+                    throw new LoginFailedException();
             }
 
             URL downloadURL = new URL(url);
@@ -120,7 +122,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
             return buffer.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new PageIsEmptyException();
+            throw new MemeSiteResponseFailedException();
         }
     }
 

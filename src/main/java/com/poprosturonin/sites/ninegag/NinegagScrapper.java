@@ -6,6 +6,7 @@ import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.PreviewContent;
 import com.poprosturonin.data.contents.VideoContent;
+import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.Scrapper;
 import org.json.JSONArray;
@@ -56,7 +57,7 @@ public class NinegagScrapper implements Scrapper {
             return buffer.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new PageIsEmptyException();
+            throw new MemeSiteResponseFailedException();
         }
     }
 
