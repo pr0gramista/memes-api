@@ -101,8 +101,6 @@ public class NinegagScrapper implements Scrapper {
             //Check if it is a preview
             Elements previewElement = element.select("a.post-read-more");
             if(previewElement.size() > 0) {
-                System.out.println("It's gas.");
-                System.out.println(element.text());
                 content = new PreviewContent(image_src);
             }
             else {
