@@ -39,7 +39,7 @@ public class NinegagScrapper implements Scrapper {
      */
     private Pattern urlPattern = Pattern.compile("^/\\?id=(.+)&c=(\\d+)");
 
-    public static String getJSON(String url) {
+    public String getJSON(String url) {
         try {
             URL downloadURL = new URL(url);
             URLConnection connection = downloadURL.openConnection();
@@ -60,7 +60,7 @@ public class NinegagScrapper implements Scrapper {
         }
     }
 
-    public static String getHTML(JSONObject response) {
+    public String getHTML(JSONObject response) {
         JSONArray ids = response.getJSONArray("ids");
         JSONObject items = response.getJSONObject("items");
 
