@@ -28,7 +28,9 @@ import java.util.stream.Collectors;
 public class NinegagNSFWScrapper extends NinegagScrapper {
     private static final String LOGIN_URL = "http://9gag.com/login";
     private static final String CHARSET = "UTF-8";
-    public String session = "";
+
+    private String session = "";
+
     /**
      * Pattern for url
      * fe. /nsfw?id=arbN9e0%2CajXDj41%2CagLGjgw&c=20&
@@ -43,7 +45,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
     @Value("${9gag.password}")
     private String password;
 
-    public boolean login() {
+    private boolean login() {
         try {
             URL url = new URL(LOGIN_URL);
 
@@ -90,7 +92,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
         }
     }
 
-    public boolean isLoggedIn() {
+    private boolean isLoggedIn() {
         return session != null && session.length() > 0;
     }
 
@@ -106,7 +108,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
             URLConnection connection = downloadURL.openConnection();
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-            connection.setRequestProperty("Cookie", session + ";safemode=0");
+            connection.setRequestProperty("Cookie", session + ";safemode=0"); //Disabling safemode makes post visible without having to click on them
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             StringBuffer buffer = new StringBuffer();
