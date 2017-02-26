@@ -2,7 +2,6 @@ package com.poprosturonin.sites.ninegag;
 
 import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.BeforeClass;
@@ -14,9 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -26,7 +23,7 @@ import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
- * Tests for mistrzowie scrapper
+ * Tests for 9gag scrapper
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -41,23 +38,10 @@ public class NinegagScrapperTest {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        //Read file from disk
-        File file = new File(NinegagScrapperTest.class
+        testDocument = Jsoup.parse(new File(NinegagScrapperTest.class
                 .getClassLoader()
-                .getResource("sites/9gag.json")
-                .toURI());
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-
-        StringBuffer buffer = new StringBuffer();
-        int read;
-        char[] chars = new char[1024];
-        while ((read = reader.read(chars)) != -1)
-            buffer.append(chars, 0, read);
-
-        String json = buffer.toString();
-        testDocument = Jsoup.parse(NinegagScrapper.getHTML(new JSONObject(json)));
-
+                .getResource("sites/9gag.html")
+                .toURI()), CHARSET);
     }
 
     @Test(expected = PageIsEmptyException.class)

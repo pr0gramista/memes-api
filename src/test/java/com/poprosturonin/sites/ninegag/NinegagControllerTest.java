@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Mistrzowie tests
+ * 9gag tests
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
