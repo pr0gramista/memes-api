@@ -1,4 +1,4 @@
-﻿# Memes API [![Build Status](http://me.poprosturonin.com:8004/buildStatus/icon?job=memes-api)](http://me.poprosturonin.com:8004/job/memes-api/)
+﻿# Memes API [![Build Status](https://travis-ci.org/PoprostuRonin/memes-api.svg?branch=master)](https://travis-ci.org/PoprostuRonin/memes-api)
 
 API for scrapping common meme sites.
 Currently supports:
