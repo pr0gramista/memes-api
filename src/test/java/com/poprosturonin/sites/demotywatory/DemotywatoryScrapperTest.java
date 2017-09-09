@@ -142,9 +142,9 @@ public class DemotywatoryScrapperTest {
                 .map(meme -> (CaptionedGalleryContent) meme.getContent())
                 .collect(Collectors.toList());
 
-        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 21).count());
-        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 8).count());
-        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 18).count());
+        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 22).count());
+        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 9).count());
+        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 19).count());
     }
 
     @Configuration
