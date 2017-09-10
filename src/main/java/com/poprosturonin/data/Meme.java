@@ -3,6 +3,8 @@ package com.poprosturonin.data;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.poprosturonin.data.contents.Content;
 
+import java.util.List;
+
 /**
  * Single meme with some content
  */
@@ -11,16 +13,18 @@ public class Meme {
     private String title;
     private Content content;
     private String url;
+    private Author author;
+    private List<Comment> comments;
 
     private String description;
-    private int comments;
+    private int commentAmount;
     private int points;
 
     public Meme(String title, Content content, String url, int comments, int points) {
         this.title = title;
         this.content = content;
         this.url = url;
-        this.comments = comments;
+        this.commentAmount = comments;
         this.points = points;
     }
 
@@ -29,7 +33,7 @@ public class Meme {
         this.content = content;
         this.url = url;
         this.description = description;
-        this.comments = comments;
+        this.commentAmount = comments;
         this.points = points;
     }
 
@@ -65,12 +69,12 @@ public class Meme {
         this.url = url;
     }
 
-    public int getComments() {
-        return comments;
+    public int getCommentAmount() {
+        return commentAmount;
     }
 
-    public void setComments(int comments) {
-        this.comments = comments;
+    public void setCommentAmount(int commentAmount) {
+        this.commentAmount = commentAmount;
     }
 
     public int getPoints() {
@@ -79,5 +83,21 @@ public class Meme {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

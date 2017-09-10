@@ -123,14 +123,14 @@ public class KwejkScrapperTest {
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("IMPREZA :)")),
                         hasProperty("url", equalTo("http://kwejk.pl/obrazek/2803669/impreza.html")),
-                        hasProperty("comments", is(1)),
+                        hasProperty("commentAmount", is(1)),
                         hasProperty("points", is(96)),
                         hasProperty("content", hasProperty("url", equalTo("http://i1.kwejk.pl/k/obrazki/2016/10/nX5hTD3AjRz0vEoKkH4CZ5GzBy0VyCao.jpg")))
                 ),
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("NIGDY NIE MA TWOJEGO TATY")),
                         hasProperty("url", equalTo("http://kwejk.pl/obrazek/2803727/nigdy-nie-ma-twojego-taty.html")),
-                        hasProperty("comments", is(6)),
+                        hasProperty("commentAmount", is(6)),
                         hasProperty("points", is(64)),
                         hasProperty("content", hasProperty("url", equalTo("http://i1.kwejk.pl/k/obrazki/2016/10/782db6afb8715ca8d43da021749cd212.jpg")))
                 )

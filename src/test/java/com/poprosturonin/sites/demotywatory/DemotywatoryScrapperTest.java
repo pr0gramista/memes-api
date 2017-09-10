@@ -113,14 +113,14 @@ public class DemotywatoryScrapperTest {
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("Zwykli bohaterowie są wśród nas")),
                         hasProperty("url", equalTo("http://m.demotywatory.pl/4704634")),
-                        hasProperty("comments", is(33)),
+                        hasProperty("commentAmount", is(33)),
                         hasProperty("points", is(965)),
                         hasProperty("content", hasProperty("url", equalTo("http://img6.demotywatoryfb.pl//uploads/201610/1477871536_dduner_600.jpg")))
                 ),
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("Takie Halloween to ja rozumiem")),
                         hasProperty("url", equalTo("http://m.demotywatory.pl/4704722")),
-                        hasProperty("comments", is(23)),
+                        hasProperty("commentAmount", is(23)),
                         hasProperty("points", is(597)),
                         hasProperty("content", hasProperty("url", equalTo("http://img6.demotywatoryfb.pl//uploads/201610/1477925937_gsxf0u_600.jpg")))
                 )
