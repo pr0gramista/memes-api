@@ -69,14 +69,14 @@ public class MistrzowieScrapperTest {
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("Kim jest?")),
                         hasProperty("url", equalTo("http://mistrzowie.org/679961/Kim-jest")),
-                        hasProperty("comments", is(3)),
+                        hasProperty("commentAmount", is(3)),
                         hasProperty("points", is(233)),
                         hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071055_by_Nightstalker.jpg?1479071055")))
                 ),
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("Satyrycy oglądają youtuberów")),
                         hasProperty("url", equalTo("http://mistrzowie.org/679963/Satyrycy-ogladaja-youtuberow")),
-                        hasProperty("comments", is(3)),
+                        hasProperty("commentAmount", is(3)),
                         hasProperty("points", is(216)),
                         hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071999_by_bartekkk1.jpg?1479071999")))
                 )

@@ -69,14 +69,14 @@ public class NinegagScrapperTest {
                 allOf(
                         hasProperty("title", equalTo("I see no difference")),
                         hasProperty("url", equalTo("http://9gag.com/gag/aAdPmE9")),
-                        hasProperty("comments", is(156)),
+                        hasProperty("commentAmount", is(156)),
                         hasProperty("points", is(4030)),
                         hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/aAdPmE9_460s.jpg")))
                 ),
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("This thing is like.. really dangerous!")),
                         hasProperty("url", equalTo("http://9gag.com/gag/arbNy9y")),
-                        hasProperty("comments", is(248)),
+                        hasProperty("commentAmount", is(248)),
                         hasProperty("points", is(5317)),
                         hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/arbNy9y_460s.jpg")))
                 )
