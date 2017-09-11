@@ -156,7 +156,7 @@ public class DemotywatoryScrapper implements Scrapper {
         return votes;
     }
 
-    public Page parse(Document document) {
+    public Page parsePage(Document document) {
         Page page = new Page();
 
         //Get next link page

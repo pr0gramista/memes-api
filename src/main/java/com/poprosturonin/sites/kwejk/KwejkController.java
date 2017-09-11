@@ -22,12 +22,12 @@ public class KwejkController {
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return kwejkScrapper.scrap(KWEJK_ROOT_URL);
+        return kwejkScrapper.scrapPage(KWEJK_ROOT_URL);
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return kwejkScrapper.scrap(KWEJK_ROOT_URL + KWEJK_PAGE_URL + Integer.toString(id));
+        return kwejkScrapper.scrapPage(KWEJK_ROOT_URL + KWEJK_PAGE_URL + Integer.toString(id));
     }
 }

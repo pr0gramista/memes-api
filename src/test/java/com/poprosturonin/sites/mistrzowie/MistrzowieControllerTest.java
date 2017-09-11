@@ -33,7 +33,7 @@ public class MistrzowieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
-        mockMvc.perform(get("/mistrzowie/2000"))
+        mockMvc.perform(get("/mistrzowie/page/2000"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -42,7 +42,7 @@ public class MistrzowieControllerTest {
 
     @Test
     public void shouldReturnEmptyPage() throws Exception {
-        mockMvc.perform(get("/mistrzowie/-1"))
+        mockMvc.perform(get("/mistrzowie/page/-1"))
                 .andExpect(status().isNotFound());
     }
 }

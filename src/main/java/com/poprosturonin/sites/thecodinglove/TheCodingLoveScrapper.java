@@ -35,7 +35,7 @@ public class TheCodingLoveScrapper implements Scrapper {
         );
     }
 
-    public Page parse(Document document) {
+    public Page parsePage(Document document) {
         Page page = new Page();
 
         //Get next link page

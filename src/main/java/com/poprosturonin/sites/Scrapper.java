@@ -19,15 +19,15 @@ public interface Scrapper {
     String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
 
     /**
-     * Scraps the website accessible from given URL.
-     * Executes {@link #parse(Document)}
+     * Scraps the page of memes accessible from given URL.
+     * Executes {@link #parsePage(Document)}
      *
      * @param url given URL
      * @return parsed page if possible, otherwise empty page
      */
-    default Page scrap(String url) {
+    default Page scrapPage(String url) {
         try {
-            return parse(Jsoup.connect(url).userAgent(USER_AGENT).get());
+            return parsePage(Jsoup.connect(url).userAgent(USER_AGENT).get());
         } catch (HttpStatusException e) {
             e.printStackTrace();
             throw new PageIsEmptyException();
@@ -38,10 +38,10 @@ public interface Scrapper {
     }
 
     /**
-     * Parses given document
+     * Parses given document as a page
      *
-     * @param document given documnet
+     * @param document given document
      * @return parsed page if possible, otherwise empty page
      */
-    Page parse(Document document);
+    Page parsePage(Document document);
 }

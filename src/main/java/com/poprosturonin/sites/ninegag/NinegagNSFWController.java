@@ -23,15 +23,15 @@ public class NinegagNSFWController {
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return ninegagNSFWScrapper.scrap(ROOT_URL);
+        return ninegagNSFWScrapper.scrapPage(ROOT_URL);
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable String id) {
         if (id.length() <= 4) //There is no 9gag id that has 4 letters
             throw new PageIsEmptyException();
 
-        return ninegagNSFWScrapper.scrap(ROOT_URL + ID_URL_PART + id);
+        return ninegagNSFWScrapper.scrapPage(ROOT_URL + ID_URL_PART + id);
     }
 }

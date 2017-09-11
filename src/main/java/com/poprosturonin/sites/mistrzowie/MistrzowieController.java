@@ -22,12 +22,12 @@ public class MistrzowieController {
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return mistrzowieScrapper.scrap(ROOT_URL);
+        return mistrzowieScrapper.scrapPage(ROOT_URL);
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return mistrzowieScrapper.scrap(ROOT_URL + PAGE_URL + Integer.toString(id));
+        return mistrzowieScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
     }
 }

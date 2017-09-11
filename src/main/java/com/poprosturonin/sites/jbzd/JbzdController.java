@@ -22,12 +22,12 @@ public class JbzdController {
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return jbzdScrapper.scrap(JBZD_ROOT_URL);
+        return jbzdScrapper.scrapPage(JBZD_ROOT_URL);
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return jbzdScrapper.scrap(JBZD_ROOT_URL + JBZD_PAGE_URL + Integer.toString(id));
+        return jbzdScrapper.scrapPage(JBZD_ROOT_URL + JBZD_PAGE_URL + Integer.toString(id));
     }
 }

@@ -33,7 +33,7 @@ public class JbzdControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
-        mockMvc.perform(get("/jbzd/6000"))
+        mockMvc.perform(get("/jbzd/page/6000"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -42,7 +42,7 @@ public class JbzdControllerTest {
 
     @Test
     public void shouldReturnEmptyPage() throws Exception {
-        mockMvc.perform(get("/jbzd/-1"))
+        mockMvc.perform(get("/jbzd/page/-1"))
                 .andExpect(status().isNotFound());
     }
 }

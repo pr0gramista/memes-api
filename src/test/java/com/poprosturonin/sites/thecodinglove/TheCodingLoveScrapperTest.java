@@ -45,12 +45,12 @@ public class TheCodingLoveScrapperTest {
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        theCodingLoveScrapper.parse(document);
+        theCodingLoveScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = theCodingLoveScrapper.parse(testDocument);
+        Page page = theCodingLoveScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -61,7 +61,7 @@ public class TheCodingLoveScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = theCodingLoveScrapper.parse(testDocument);
+        Page page = theCodingLoveScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(

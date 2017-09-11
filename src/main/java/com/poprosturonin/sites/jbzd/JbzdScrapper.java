@@ -27,7 +27,7 @@ public class JbzdScrapper implements Scrapper {
     }
 
     @Override
-    public Page parse(Document document) {
+    public Page parsePage(Document document) {
         Page page = new Page();
 
         String title = document.title();

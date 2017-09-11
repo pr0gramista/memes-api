@@ -79,8 +79,8 @@ public class NinegagScrapper implements Scrapper {
     }
 
     @Override
-    public Page scrap(String url) {
-        return parse(Jsoup.parse(getHTML(new JSONObject(getJSON(url)))));
+    public Page scrapPage(String url) {
+        return parsePage(Jsoup.parse(getHTML(new JSONObject(getJSON(url)))));
     }
 
     public Meme parseArticle(Element element) {
@@ -117,7 +117,7 @@ public class NinegagScrapper implements Scrapper {
         return new Meme(title, content, url, comments, points);
     }
 
-    public Page parse(Document document) {
+    public Page parsePage(Document document) {
         List<Meme> memes = document.select("article")
                 .stream()
                 .map(this::parseArticle)

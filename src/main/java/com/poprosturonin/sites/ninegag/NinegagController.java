@@ -23,15 +23,15 @@ public class NinegagController {
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return ninegagScrapper.scrap(ROOT_URL);
+        return ninegagScrapper.scrapPage(ROOT_URL);
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable String id) {
         if (id.length() <= 4) //There is no 9gag id that has 4 letters
             throw new PageIsEmptyException();
 
-        return ninegagScrapper.scrap(ROOT_URL + ID_URL_PART + id);
+        return ninegagScrapper.scrapPage(ROOT_URL + ID_URL_PART + id);
     }
 }

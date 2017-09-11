@@ -52,12 +52,12 @@ public class JbzdScrapperTest {
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        jbzdScrapper.parse(document);
+        jbzdScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = jbzdScrapper.parse(testDocument);
+        Page page = jbzdScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -68,7 +68,7 @@ public class JbzdScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = jbzdScrapper.parse(testDocument);
+        Page page = jbzdScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
@@ -88,7 +88,7 @@ public class JbzdScrapperTest {
 
     @Test
     public void isVideoPresentAndOk() throws Exception {
-        Page page = jbzdScrapper.parse(testDocument);
+        Page page = jbzdScrapper.parsePage(testDocument);
 
         Optional<Meme> videoOptional = page.getMemes()
                 .stream()

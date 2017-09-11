@@ -22,12 +22,12 @@ public class DemotywatoryController {
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return demotywatoryScrapper.scrap(ROOT_URL);
+        return demotywatoryScrapper.scrapPage(ROOT_URL);
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return demotywatoryScrapper.scrap(ROOT_URL + PAGE_URL + Integer.toString(id));
+        return demotywatoryScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
     }
 }

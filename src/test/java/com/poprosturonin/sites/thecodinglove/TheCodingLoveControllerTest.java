@@ -33,7 +33,7 @@ public class TheCodingLoveControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
-        mockMvc.perform(get("/thecodinglove/250"))
+        mockMvc.perform(get("/thecodinglove/page/250"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -42,7 +42,7 @@ public class TheCodingLoveControllerTest {
 
     @Test
     public void shouldReturnEmptyPage() throws Exception {
-        mockMvc.perform(get("/thecodinglove/4000000"))
+        mockMvc.perform(get("/thecodinglove/page/4000000"))
                 .andExpect(status().isNotFound());
     }
 }

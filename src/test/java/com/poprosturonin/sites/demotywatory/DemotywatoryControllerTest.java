@@ -33,7 +33,7 @@ public class DemotywatoryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
-        mockMvc.perform(get("/demotywatory/2000"))
+        mockMvc.perform(get("/demotywatory/page/2000"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -42,7 +42,7 @@ public class DemotywatoryControllerTest {
 
     @Test
     public void shouldReturnEmptyPage() throws Exception {
-        mockMvc.perform(get("/demotywatory/-1"))
+        mockMvc.perform(get("/demotywatory/page/-1"))
                 .andExpect(status().isNotFound());
     }
 }

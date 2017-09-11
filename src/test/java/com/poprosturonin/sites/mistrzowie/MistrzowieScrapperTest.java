@@ -47,12 +47,12 @@ public class MistrzowieScrapperTest {
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        mistrzowieScrapper.parse(document);
+        mistrzowieScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = mistrzowieScrapper.parse(testDocument);
+        Page page = mistrzowieScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -63,7 +63,7 @@ public class MistrzowieScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = mistrzowieScrapper.parse(testDocument);
+        Page page = mistrzowieScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(

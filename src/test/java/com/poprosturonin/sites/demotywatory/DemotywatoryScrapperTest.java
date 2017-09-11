@@ -64,12 +64,12 @@ public class DemotywatoryScrapperTest {
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        demotywatoryScrapper.parse(document);
+        demotywatoryScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = demotywatoryScrapper.parse(testDocument);
+        Page page = demotywatoryScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -79,7 +79,7 @@ public class DemotywatoryScrapperTest {
 
     @Test
     public void gotVideoAndGif() throws Exception {
-        Page page = demotywatoryScrapper.parse(testDocument2);
+        Page page = demotywatoryScrapper.parsePage(testDocument2);
 
         List<Content> contents = page.getMemes().stream()
                 .map(Meme::getContent)
@@ -107,7 +107,7 @@ public class DemotywatoryScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = demotywatoryScrapper.parse(testDocument);
+        Page page = demotywatoryScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
@@ -129,7 +129,7 @@ public class DemotywatoryScrapperTest {
 
     @Test
     public void isGalleryPresentAndOk() throws Exception {
-        Page page = demotywatoryScrapper.parse(testDocument);
+        Page page = demotywatoryScrapper.parsePage(testDocument);
 
         List<Meme> memes = page.getMemes()
                 .stream()

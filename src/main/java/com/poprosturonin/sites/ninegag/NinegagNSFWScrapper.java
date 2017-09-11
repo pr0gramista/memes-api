@@ -127,7 +127,7 @@ public class NinegagNSFWScrapper extends NinegagScrapper {
     }
 
     @Override
-    public Page parse(Document document) {
+    public Page parsePage(Document document) {
         List<Meme> memes = document.select("article")
                 .stream()
                 .map(this::parseArticle)

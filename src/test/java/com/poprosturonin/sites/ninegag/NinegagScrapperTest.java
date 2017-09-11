@@ -47,12 +47,12 @@ public class NinegagScrapperTest {
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        ninegagScrapper.parse(document);
+        ninegagScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = ninegagScrapper.parse(testDocument);
+        Page page = ninegagScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -63,7 +63,7 @@ public class NinegagScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = ninegagScrapper.parse(testDocument);
+        Page page = ninegagScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(

@@ -115,7 +115,7 @@ public class KwejkScrapper implements Scrapper {
             return Optional.empty();
     }
 
-    public Page parse(Document document) {
+    public Page parsePage(Document document) {
         Page page = new Page();
 
         String title = document.title();

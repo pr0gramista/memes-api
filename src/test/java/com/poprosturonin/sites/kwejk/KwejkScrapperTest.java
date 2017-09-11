@@ -64,12 +64,12 @@ public class KwejkScrapperTest {
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        kwejkScrapper.parse(document);
+        kwejkScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = kwejkScrapper.parse(testDocument);
+        Page page = kwejkScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -79,7 +79,7 @@ public class KwejkScrapperTest {
 
     @Test
     public void numberOfMemesMatch() throws Exception {
-        Page page = kwejkScrapper.parse(testDocument2);
+        Page page = kwejkScrapper.parsePage(testDocument2);
 
         List<Content> contentList = page.getMemes()
                 .stream()
@@ -117,7 +117,7 @@ public class KwejkScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = kwejkScrapper.parse(testDocument);
+        Page page = kwejkScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
@@ -139,7 +139,7 @@ public class KwejkScrapperTest {
 
     @Test
     public void isGalleryPresentAndOk() throws Exception {
-        Page page = kwejkScrapper.parse(testDocument);
+        Page page = kwejkScrapper.parsePage(testDocument);
 
         Optional<Meme> galleryOptional = page.getMemes()
                 .stream()
