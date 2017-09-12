@@ -1,4 +1,4 @@
-package com.poprosturonin.sites.thecodinglove;
+package com.poprosturonin.sites.ninegag;
 
 import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.PageIsEmptyException;
@@ -16,41 +16,43 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.File;
 
 import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
- * Tests for the coding love scrapper
+ * Tests for 9gag scrapper
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class TheCodingLoveScrapperTest {
+public class NinegagPageScrapperTest {
 
     private static String CHARSET = "UTF-8";
+
     private static Document testDocument;
 
     @Autowired
-    private TheCodingLoveScrapper theCodingLoveScrapper;
+    private NinegagPageScrapper ninegagScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(TheCodingLoveScrapperTest.class
+        testDocument = Jsoup.parse(new File(NinegagPageScrapperTest.class
                 .getClassLoader()
-                .getResource("sites/thecodinglove.html")
+                .getResource("sites/9gag.html")
                 .toURI()), CHARSET);
     }
 
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        theCodingLoveScrapper.parsePage(document);
+        ninegagScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = theCodingLoveScrapper.parsePage(testDocument);
+        Page page = ninegagScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -61,18 +63,22 @@ public class TheCodingLoveScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = theCodingLoveScrapper.parsePage(testDocument);
+        Page page = ninegagScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("When a feature does more than expected")),
-                        hasProperty("url", equalTo("http://thecodinglove.com/post/153260172278/when-a-feature-does-more-than-expected")),
-                        hasProperty("content", hasProperty("url", equalTo("http://ljdchost.com/gOwS4tK.gif")))
+                        hasProperty("title", equalTo("I see no difference")),
+                        hasProperty("url", equalTo("http://9gag.com/gag/aAdPmE9")),
+                        hasProperty("commentAmount", is(156)),
+                        hasProperty("points", is(4030)),
+                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/aAdPmE9_460s.jpg")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("When updating libraries fixes bugs")),
-                        hasProperty("url", equalTo("http://thecodinglove.com/post/153257122542/when-updating-libraries-fixes-bugs")),
-                        hasProperty("content", hasProperty("url", equalTo("http://ljdchost.com/k3Lrab8.gif")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("This thing is like.. really dangerous!")),
+                        hasProperty("url", equalTo("http://9gag.com/gag/arbNy9y")),
+                        hasProperty("commentAmount", is(248)),
+                        hasProperty("points", is(5317)),
+                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/arbNy9y_460s.jpg")))
                 )
         ));
     }
@@ -80,8 +86,8 @@ public class TheCodingLoveScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public TheCodingLoveScrapper getTheCodingLoveScrapper() {
-            return new TheCodingLoveScrapper();
+        public NinegagPageScrapper getNinegagScrapper() {
+            return new NinegagPageScrapper();
         }
     }
 }

@@ -17,17 +17,17 @@ public class DemotywatoryController {
     final static String PAGE_URL = "/page/";
 
     @Autowired
-    private DemotywatoryScrapper demotywatoryScrapper;
+    private DemotywatoryPageScrapper demotywatoryPageScrapper;
 
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return demotywatoryScrapper.scrapPage(ROOT_URL);
+        return demotywatoryPageScrapper.scrapPage(ROOT_URL);
     }
 
     @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return demotywatoryScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
+        return demotywatoryPageScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
     }
 }

@@ -4,7 +4,7 @@ import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.*;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.sites.PageScrapper;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,7 +24,7 @@ import static com.poprosturonin.sites.demotywatory.DemotywatoryController.ROOT_U
  * Demotywatory scrapper
  */
 @Component
-public class DemotywatoryScrapper implements Scrapper {
+public class DemotywatoryPageScrapper implements PageScrapper {
 
     private Optional<Meme> parsePicture(Element demot) {
         if (demot.hasClass("image"))

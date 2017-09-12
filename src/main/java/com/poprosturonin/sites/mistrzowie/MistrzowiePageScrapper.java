@@ -5,7 +5,7 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.sites.PageScrapper;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,7 +24,7 @@ import static com.poprosturonin.sites.mistrzowie.MistrzowieController.ROOT_URL;
  * Mistrzowie scrapper
  */
 @Component
-public class MistrzowieScrapper implements Scrapper {
+public class MistrzowiePageScrapper implements PageScrapper {
     private Pattern commentPattern = Pattern.compile("Skomentuj \\(([0-9]+)\\)");
 
     private Optional<Meme> parsePicture(Element mistrz) {

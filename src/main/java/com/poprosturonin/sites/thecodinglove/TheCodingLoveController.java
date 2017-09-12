@@ -17,17 +17,17 @@ public class TheCodingLoveController {
     final static String PAGE_URL = "/page/";
 
     @Autowired
-    private TheCodingLoveScrapper theCodingLoveScrapper;
+    private TheCodingLovePageScrapper theCodingLovePageScrapper;
 
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return theCodingLoveScrapper.scrapPage(ROOT_URL);
+        return theCodingLovePageScrapper.scrapPage(ROOT_URL);
     }
 
     @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return theCodingLoveScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
+        return theCodingLovePageScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
     }
 }

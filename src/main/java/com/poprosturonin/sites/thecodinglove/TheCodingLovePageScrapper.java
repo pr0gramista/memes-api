@@ -4,7 +4,7 @@ import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.GIFContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.sites.PageScrapper;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * Mistrzowie scrapper
  */
 @Component
-public class TheCodingLoveScrapper implements Scrapper {
+public class TheCodingLovePageScrapper implements PageScrapper {
 
     private Optional<Meme> parsePicture(Element post) {
         Element titleAsLink = post.select("h3 > a").first();

@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class JbzdScrapperTest {
+public class JbzdPageScrapperTest {
     private static String CHARSET = "UTF-8";
 
     /**
@@ -39,11 +39,11 @@ public class JbzdScrapperTest {
     private static Document testDocument;
 
     @Autowired
-    private JbzdScrapper jbzdScrapper;
+    private JbzdPageScrapper jbzdScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(JbzdScrapperTest.class.
+        testDocument = Jsoup.parse(new File(JbzdPageScrapperTest.class.
                 getClassLoader()
                 .getResource("sites/jbzd.html")
                 .toURI()), CHARSET);
@@ -107,8 +107,8 @@ public class JbzdScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public JbzdScrapper getJbzdScrapper() {
-            return new JbzdScrapper();
+        public JbzdPageScrapper getJbzdScrapper() {
+            return new JbzdPageScrapper();
         }
     }
 }

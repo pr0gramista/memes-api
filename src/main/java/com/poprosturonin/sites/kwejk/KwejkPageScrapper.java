@@ -6,7 +6,7 @@ import com.poprosturonin.data.contents.GalleryContent;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.sites.PageScrapper;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * Kwejk scrapper
  */
 @Component
-public class KwejkScrapper implements Scrapper {
+public class KwejkPageScrapper implements PageScrapper {
     private final static String SEQUENCE_404 = "404 - strona";
 
     private boolean is404(String title) {

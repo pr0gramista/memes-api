@@ -1,4 +1,4 @@
-package com.poprosturonin.sites.mistrzowie;
+package com.poprosturonin.sites.thecodinglove;
 
 import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.PageIsEmptyException;
@@ -16,43 +16,41 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.File;
 
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
- * Tests for mistrzowie scrapper
+ * Tests for the coding love scrapper
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class MistrzowieScrapperTest {
+public class TheCodingLovePageScrapperTest {
 
     private static String CHARSET = "UTF-8";
-
     private static Document testDocument;
 
     @Autowired
-    private MistrzowieScrapper mistrzowieScrapper;
+    private TheCodingLovePageScrapper theCodingLoveScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(MistrzowieScrapperTest.class
+        testDocument = Jsoup.parse(new File(TheCodingLovePageScrapperTest.class
                 .getClassLoader()
-                .getResource("sites/mistrzowie.html")
+                .getResource("sites/thecodinglove.html")
                 .toURI()), CHARSET);
     }
 
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        mistrzowieScrapper.parsePage(document);
+        theCodingLoveScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = mistrzowieScrapper.parsePage(testDocument);
+        Page page = theCodingLoveScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -63,22 +61,18 @@ public class MistrzowieScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = mistrzowieScrapper.parsePage(testDocument);
+        Page page = theCodingLoveScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("Kim jest?")),
-                        hasProperty("url", equalTo("http://mistrzowie.org/679961/Kim-jest")),
-                        hasProperty("commentAmount", is(3)),
-                        hasProperty("points", is(233)),
-                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071055_by_Nightstalker.jpg?1479071055")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("When a feature does more than expected")),
+                        hasProperty("url", equalTo("http://thecodinglove.com/post/153260172278/when-a-feature-does-more-than-expected")),
+                        hasProperty("content", hasProperty("url", equalTo("http://ljdchost.com/gOwS4tK.gif")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("Satyrycy oglądają youtuberów")),
-                        hasProperty("url", equalTo("http://mistrzowie.org/679963/Satyrycy-ogladaja-youtuberow")),
-                        hasProperty("commentAmount", is(3)),
-                        hasProperty("points", is(216)),
-                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071999_by_bartekkk1.jpg?1479071999")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("When updating libraries fixes bugs")),
+                        hasProperty("url", equalTo("http://thecodinglove.com/post/153257122542/when-updating-libraries-fixes-bugs")),
+                        hasProperty("content", hasProperty("url", equalTo("http://ljdchost.com/k3Lrab8.gif")))
                 )
         ));
     }
@@ -86,8 +80,8 @@ public class MistrzowieScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public MistrzowieScrapper getMistrzowieScrapper() {
-            return new MistrzowieScrapper();
+        public TheCodingLovePageScrapper getTheCodingLoveScrapper() {
+            return new TheCodingLovePageScrapper();
         }
     }
 }

@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * Mistrzowie scrapper
  */
 @Component
-public class NinegagNSFWScrapper extends NinegagScrapper {
+public class NinegagNSFWPageScrapper extends NinegagPageScrapper {
     private static final String LOGIN_URL = "http://9gag.com/login";
     private static final String CHARSET = "UTF-8";
 

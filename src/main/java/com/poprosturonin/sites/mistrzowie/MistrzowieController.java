@@ -17,17 +17,17 @@ public class MistrzowieController {
     final static String PAGE_URL = "/page/";
 
     @Autowired
-    private MistrzowieScrapper mistrzowieScrapper;
+    private MistrzowiePageScrapper mistrzowiePageScrapper;
 
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return mistrzowieScrapper.scrapPage(ROOT_URL);
+        return mistrzowiePageScrapper.scrapPage(ROOT_URL);
     }
 
     @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return mistrzowieScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
+        return mistrzowiePageScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
     }
 }

@@ -17,17 +17,17 @@ public class KwejkController {
     final static String KWEJK_PAGE_URL = "/strona/";
 
     @Autowired
-    private KwejkScrapper kwejkScrapper;
+    private KwejkPageScrapper kwejkPageScrapper;
 
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return kwejkScrapper.scrapPage(KWEJK_ROOT_URL);
+        return kwejkPageScrapper.scrapPage(KWEJK_ROOT_URL);
     }
 
     @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return kwejkScrapper.scrapPage(KWEJK_ROOT_URL + KWEJK_PAGE_URL + Integer.toString(id));
+        return kwejkPageScrapper.scrapPage(KWEJK_ROOT_URL + KWEJK_PAGE_URL + Integer.toString(id));
     }
 }

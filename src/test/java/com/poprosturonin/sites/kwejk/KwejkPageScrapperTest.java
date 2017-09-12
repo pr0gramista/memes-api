@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class KwejkScrapperTest {
+public class KwejkPageScrapperTest {
     private static String CHARSET = "UTF-8";
     /**
      * This site contains 1 gallery and 7 images
@@ -47,15 +47,15 @@ public class KwejkScrapperTest {
     private static Document testDocument2;
 
     @Autowired
-    private KwejkScrapper kwejkScrapper;
+    private KwejkPageScrapper kwejkScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(KwejkScrapperTest.class.
+        testDocument = Jsoup.parse(new File(KwejkPageScrapperTest.class.
                 getClassLoader()
                 .getResource("sites/kwejk.html")
                 .toURI()), CHARSET);
-        testDocument2 = Jsoup.parse(new File(KwejkScrapperTest.class
+        testDocument2 = Jsoup.parse(new File(KwejkPageScrapperTest.class
                 .getClassLoader()
                 .getResource("sites/kwejk2.html")
                 .toURI()), CHARSET);
@@ -157,8 +157,8 @@ public class KwejkScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public KwejkScrapper getKwejkScrapper() {
-            return new KwejkScrapper();
+        public KwejkPageScrapper getKwejkScrapper() {
+            return new KwejkPageScrapper();
         }
     }
 }

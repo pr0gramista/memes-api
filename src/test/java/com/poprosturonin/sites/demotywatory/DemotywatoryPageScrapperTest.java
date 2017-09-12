@@ -34,7 +34,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class DemotywatoryScrapperTest {
+public class DemotywatoryPageScrapperTest {
 
     private static String CHARSET = "UTF-8";
     /**
@@ -47,15 +47,15 @@ public class DemotywatoryScrapperTest {
     private static Document testDocument2;
 
     @Autowired
-    private DemotywatoryScrapper demotywatoryScrapper;
+    private DemotywatoryPageScrapper demotywatoryScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(DemotywatoryScrapperTest.class.
+        testDocument = Jsoup.parse(new File(DemotywatoryPageScrapperTest.class.
                 getClassLoader()
                 .getResource("sites/demotywatory.html")
                 .toURI()), CHARSET);
-        testDocument2 = Jsoup.parse(new File(DemotywatoryScrapperTest.class
+        testDocument2 = Jsoup.parse(new File(DemotywatoryPageScrapperTest.class
                 .getClassLoader()
                 .getResource("sites/demotywatory2.html")
                 .toURI()), CHARSET);
@@ -150,8 +150,8 @@ public class DemotywatoryScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public DemotywatoryScrapper getDemotywatoryScrappery() {
-            return new DemotywatoryScrapper();
+        public DemotywatoryPageScrapper getDemotywatoryScrappery() {
+            return new DemotywatoryPageScrapper();
         }
     }
 }

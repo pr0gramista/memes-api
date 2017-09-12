@@ -8,7 +8,7 @@ import com.poprosturonin.data.contents.PreviewContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.sites.PageScrapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * Mistrzowie scrapper
  */
 @Component
-public class NinegagScrapper implements Scrapper {
+public class NinegagPageScrapper implements PageScrapper {
     /**
      * Pattern for url
      * fe. /?id=arbN9e0%2CajXDj41%2CagLGjgw&c=20&

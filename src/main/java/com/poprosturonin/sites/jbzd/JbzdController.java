@@ -17,17 +17,17 @@ public class JbzdController {
     final static String JBZD_PAGE_URL = "/strona/";
 
     @Autowired
-    private JbzdScrapper jbzdScrapper;
+    private JbzdPageScrapper jbzdPageScrapper;
 
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return jbzdScrapper.scrapPage(JBZD_ROOT_URL);
+        return jbzdPageScrapper.scrapPage(JBZD_ROOT_URL);
     }
 
     @RequestMapping(value = "/page/{id}")
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
-        return jbzdScrapper.scrapPage(JBZD_ROOT_URL + JBZD_PAGE_URL + Integer.toString(id));
+        return jbzdPageScrapper.scrapPage(JBZD_ROOT_URL + JBZD_PAGE_URL + Integer.toString(id));
     }
 }

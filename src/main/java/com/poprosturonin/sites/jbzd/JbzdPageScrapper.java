@@ -7,7 +7,7 @@ import com.poprosturonin.data.contents.GIFContent;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
-import com.poprosturonin.sites.Scrapper;
+import com.poprosturonin.sites.PageScrapper;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class JbzdScrapper implements Scrapper {
+public class JbzdPageScrapper implements PageScrapper {
     private final static String SEQUENCE_404 = "Error 404";
 
     private boolean is404(String title) {

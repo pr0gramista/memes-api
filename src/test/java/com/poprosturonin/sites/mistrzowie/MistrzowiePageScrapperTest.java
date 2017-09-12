@@ -1,4 +1,4 @@
-package com.poprosturonin.sites.ninegag;
+package com.poprosturonin.sites.mistrzowie;
 
 import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.PageIsEmptyException;
@@ -23,36 +23,36 @@ import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
- * Tests for 9gag scrapper
+ * Tests for mistrzowie scrapper
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class NinegagScrapperTest {
+public class MistrzowiePageScrapperTest {
 
     private static String CHARSET = "UTF-8";
 
     private static Document testDocument;
 
     @Autowired
-    private NinegagScrapper ninegagScrapper;
+    private MistrzowiePageScrapper mistrzowieScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(NinegagScrapperTest.class
+        testDocument = Jsoup.parse(new File(MistrzowiePageScrapperTest.class
                 .getClassLoader()
-                .getResource("sites/9gag.html")
+                .getResource("sites/mistrzowie.html")
                 .toURI()), CHARSET);
     }
 
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        ninegagScrapper.parsePage(document);
+        mistrzowieScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = ninegagScrapper.parsePage(testDocument);
+        Page page = mistrzowieScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -63,22 +63,22 @@ public class NinegagScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = ninegagScrapper.parsePage(testDocument);
+        Page page = mistrzowieScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalTo("I see no difference")),
-                        hasProperty("url", equalTo("http://9gag.com/gag/aAdPmE9")),
-                        hasProperty("commentAmount", is(156)),
-                        hasProperty("points", is(4030)),
-                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/aAdPmE9_460s.jpg")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("Kim jest?")),
+                        hasProperty("url", equalTo("http://mistrzowie.org/679961/Kim-jest")),
+                        hasProperty("commentAmount", is(3)),
+                        hasProperty("points", is(233)),
+                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071055_by_Nightstalker.jpg?1479071055")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("This thing is like.. really dangerous!")),
-                        hasProperty("url", equalTo("http://9gag.com/gag/arbNy9y")),
-                        hasProperty("commentAmount", is(248)),
-                        hasProperty("points", is(5317)),
-                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/arbNy9y_460s.jpg")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("Satyrycy oglądają youtuberów")),
+                        hasProperty("url", equalTo("http://mistrzowie.org/679963/Satyrycy-ogladaja-youtuberow")),
+                        hasProperty("commentAmount", is(3)),
+                        hasProperty("points", is(216)),
+                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071999_by_bartekkk1.jpg?1479071999")))
                 )
         ));
     }
@@ -86,8 +86,8 @@ public class NinegagScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public NinegagScrapper getNinegagScrapper() {
-            return new NinegagScrapper();
+        public MistrzowiePageScrapper getMistrzowieScrapper() {
+            return new MistrzowiePageScrapper();
         }
     }
 }

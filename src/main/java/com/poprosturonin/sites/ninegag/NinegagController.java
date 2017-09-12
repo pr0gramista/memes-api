@@ -18,12 +18,12 @@ public class NinegagController {
     final static String ID_URL_PART = "?id=";
 
     @Autowired
-    private NinegagScrapper ninegagScrapper;
+    private NinegagPageScrapper ninegagPageScrapper;
 
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
-        return ninegagScrapper.scrapPage(ROOT_URL);
+        return ninegagPageScrapper.scrapPage(ROOT_URL);
     }
 
     @RequestMapping(value = "/page/{id}")
@@ -32,6 +32,6 @@ public class NinegagController {
         if (id.length() <= 4) //There is no 9gag id that has 4 letters
             throw new PageIsEmptyException();
 
-        return ninegagScrapper.scrapPage(ROOT_URL + ID_URL_PART + id);
+        return ninegagPageScrapper.scrapPage(ROOT_URL + ID_URL_PART + id);
     }
 }
