@@ -26,6 +26,8 @@ import static com.poprosturonin.sites.demotywatory.DemotywatoryController.ROOT_U
 @Component
 public class DemotywatoryPageScrapper implements PageScrapper {
 
+    DemotywatoryGalleryParser galleryParser = new DemotywatoryGalleryParser();
+
     private Optional<Meme> parsePicture(Element demot) {
         if (demot.hasClass("image"))
             return parseAsImage(demot);
@@ -108,7 +110,6 @@ public class DemotywatoryPageScrapper implements PageScrapper {
         Elements galleryThumbnail = demot.getElementsByTag("img");
         String title = galleryThumbnail.attr("alt");
         String url = ROOT_URL + demot.getElementsByTag("a").attr("href");
-
         List<CaptionedGalleryContent.CaptionedGallerySlide> singles = new ArrayList<>();
 
         //Put gallery thumbnail as first image
@@ -117,21 +118,13 @@ public class DemotywatoryPageScrapper implements PageScrapper {
         ));
 
         //Put slides
+        CaptionedGalleryContent galleryContent = new CaptionedGalleryContent(singles);
         try {
-            Document document = Jsoup.connect(url).userAgent(USER_AGENT).get();
-            Elements slides = document.select("div.rsSlideContent");
-            slides.forEach((Element slide) ->
-                    singles.add(new CaptionedGalleryContent.CaptionedGallerySlide(
-                            ROOT_URL + slide.getElementsByTag("img").attr("src"),
-                            slide.getElementsByTag("h3").text(),
-                            slide.getElementsByTag("p").text()
-                    ))
-            );
+            galleryContent.getImages().addAll(galleryParser.parse(Jsoup.connect(url).userAgent(USER_AGENT).get()));
         } catch (IOException e) {
             e.printStackTrace();
             return Optional.empty();
         }
-        CaptionedGalleryContent galleryContent = new CaptionedGalleryContent(singles);
 
         return Optional.of(new Meme(title, galleryContent, url, getComments(demot), getVotes(demot)));
     }

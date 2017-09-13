@@ -38,13 +38,19 @@ public class DemotywatoryPageScrapperTest {
 
     private static String CHARSET = "UTF-8";
     /**
-     * This site contains 3 galleries and 7 images
+     * This site contains 3 galleries and 7 images<br>
+     * <b>Warning:</b> Galleries on this file are obsolete!
      */
     private static Document testDocument;
     /**
      * This page contains 1 video, 1 gif, no galleries and 8 images
      */
     private static Document testDocument2;
+    /**
+     * This page contains 3 galleries with only one containing text
+     * Galleries on this file are valid for 13.09.2017
+     */
+    private static Document testDocument3;
 
     @Autowired
     private DemotywatoryPageScrapper demotywatoryScrapper;
@@ -58,6 +64,10 @@ public class DemotywatoryPageScrapperTest {
         testDocument2 = Jsoup.parse(new File(DemotywatoryPageScrapperTest.class
                 .getClassLoader()
                 .getResource("sites/demotywatory2.html")
+                .toURI()), CHARSET);
+        testDocument3 = Jsoup.parse(new File(DemotywatoryPageScrapperTest.class
+                .getClassLoader()
+                .getResource("sites/demotywatory3.html")
                 .toURI()), CHARSET);
     }
 
@@ -129,7 +139,7 @@ public class DemotywatoryPageScrapperTest {
 
     @Test
     public void isGalleryPresentAndOk() throws Exception {
-        Page page = demotywatoryScrapper.parsePage(testDocument);
+        Page page = demotywatoryScrapper.parsePage(testDocument3);
 
         List<Meme> memes = page.getMemes()
                 .stream()
@@ -143,8 +153,8 @@ public class DemotywatoryPageScrapperTest {
                 .collect(Collectors.toList());
 
         assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 22).count());
-        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 9).count());
-        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 19).count());
+        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 21).count());
+        assertEquals(1, galleries.stream().filter(galleryContent -> galleryContent.getImages().size() == 8).count());
     }
 
     @Configuration
