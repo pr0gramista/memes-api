@@ -4,6 +4,7 @@ import com.poprosturonin.data.Author;
 import com.poprosturonin.data.Comment;
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.contents.*;
+import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.sites.SingleMemeScrapper;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
@@ -26,6 +27,8 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
         Meme meme = new Meme();
 
         Element demot = document.getElementsByClass("demot_pic").first();
+        if (demot == null)
+            throw new CouldNotParseMemeException();
 
         meme.setAuthor(getAuthor(demot));
         meme.setContent(getContent(demot));
@@ -77,7 +80,7 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private String getURL(Document document) {
-        return URLUtils.cutToFirstSlash(document.baseUri()).get();
+        return URLUtils.cutToFirstSlash(document.baseUri()).orElseGet(() -> null); // The Best Optional usage!!!
     }
 
     private String getTitle(Element demot) {
