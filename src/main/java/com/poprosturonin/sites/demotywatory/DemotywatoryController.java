@@ -1,5 +1,6 @@
 package com.poprosturonin.sites.demotywatory;
 
+import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,9 @@ public class DemotywatoryController {
     @Autowired
     private DemotywatoryPageScrapper demotywatoryPageScrapper;
 
+    @Autowired
+    private DemotywatorySingleMemeScrapper demotywatorySingleMemeScrapper;
+
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
@@ -29,5 +33,11 @@ public class DemotywatoryController {
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
         return demotywatoryPageScrapper.scrapPage(ROOT_URL + PAGE_URL + Integer.toString(id));
+    }
+
+    @RequestMapping(value = "/{id}")
+    @ResponseBody
+    public Meme readerMeme(@PathVariable int id) {
+        return demotywatorySingleMemeScrapper.scrapMeme(ROOT_URL + "/" + Integer.toString(id));
     }
 }

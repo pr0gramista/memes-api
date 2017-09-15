@@ -20,6 +20,9 @@ public class Meme {
     private int commentAmount;
     private int points;
 
+    public Meme() {
+    }
+
     public Meme(String title, Content content, String url, int comments, int points) {
         this.title = title;
         this.content = content;

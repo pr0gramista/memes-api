@@ -22,10 +22,10 @@ import static com.poprosturonin.sites.demotywatory.DemotywatoryController.ROOT_U
 class DemotywatoryGalleryParser {
     Pattern pattern = Pattern.compile("galleryPics = \\[\"(.+)\"\\];");
 
-    public List<CaptionedGalleryContent.CaptionedGallerySlide> parse(Document document) {
+    public List<CaptionedGalleryContent.CaptionedGallerySlide> parse(Element demot) {
         List<CaptionedGalleryContent.CaptionedGallerySlide> slides = new LinkedList<>();
 
-        Elements scripts = document.getElementsByTag("script");
+        Elements scripts = demot.getElementsByTag("script");
         for (Element script : scripts) {
             Matcher matcher = pattern.matcher(script.html());
             if (matcher.find()) {

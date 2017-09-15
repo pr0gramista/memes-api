@@ -15,6 +15,7 @@ public class Comment {
 
     private List<Comment> responses = new LinkedList<>();
     private int points;
+    private boolean isReply = false;
 
     public Comment(String content, Author author, int points) {
         this.content = content;
@@ -27,6 +28,14 @@ public class Comment {
         this.author = author;
         this.responses = responses;
         this.points = points;
+    }
+
+    public boolean isReply() {
+        return isReply;
+    }
+
+    public void setReply(boolean reply) {
+        isReply = reply;
     }
 
     public String getContent() {
