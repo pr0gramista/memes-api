@@ -37,6 +37,8 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
     @Override
     public Optional<Meme> parseMeme(Document document) {
         Element memeElement = document.getElementsByTag("article").first();
+        if (memeElement == null)
+            throw new CouldNotParseMemeException();
 
         String title, url;
         int votes = 0, commentAmount = 0;
@@ -45,7 +47,7 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
             title = titleElement.text();
             url = titleElement.attr("href");
         } else
-            return Optional.empty();
+            throw new CouldNotParseMemeException();
 
         //Get votes
         Element plusOneElement = memeElement.select("a.btn-plus").first();
@@ -67,6 +69,10 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
             responses += comment.getResponses().size();
         }
 
+        //Get author
+        Element authorElement = memeElement.select("div.info > a").first();
+        Author author = new Author(authorElement.text(), authorElement.attr("href"));
+
         Meme meme = new Meme();
         meme.setTitle(title);
         meme.setUrl(URLUtils.cutToSecondSlash(url).orElse(null));
@@ -74,6 +80,7 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
         meme.setPoints(votes);
         meme.setContent(content);
         meme.setComments(comments);
+        meme.setAuthor(author);
 
         return Optional.of(meme);
     }
