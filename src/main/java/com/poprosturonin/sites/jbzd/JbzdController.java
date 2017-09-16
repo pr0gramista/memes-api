@@ -1,5 +1,6 @@
 package com.poprosturonin.sites.jbzd;
 
+import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,9 @@ public class JbzdController {
     @Autowired
     private JbzdPageScrapper jbzdPageScrapper;
 
+    @Autowired
+    private JbzdSingleMemeScrapper jbzdSingleMemeScrapper;
+
     @RequestMapping(value = "")
     @ResponseBody
     public Page readerPage() {
@@ -29,5 +33,11 @@ public class JbzdController {
     @ResponseBody
     public Page readerPage(@PathVariable int id) {
         return jbzdPageScrapper.scrapPage(JBZD_ROOT_URL + JBZD_PAGE_URL + Integer.toString(id));
+    }
+
+    @RequestMapping(value = "/{id}")
+    @ResponseBody
+    public Meme readerMeme(@PathVariable int id) {
+        return jbzdSingleMemeScrapper.scrapMeme(JBZD_ROOT_URL + "/obr/" + Integer.toString(id));
     }
 }
