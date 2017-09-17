@@ -75,7 +75,8 @@ public class KwejkSingleMemeScrapperTest {
 
         assertThat(meme, allOf(
                 hasProperty("title", equalToIgnoringWhiteSpace("Hula hop")),
-                hasProperty("url", equalToIgnoringWhiteSpace("/3039657/hula-hop.html")),
+                hasProperty("url", equalToIgnoringWhiteSpace("https://kwejk.pl/obrazek/3039657/hula-hop.html")),
+                hasProperty("viewUrl", equalTo("/kwejk/3039657")),
                 // hasProperty("commentAmount", is(0)),  has dynamic comments
                 hasProperty("points", is(130)),
                 hasProperty("content",

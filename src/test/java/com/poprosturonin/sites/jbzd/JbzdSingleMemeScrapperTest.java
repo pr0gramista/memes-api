@@ -105,7 +105,7 @@ public class JbzdSingleMemeScrapperTest {
         assertThat(meme, allOf(
                 hasProperty("title", equalToIgnoringWhiteSpace("Wróżka")),
                 hasProperty("url", equalToIgnoringWhiteSpace("https://jbzdy.pl/obr/608757/wrozka")),
-                hasProperty("viewUrl", equalToIgnoringWhiteSpace("/jbzd/608757/")),
+                hasProperty("viewUrl", equalToIgnoringWhiteSpace("/jbzd/608757")),
                 hasProperty("points", is(136)),
                 hasProperty("content",
                         allOf(
