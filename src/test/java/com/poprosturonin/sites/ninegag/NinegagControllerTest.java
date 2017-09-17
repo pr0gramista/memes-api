@@ -27,7 +27,7 @@ public class NinegagControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private Pattern good9GAGURLPattern = Pattern.compile("^/9gag/([a-zA-Z0-9%]+)$");
+    private Pattern good9GAGURLPattern = Pattern.compile("^/9gag/page/([a-zA-Z0-9%]+)$");
 
     @Test
     public void shouldReturnJson() throws Exception {
