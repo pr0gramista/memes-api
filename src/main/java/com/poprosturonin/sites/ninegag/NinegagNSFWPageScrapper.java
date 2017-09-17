@@ -142,7 +142,7 @@ public class NinegagNSFWPageScrapper extends NinegagPageScrapper {
         //Get next page url
         Matcher m = urlPattern.matcher(document.select("a#nextpage").attr("href"));
         if (m.find())
-            page.setNextPage("/9gagnsfw/" + m.group(1));
+            page.setNextPage("/9gagnsfw/page" + m.group(1));
 
         return page;
     }

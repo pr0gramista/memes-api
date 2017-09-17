@@ -132,7 +132,7 @@ public class NinegagPageScrapper implements PageScrapper {
         //Get next page url
         Matcher m = urlPattern.matcher(document.select("a#nextpage").attr("href"));
         if (m.find())
-            page.setNextPage("/9gag/" + m.group(1));
+            page.setNextPage("/9gag/page" + m.group(1));
 
         return page;
     }

@@ -155,7 +155,7 @@ public class DemotywatoryPageScrapper implements PageScrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("next-page");
         if (nextPageElement.size() > 0)
-            page.setNextPage("/demotywatory" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
+            page.setNextPage("/demotywatory/page" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
         //Get content
         Elements pictures = document.getElementsByClass("demot_pic");

@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class URLUtils {
-    public static String CUT_URL_PATTERN = "^/([^\\s/]+)/(\\d+)";
+    public static String CUT_URL_PATTERN = "^/([^\\s/]+)/page/(\\d+)";
     public static String FIND_ID_PATTERN = "/([0-9]+)";
 
     private static Pattern findIdPattern = Pattern.compile(FIND_ID_PATTERN);

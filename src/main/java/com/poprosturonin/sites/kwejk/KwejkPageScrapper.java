@@ -126,7 +126,7 @@ public class KwejkPageScrapper implements PageScrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("btn-next-page");
         if (nextPageElement.size() > 0) {
-            page.setNextPage("/kwejk" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
+            page.setNextPage("/kwejk/page" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
         }
 
         //Get content

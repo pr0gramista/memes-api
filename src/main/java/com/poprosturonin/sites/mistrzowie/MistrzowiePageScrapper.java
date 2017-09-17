@@ -83,7 +83,7 @@ public class MistrzowiePageScrapper implements PageScrapper {
         //Get next link page
         Elements nextPageElement = document.getElementsByClass("prefetch list_next_page_button");
         if (nextPageElement.size() > 0)
-            page.setNextPage("/mistrzowie" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
+            page.setNextPage("/mistrzowie/page" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
         //Get content
         Elements pictures = document.select("div.pic");
