@@ -103,7 +103,8 @@ public class KwejkSingleMemeScrapperTest {
 
         assertThat(meme, allOf(
                 hasProperty("title", equalToIgnoringWhiteSpace("Ciemność widzę")),
-                hasProperty("url", equalToIgnoringWhiteSpace("/3041505/ciemnosc-widze.html")),
+                hasProperty("url", equalToIgnoringWhiteSpace("https://kwejk.pl/obrazek/3041505/ciemnosc-widze.html")),
+                hasProperty("viewUrl", equalToIgnoringWhiteSpace("/kwejk/3041505")),
                 hasProperty("points", is(115)),
                 hasProperty("content",
                         allOf(

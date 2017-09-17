@@ -75,7 +75,8 @@ public class JbzdSingleMemeScrapperTest {
 
         assertThat(meme, allOf(
                 hasProperty("title", equalToIgnoringWhiteSpace("Duch jest wśród nas!")),
-                hasProperty("url", equalToIgnoringWhiteSpace("/608551/duch-jest-wsrod-nas")),
+                hasProperty("url", equalToIgnoringWhiteSpace("https://jbzdy.pl/obr/608551/duch-jest-wsrod-nas")),
+                hasProperty("viewUrl", equalToIgnoringWhiteSpace("/jbzd/608551")),
                 // hasProperty("commentAmount", is(0)), Jbzd has dynamic comments
                 hasProperty("points", is(140)),
                 hasProperty("content",
@@ -103,7 +104,8 @@ public class JbzdSingleMemeScrapperTest {
 
         assertThat(meme, allOf(
                 hasProperty("title", equalToIgnoringWhiteSpace("Wróżka")),
-                hasProperty("url", equalToIgnoringWhiteSpace("/608757/wrozka")),
+                hasProperty("url", equalToIgnoringWhiteSpace("https://jbzdy.pl/obr/608757/wrozka")),
+                hasProperty("viewUrl", equalToIgnoringWhiteSpace("/jbzd/608757/")),
                 hasProperty("points", is(136)),
                 hasProperty("content",
                         allOf(
