@@ -41,7 +41,7 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
             throw new CouldNotParseMemeException();
 
         String title, url;
-        int votes = 0, commentAmount = 0;
+        int votes = 0;
         Element titleElement = memeElement.select("div.title > a").first();
         if (titleElement != null) {
             title = titleElement.text();
@@ -75,12 +75,14 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
 
         Meme meme = new Meme();
         meme.setTitle(title);
-        meme.setUrl(URLUtils.cutToSecondSlash(url).orElse(null));
+        meme.setUrl(url);
         meme.setCommentAmount(responses + comments.size());
         meme.setPoints(votes);
         meme.setContent(content);
         meme.setComments(comments);
         meme.setAuthor(author);
+
+        URLUtils.getPathId(url).ifPresent(s -> meme.setViewUrl(String.format("/jbzd/%s", s)));
 
         return Optional.of(meme);
     }

@@ -163,6 +163,7 @@ public class DemotywatoryPageScrapper implements PageScrapper {
                 .map(this::parsePicture)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .peek(meme -> URLUtils.getPathId(meme.getUrl()).ifPresent(s -> meme.setViewUrl(String.format("/demotywatory/%s", s))))
                 .collect(Collectors.toList());
 
         page.getMemes().addAll(memes);

@@ -37,6 +37,7 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
         meme.setPoints(getVotes(demot));
 
         meme.setUrl(getURL(document));
+        meme.setViewUrl(getViewURL(meme.getUrl()));
         meme.setComments(getComments(document));
 
         return Optional.of(meme);
@@ -80,7 +81,15 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private String getURL(Document document) {
-        return URLUtils.cutToFirstSlash(document.baseUri()).orElseGet(() -> null); // The Best Optional usage!!!
+        return document.baseUri();
+    }
+
+    private String getViewURL(String url) {
+        String s = URLUtils.cutToFirstSlash(url).orElse(null);
+        if (s != null)
+            return String.format("/demotywatory/%s", s);
+        else
+            return null;
     }
 
     private String getTitle(Element demot) {

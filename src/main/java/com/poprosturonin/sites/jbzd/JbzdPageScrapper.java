@@ -46,6 +46,7 @@ public class JbzdPageScrapper implements PageScrapper {
                 .map(this::parseListElement)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .peek(meme -> URLUtils.getPathId(meme.getUrl()).ifPresent(s -> meme.setViewUrl(String.format("/jbzd/%s", s))))
                 .collect(Collectors.toList());
 
         page.getMemes().addAll(memes);

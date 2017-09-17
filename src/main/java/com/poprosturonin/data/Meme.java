@@ -13,6 +13,7 @@ public class Meme {
     private String title;
     private Content content;
     private String url;
+    private String viewUrl;
     private Author author;
     private List<Comment> comments;
 
@@ -38,6 +39,14 @@ public class Meme {
         this.description = description;
         this.commentAmount = comments;
         this.points = points;
+    }
+
+    public String getViewUrl() {
+        return viewUrl;
+    }
+
+    public void setViewUrl(String viewUrl) {
+        this.viewUrl = viewUrl;
     }
 
     public String getDescription() {

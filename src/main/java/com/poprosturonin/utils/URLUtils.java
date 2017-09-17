@@ -1,9 +1,30 @@
 package com.poprosturonin.utils;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class URLUtils {
     public static String CUT_URL_PATTERN = "^/([^\\s/]+)/(\\d+)";
+    public static String FIND_ID_PATTERN = "/([0-9]+)";
+
+    private static Pattern findIdPattern = Pattern.compile(FIND_ID_PATTERN);
+
+    /**
+     * Finds the id in the url like /wow/<b>504252</b>/that_was_id/ and
+     * returns it
+     *
+     * @param url url to search
+     * @return id in optional or empty optional if id was not found
+     */
+    public static Optional<String> getPathId(String url) {
+        Matcher matcher = findIdPattern.matcher(url);
+        if (matcher.find() && matcher.groupCount() > 0) {
+            return Optional.of(matcher.group(1));
+        } else {
+            return Optional.empty();
+        }
+    }
 
     /**
      * Cuts the part of the url before first slash

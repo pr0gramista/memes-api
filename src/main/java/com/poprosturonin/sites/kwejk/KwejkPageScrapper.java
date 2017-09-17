@@ -135,6 +135,7 @@ public class KwejkPageScrapper implements PageScrapper {
                 .map(this::parseArticle)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .peek(meme -> URLUtils.getPathId(meme.getUrl()).ifPresent(s -> meme.setViewUrl(String.format("/kwejk/%s", s))))
                 .collect(Collectors.toList());
 
         page.getMemes().addAll(memes);

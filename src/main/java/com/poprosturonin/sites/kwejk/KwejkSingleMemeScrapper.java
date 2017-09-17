@@ -9,7 +9,6 @@ import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.sites.SingleMemeScrapper;
-import com.poprosturonin.utils.URLUtils;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,6 +48,7 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
     private Optional<Meme> parseArticle(Element article) {
         String title = null;
         String url = null;
+        String viewUrl = null;
         String absUrl = null;
         int comments = 0;
         int votes = 0;
@@ -58,8 +58,7 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
         if (headers.size() > 0) {
             Element headerElement = headers.get(0);
             title = headerElement.text();
-            absUrl = headerElement.attr("href");
-            url = URLUtils.cutToSecondSlash(absUrl).orElse(null); // Optional TODO
+            url = headerElement.attr("href");
         }
 
         //Get author
@@ -93,12 +92,13 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
         Meme meme = new Meme();
         meme.setTitle(title);
         meme.setUrl(url);
+        meme.setViewUrl(String.format("/kwejk/%s", id));
         meme.setPoints(votes);
         meme.setCommentAmount(comments);
         meme.setAuthor(author);
         meme.setComments(getComments(id));
 
-        Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(article, absUrl);
+        Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(article, url);
         if (galleryContent.isPresent()) {
             meme.setContent(galleryContent.get());
             return Optional.of(meme);
