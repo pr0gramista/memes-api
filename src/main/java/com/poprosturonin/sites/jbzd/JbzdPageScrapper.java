@@ -93,6 +93,10 @@ public class JbzdPageScrapper implements PageScrapper {
             votes = Integer.parseInt(plusOneElement.select("span").text());
         }
 
+        //Get comments
+        String commentsString = element.select("span.comments").first().ownText().trim();
+        comments = Integer.parseInt(commentsString);
+
         Content content = getContent(element.select("div.media").first());
         if (content == null)
             return Optional.empty();

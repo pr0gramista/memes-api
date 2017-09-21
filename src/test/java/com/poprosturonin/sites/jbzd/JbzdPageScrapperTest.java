@@ -75,12 +75,14 @@ public class JbzdPageScrapperTest {
                         hasProperty("title", equalToIgnoringWhiteSpace("Idealnie")),
                         hasProperty("url", equalTo("http://jbzd.pl/obr/518889/idealnie")),
                         hasProperty("points", is(246)),
+                        hasProperty("commentAmount", is(4)),
                         hasProperty("content", hasProperty("url", equalTo("http://i1.jbzd.pl/contents/2017/01/4e2cc4a9ac76b4fe7776dc28d935d3c7.gif")))
                 ),
                 allOf(
                         hasProperty("title", equalToIgnoringWhiteSpace("NFS")),
                         hasProperty("url", equalTo("http://jbzd.pl/obr/519096/nfs")),
                         hasProperty("points", is(199)),
+                        hasProperty("commentAmount", is(4)),
                         hasProperty("content", hasProperty("url", equalTo("http://i1.jbzd.pl/contents/2017/01/6dde374abf0e009c738539117dc08de3.jpg")))
                 )
         ));
