@@ -1,4 +1,4 @@
-﻿# Memes API [![Build Status](https://travis-ci.org/PoprostuRonin/memes-api.svg?branch=master)](https://travis-ci.org/PoprostuRonin/memes-api)
+﻿# Memes API [![Build Status](https://travis-ci.org/pr0gramista/memes-api.svg?branch=master)](https://travis-ci.org/pr0gramista/memes-api)
 
 API for scrapping common meme sites.
 Currently supports:
@@ -53,6 +53,6 @@ Then you can access them by accessing fe. `/kwejk`
       "points": 126
     }
   ],
-  "nextPage": "/kwejk/31310"
+  "nextPage": "/kwejk/page/31310"
 }
 ```
