@@ -2,6 +2,7 @@ package com.poprosturonin.sites.kwejk;
 
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
+import com.poprosturonin.data.Tag;
 import com.poprosturonin.data.contents.GalleryContent;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
@@ -71,21 +72,42 @@ public class KwejkPageScrapper implements PageScrapper {
             votes = Integer.parseInt(voteElement.text());
         }
 
+        //Get tags
+        Elements tagElements = article.select("div.tags > a");
+        List<Tag> tags = null;
+        if (tagElements.size() > 0) {
+            tags = tagElements.stream().map(e ->
+                    new Tag(e.text().replace("#", ""),
+                            e.attr("href"),
+                            URLUtils.cutToSecondSlash(e.attr("href")).get().substring(1)
+                    )
+            ).collect(Collectors.toList());
+        }
+
         //If no header was found, skip this article
         if (title == null || url == null)
             return Optional.empty();
 
         Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(url);
-        if (galleryContent.isPresent())
-            return Optional.of(new Meme(title, galleryContent.get(), url, comments, votes));
+        if (galleryContent.isPresent()) {
+            Meme meme = new Meme(title, galleryContent.get(), url, comments, votes);
+            meme.setTags(tags);
+            return Optional.of(meme);
+        }
 
         Optional<VideoContent> videoContent = tryToParseAsVideoContent(article);
-        if (videoContent.isPresent())
-            return Optional.of(new Meme(title, videoContent.get(), url, comments, votes));
+        if (videoContent.isPresent()) {
+            Meme meme = new Meme(title, videoContent.get(), url, comments, votes);
+            meme.setTags(tags);
+            return Optional.of(meme);
+        }
 
         Optional<ImageContent> imageContent = tryToParseAsImageContent(article);
-        if (imageContent.isPresent())
-            return Optional.of(new Meme(title, imageContent.get(), url, comments, votes));
+        if (imageContent.isPresent()) {
+            Meme meme = new Meme(title, imageContent.get(), url, comments, votes);
+            meme.setTags(tags);
+            return Optional.of(meme);
+        }
 
         return Optional.empty();
     }

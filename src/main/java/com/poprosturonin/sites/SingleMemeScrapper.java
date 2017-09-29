@@ -3,6 +3,7 @@ package com.poprosturonin.sites;
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.exceptions.MemeNotFoundException;
+import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -27,15 +28,14 @@ public interface SingleMemeScrapper {
      * @return parsed meme if possible, otherwise throws {@link CouldNotParseMemeException}
      */
     default Meme scrapMeme(String url) {
-        // TODO: fix this crap
         try {
             return parseMeme(Jsoup.connect(url).userAgent(USER_AGENT).get()).orElseThrow(CouldNotParseMemeException::new);
         } catch (HttpStatusException e) {
-            if(e.getStatusCode() == 404) {
+            if (e.getStatusCode() == 404)
                 throw new MemeNotFoundException();
-            }
         } catch (IOException e) {
             e.printStackTrace();
+            throw new MemeSiteResponseFailedException();
         }
         throw new CouldNotParseMemeException();
     }

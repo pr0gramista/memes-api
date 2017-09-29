@@ -87,6 +87,18 @@ public class KwejkSingleMemeScrapperTest {
                 hasProperty("author", allOf(
                         hasProperty("name", equalToIgnoringWhiteSpace("Ellhuir")),
                         hasProperty("profileUrl", equalTo("https://kwejk.pl/ups/Ellhuir"))
+                )),
+                hasProperty("tags", hasItems(
+                        allOf(
+                                hasProperty("name", equalTo("obrazek")),
+                                hasProperty("sourceUrl", equalTo("https://kwejk.pl/tag/obrazek")),
+                                hasProperty("slug", equalTo("obrazek"))
+                        ),
+                        allOf(
+                                hasProperty("name", equalToIgnoringWhiteSpace("hulahop")),
+                                hasProperty("sourceUrl", equalTo("https://kwejk.pl/tag/hulahop")),
+                                hasProperty("slug", equalToIgnoringWhiteSpace("hulahop"))
+                        )
                 ))
         ));
     }
@@ -119,7 +131,19 @@ public class KwejkSingleMemeScrapperTest {
                                 hasProperty("profileUrl", equalTo("https://kwejk.pl/ups/mrsheenck"))
                         )),
                         hasProperty("reply", equalTo(false))
-                )))
+                ))),
+                hasProperty("tags", hasItems(
+                        allOf(
+                                hasProperty("name", equalTo("mem")),
+                                hasProperty("sourceUrl", equalTo("https://kwejk.pl/tag/mem")),
+                                hasProperty("slug", equalTo("mem"))
+                        ),
+                        allOf(
+                                hasProperty("name", equalToIgnoringWhiteSpace("humor")),
+                                hasProperty("sourceUrl", equalTo("https://kwejk.pl/tag/humor")),
+                                hasProperty("slug", equalToIgnoringWhiteSpace("humor"))
+                        )
+                ))
         ));
     }
 

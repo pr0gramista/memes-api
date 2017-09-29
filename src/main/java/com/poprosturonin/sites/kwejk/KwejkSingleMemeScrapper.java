@@ -3,12 +3,14 @@ package com.poprosturonin.sites.kwejk;
 import com.poprosturonin.data.Author;
 import com.poprosturonin.data.Comment;
 import com.poprosturonin.data.Meme;
+import com.poprosturonin.data.Tag;
 import com.poprosturonin.data.contents.GalleryContent;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.sites.SingleMemeScrapper;
+import com.poprosturonin.utils.URLUtils;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -97,6 +99,7 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
         meme.setCommentAmount(comments);
         meme.setAuthor(author);
         meme.setComments(getComments(id));
+        meme.setTags(getTags(article));
 
         Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(article, url);
         if (galleryContent.isPresent()) {
@@ -144,6 +147,19 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
             return Optional.empty();
     }
 
+    private List<Tag> getTags(Element article) {
+        Elements tagElements = article.select("div.tags > a");
+        if (tagElements.size() > 0) {
+            return tagElements.stream().map(e ->
+                    new Tag(e.text().replace("#", ""),
+                            e.attr("href"),
+                            URLUtils.cutToSecondSlash(e.attr("href")).get().substring(1)
+                    )
+            ).collect(Collectors.toList());
+        }
+        return null;
+    }
+
     private List<Comment> getComments(String id) {
         // TODO: handle multiple pages of comments
         JSONObject response = new JSONObject(getCommentJSON(id));
@@ -156,7 +172,6 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
         for (Element commentElement : commentElements) {
             Element authorElement = commentElement.select(".info > div").first().child(0);
             Author author = null;
-            System.out.println(authorElement.tag().getName());
             if (authorElement.tag().getName().equals("a")) {
                 author = new Author(authorElement.attr("title").trim(), authorElement.attr("href"));
             }
