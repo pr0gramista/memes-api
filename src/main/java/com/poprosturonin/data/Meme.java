@@ -16,6 +16,7 @@ public class Meme {
     private String viewUrl;
     private Author author;
     private List<Comment> comments;
+    private List<Tag> tags;
 
     private String description;
     private int commentAmount;
@@ -111,5 +112,13 @@ public class Meme {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
