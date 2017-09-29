@@ -2,6 +2,7 @@ package com.poprosturonin.sites.jbzd;
 
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
+import com.poprosturonin.data.Tag;
 import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.GIFContent;
 import com.poprosturonin.data.contents.ImageContent;
@@ -97,10 +98,23 @@ public class JbzdPageScrapper implements PageScrapper {
         String commentsString = element.select("span.comments").first().ownText().trim();
         comments = Integer.parseInt(commentsString);
 
+        //Get tags
+        Element tagListElement = element.select("div.tags").first();
+        Elements tagsElements = tagListElement.select("a.tag");
+        List<Tag> tags = tagsElements.stream()
+                .map((Element e) -> new Tag(
+                        e.text().replaceFirst("#", ""),
+                        e.attr("href"),
+                        URLUtils.cutToSecondSlash(e.attr("href")).orElse(" ").substring(1)))
+                .collect(Collectors.toList());
+
+
         Content content = getContent(element.select("div.media").first());
         if (content == null)
             return Optional.empty();
 
-        return Optional.of(new Meme(title, content, url, comments, votes));
+        Meme meme = new Meme(title, content, url, comments, votes);
+        meme.setTags(tags);
+        return Optional.of(meme);
     }
 }

@@ -3,6 +3,7 @@ package com.poprosturonin.sites.jbzd;
 import com.poprosturonin.data.Author;
 import com.poprosturonin.data.Comment;
 import com.poprosturonin.data.Meme;
+import com.poprosturonin.data.Tag;
 import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.GIFContent;
 import com.poprosturonin.data.contents.ImageContent;
@@ -69,6 +70,9 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
             responses += comment.getResponses().size();
         }
 
+        //Get tags
+        List<Tag> tags = getTags(memeElement);
+
         //Get author
         Element authorElement = memeElement.select("div.info > a").first();
         Author author = new Author(authorElement.text(), authorElement.attr("href"));
@@ -81,6 +85,7 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
         meme.setContent(content);
         meme.setComments(comments);
         meme.setAuthor(author);
+        meme.setTags(tags);
 
         URLUtils.getPathId(url).ifPresent(s -> meme.setViewUrl(String.format("/jbzd/%s", s)));
 
@@ -154,6 +159,17 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
             e.printStackTrace();
             throw new MemeSiteResponseFailedException();
         }
+    }
+
+    private List<Tag> getTags(Element memeElement) {
+        Element tagListElement = memeElement.select("div.info").first();
+        Elements tagsElements = tagListElement.select("a.tag");
+        return tagsElements.stream()
+                .map((Element e) -> new Tag(
+                        e.text().replaceFirst("#", ""),
+                        e.attr("href"),
+                        URLUtils.cutToSecondSlash(e.attr("href")).orElse(" ").substring(1)))
+                .collect(Collectors.toList());
     }
 
     private Content getContent(Element mediaElement) {

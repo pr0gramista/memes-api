@@ -87,6 +87,18 @@ public class JbzdSingleMemeScrapperTest {
                 hasProperty("author", allOf(
                         hasProperty("name", equalTo("SchoolShooter")),
                         hasProperty("profileUrl", equalTo("https://jbzdy.pl/uzytkownik/SchoolShooter"))
+                )),
+                hasProperty("tags", hasItems(
+                        allOf(
+                                hasProperty("name", equalTo("video")),
+                                hasProperty("sourceUrl", equalTo("https://jbzdy.pl/tag/video")),
+                                hasProperty("slug", equalTo("video"))
+                        ),
+                        allOf(
+                                hasProperty("name", equalToIgnoringWhiteSpace("duchy")),
+                                hasProperty("sourceUrl", equalTo("https://jbzdy.pl/tag/duchy")),
+                                hasProperty("slug", equalToIgnoringWhiteSpace("duchy"))
+                        )
                 ))
         ));
     }
@@ -119,7 +131,19 @@ public class JbzdSingleMemeScrapperTest {
                                 hasProperty("profileUrl", equalTo("https://jbzdy.pl/uzytkownik/arek-arekk"))
                         )),
                         hasProperty("reply", equalTo(false))
-                )))
+                ))),
+                hasProperty("tags", hasItems(
+                        allOf(
+                                hasProperty("name", equalTo("wróżka")),
+                                hasProperty("sourceUrl", equalTo("https://jbzdy.pl/tag/wrozka")),
+                                hasProperty("slug", equalTo("wrozka"))
+                        ),
+                        allOf( // Ohh empty tag! what a feature jbzdy...
+                                hasProperty("name", equalToIgnoringWhiteSpace("")),
+                                hasProperty("sourceUrl", equalTo("https://jbzdy.pl/tag")),
+                                hasProperty("slug", equalToIgnoringWhiteSpace(""))
+                        )
+                ))
         ));
     }
 
