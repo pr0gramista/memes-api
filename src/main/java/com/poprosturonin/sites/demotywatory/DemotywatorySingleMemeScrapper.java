@@ -12,7 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private List<Comment> getComments(Element document) {
-        List<Comment> comments = new LinkedList<>();
+        List<Comment> comments = new ArrayList<>(25);
         Element commentsElement = document.getElementById("comments");
 
         Elements commentElements = commentsElement.select(".comment");

@@ -2,7 +2,7 @@ package com.poprosturonin.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ public class Comment {
     private String content;
     private Author author;
 
-    private List<Comment> responses = new LinkedList<>();
+    private List<Comment> responses = new ArrayList<>(20);
     private int points;
     private boolean isReply = false;
 

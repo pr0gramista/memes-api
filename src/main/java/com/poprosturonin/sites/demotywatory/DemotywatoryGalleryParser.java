@@ -7,7 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +23,7 @@ class DemotywatoryGalleryParser {
     Pattern pattern = Pattern.compile("galleryPics = \\[\"(.+)\"\\];");
 
     public List<CaptionedGalleryContent.CaptionedGallerySlide> parse(Element demot) {
-        List<CaptionedGalleryContent.CaptionedGallerySlide> slides = new LinkedList<>();
+        List<CaptionedGalleryContent.CaptionedGallerySlide> slides = new ArrayList<>(25);
 
         Elements scripts = demot.getElementsByTag("script");
         for (Element script : scripts) {
