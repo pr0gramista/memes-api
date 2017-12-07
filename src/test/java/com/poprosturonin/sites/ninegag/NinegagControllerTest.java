@@ -36,7 +36,7 @@ public class NinegagControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(good9GAGURLPattern)));
-        mockMvc.perform(get("/9gag/page/anjOwQ0%2CaOB2LKv%2Cam2W6Q2"))
+        mockMvc.perform(get("/9gag/page/a3MOnmv%2CaoO7VWm%2CaL8EmPz&c"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
