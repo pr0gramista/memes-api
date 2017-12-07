@@ -87,7 +87,7 @@ public class NinegagPageScrapper implements PageScrapper {
         String title;
         Content content;
 
-        title = element.select("h2.badge-item-title > a").text();
+        title = element.select("h1.badge-item-title").text();
 
         //Find out the content
         Elements videoElement = element.select("video");

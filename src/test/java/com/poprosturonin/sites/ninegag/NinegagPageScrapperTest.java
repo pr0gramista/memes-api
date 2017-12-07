@@ -57,7 +57,7 @@ public class NinegagPageScrapperTest {
         assertNotNull(page);
         assertFalse(page.isEmpty());
         assertTrue(page.getMemes().size() > 0);
-        assertTrue(page.getNextPage() != null);
+        assertNotNull(page.getNextPage());
     }
 
     @Test
@@ -67,18 +67,18 @@ public class NinegagPageScrapperTest {
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalTo("I see no difference")),
-                        hasProperty("url", equalTo("http://9gag.com/gag/aAdPmE9")),
-                        hasProperty("commentAmount", is(156)),
-                        hasProperty("points", is(4030)),
-                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/aAdPmE9_460s.jpg")))
+                        hasProperty("title", equalTo("Thomas the trick engine")),
+                        hasProperty("url", equalTo("https://9gag.com/gag/ax0rwjD")),
+                        hasProperty("commentAmount", is(92)),
+                        hasProperty("points", is(4019)),
+                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/ax0rwjD_460sv.mp4")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("This thing is like.. really dangerous!")),
-                        hasProperty("url", equalTo("http://9gag.com/gag/arbNy9y")),
-                        hasProperty("commentAmount", is(248)),
-                        hasProperty("points", is(5317)),
-                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/arbNy9y_460s.jpg")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("Please rage")),
+                        hasProperty("url", equalTo("https://9gag.com/gag/a1K6BPP")),
+                        hasProperty("commentAmount", is(302)),
+                        hasProperty("points", is(3922)),
+                        hasProperty("content", hasProperty("url", equalTo("https://img-9gag-fun.9cache.com/photo/a1K6BPP_460s.jpg")))
                 )
         ));
     }
