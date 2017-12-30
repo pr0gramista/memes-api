@@ -29,6 +29,8 @@ import static org.junit.Assert.*;
 @ContextConfiguration
 public class NinegagPageScrapperTest {
 
+    /*
+
     private static String CHARSET = "UTF-8";
 
     private static Document testDocument;
@@ -89,5 +91,5 @@ public class NinegagPageScrapperTest {
         public NinegagPageScrapper getNinegagScrapper() {
             return new NinegagPageScrapper();
         }
-    }
+    } */
 }

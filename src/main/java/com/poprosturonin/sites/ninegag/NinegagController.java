@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/9gag")
 public class NinegagController {
-    final static String ROOT_URL = "http://9gag.com";
-    final static String ID_URL_PART = "?id=";
+    final static String ROOT_URL = "https://9gag.com/v1/group-posts/group/default/type/hot";
+    final static String ID_URL_PART = "?c=10&after=";
 
     @Autowired
     private NinegagPageScrapper ninegagPageScrapper;
