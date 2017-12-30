@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,7 +70,7 @@ public class NinegagPageScrapper implements PageScrapper {
 
     public Meme parseMeme(JSONObject post) {
         Meme meme = new Meme();
-        meme.setTitle(post.getString("title"));
+        meme.setTitle(StringEscapeUtils.unescapeHtml4(post.getString("title")));
         meme.setUrl(post.getString("url"));
         meme.setCommentAmount(post.getInt("commentsCount"));
         meme.setPoints(post.getInt("upVoteCount"));
