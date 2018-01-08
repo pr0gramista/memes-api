@@ -75,7 +75,9 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
 
         //Get author
         Element authorElement = memeElement.select("div.info > a").first();
-        Author author = new Author(authorElement.text(), authorElement.attr("href"));
+        Author author = null;
+        if (authorElement != null)
+             author = new Author(authorElement.text(), authorElement.attr("href"));
 
         Meme meme = new Meme();
         meme.setTitle(title);

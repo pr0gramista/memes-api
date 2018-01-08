@@ -99,14 +99,17 @@ public class JbzdPageScrapper implements PageScrapper {
         comments = Integer.parseInt(commentsString);
 
         //Get tags
+        List<Tag> tags = null;
         Element tagListElement = element.select("div.tags").first();
-        Elements tagsElements = tagListElement.select("a.tag");
-        List<Tag> tags = tagsElements.stream()
-                .map((Element e) -> new Tag(
-                        e.text().replaceFirst("#", ""),
-                        e.attr("href"),
-                        URLUtils.cutToSecondSlash(e.attr("href")).orElse(" ").substring(1)))
-                .collect(Collectors.toList());
+        if (tagListElement != null) {
+            Elements tagsElements = tagListElement.select("a.tag");
+            tags = tagsElements.stream()
+                    .map((Element e) -> new Tag(
+                            e.text().replaceFirst("#", ""),
+                            e.attr("href"),
+                            URLUtils.cutToSecondSlash(e.attr("href")).orElse(" ").substring(1)))
+                    .collect(Collectors.toList());
+        }
 
 
         Content content = getContent(element.select("div.media").first());
