@@ -5,6 +5,7 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.LoginFailedException;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.exceptions.PageIsEmptyException;
+import org.json.JSONObject;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,4 +29,10 @@ import java.util.stream.Collectors;
  */
 @Component
 public class NinegagNSFWPageScrapper extends NinegagPageScrapper {
+    @Override
+    public Page parseJSONPage(JSONObject response) {
+        Page page = super.parseJSONPage(response);
+        page.setNextPage(page.getNextPage().replace("9gag", "9gagnsfw"));
+        return page;
+    }
 }
