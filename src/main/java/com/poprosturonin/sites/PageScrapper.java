@@ -1,16 +1,12 @@
 package com.poprosturonin.sites;
 
-import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
-import com.poprosturonin.exceptions.CouldNotParseMemeException;
-import com.poprosturonin.exceptions.MemeNotFoundException;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * PageScrapper scraps pages of memes of supported sites
