@@ -1,5 +1,6 @@
 package com.poprosturonin.sites.kwejk;
 
+import com.poprosturonin.data.Author;
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import com.poprosturonin.data.Tag;
@@ -36,7 +37,7 @@ public class KwejkPageScrapper implements PageScrapper {
         List<String> list = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url).userAgent(USER_AGENT).get();
-            Elements thumbnails = document.select(".jcarousel img");
+            Elements thumbnails = document.select(".slider-nav > li > a > img");
             thumbnails.forEach((Element thumbnail) -> list.add(thumbnail.attr("src").replace("_thumb", "")));
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,67 +45,77 @@ public class KwejkPageScrapper implements PageScrapper {
         return list;
     }
 
-    private Optional<Meme> parseArticle(Element article) {
+    private Optional<Meme> parseMemeBlock(Element block) {
         String title = null;
         String url = null;
         int comments = 0;
         int votes = 0;
 
-        //Get header
-        Elements headers = article.select("h1 > art-ah0 > a");
-        if (headers.size() > 0) {
-            Element headerElement = headers.get(0);
-            title = headerElement.text();
-            url = headerElement.attr("href");
-        }
-
-        //Get comments
-        Elements commentElements = article.select(".comments-num");
-        if (commentElements.size() > 0) {
-            Element commentElement = commentElements.get(0);
-            comments = Integer.parseInt(commentElement.text());
-        }
-
-        //Get votes
-        Elements voteElements = article.select(".votes > span.bubble");
-        if (voteElements.size() > 0) {
-            Element voteElement = voteElements.get(0);
-            votes = Integer.parseInt(voteElement.text());
-        }
-
-        //Get tags
-        Elements tagElements = article.select("div.tags > a");
-        List<Tag> tags = null;
-        if (tagElements.size() > 0) {
-            tags = tagElements.stream().map(e ->
-                    new Tag(e.text().replace("#", ""),
-                            e.attr("href"),
-                            URLUtils.cutToSecondSlash(e.attr("href")).get().substring(1)
-                    )
-            ).collect(Collectors.toList());
+        // Get title
+        Element titleElement = block.select(".content > h2 > a").first();
+        if (titleElement != null) {
+            title = titleElement.text();
+            url = titleElement.attr("href");
         }
 
         //If no header was found, skip this article
         if (title == null || url == null)
             return Optional.empty();
 
+        //Get author
+        Author author = null;
+        Element authorElement = block.select("div.user-bar > div.content > a").first();
+        if (authorElement != null) {
+            author = new Author(
+                    authorElement.getElementsByClass("name").first().text(),
+                    authorElement.attr("href"));
+        }
+
+        //Get comments and votes
+        try {
+            comments = Integer.parseInt(block.attr("data-comments-count"));
+        } catch (NumberFormatException e) {
+            comments = 0;
+        }
+
+        try {
+            votes = Integer.parseInt(block.attr("data-vote-up")) - Integer.parseInt(block.attr("data-vote-down"));
+        } catch (NumberFormatException e) {
+            votes = 0;
+        }
+
+        //Get tags
+        Elements tagElements = block.select("div.tag-list > a");
+        List<Tag> tags = null;
+        if (!tagElements.isEmpty()) {
+            tags = tagElements.stream().map(e ->
+                    new Tag(e.text().replace("#", ""),
+                            e.attr("href"),
+                            URLUtils.cutToSecondSlash(e.attr("href")).orElse("  ").substring(1)
+                    )
+            ).collect(Collectors.toList());
+        }
+
         Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(url);
         if (galleryContent.isPresent()) {
             Meme meme = new Meme(title, galleryContent.get(), url, comments, votes);
+            meme.setAuthor(author);
             meme.setTags(tags);
             return Optional.of(meme);
         }
 
-        Optional<VideoContent> videoContent = tryToParseAsVideoContent(article);
+        Optional<VideoContent> videoContent = tryToParseAsVideoContent(block);
         if (videoContent.isPresent()) {
             Meme meme = new Meme(title, videoContent.get(), url, comments, votes);
+            meme.setAuthor(author);
             meme.setTags(tags);
             return Optional.of(meme);
         }
 
-        Optional<ImageContent> imageContent = tryToParseAsImageContent(article);
+        Optional<ImageContent> imageContent = tryToParseAsImageContent(block);
         if (imageContent.isPresent()) {
             Meme meme = new Meme(title, imageContent.get(), url, comments, votes);
+            meme.setAuthor(author);
             meme.setTags(tags);
             return Optional.of(meme);
         }
@@ -113,21 +124,13 @@ public class KwejkPageScrapper implements PageScrapper {
     }
 
     private Optional<ImageContent> tryToParseAsImageContent(Element article) {
-        Elements images = article.select("img");
-        if (images.size() > 0) {
-            Element contentElement = images.get(0);
-            return Optional.of(new ImageContent(contentElement.attr("src")));
-        } else
-            return Optional.empty();
+        Optional<Element> image = Optional.ofNullable(article.select("figure > a > img").first());
+        return image.map(element -> new ImageContent(element.attr("src")));
     }
 
     private Optional<VideoContent> tryToParseAsVideoContent(Element article) {
-        Elements videos = article.select("video");
-        if (videos.size() > 0) {
-            Element contentElement = videos.get(0);
-            return Optional.of(new VideoContent(contentElement.attr("src")));
-        } else
-            return Optional.empty();
+        Optional<Element> video = Optional.ofNullable(article.getElementsByTag("video").first());
+        return video.map(element -> new VideoContent(element.attr("src")));
     }
 
     private Optional<GalleryContent> tryToParseAsGalleryContent(String headerURL) {
@@ -146,15 +149,15 @@ public class KwejkPageScrapper implements PageScrapper {
         page.setTitle(document.title());
 
         //Get next link page
-        Elements nextPageElement = document.getElementsByClass("btn-next-page");
+        Elements nextPageElement = document.getElementsByClass("btn-next");
         if (nextPageElement.size() > 0) {
             page.setNextPage("/kwejk/page" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
         }
 
         //Get content
-        Elements articles = document.getElementsByTag("article");
-        List<Meme> memes = articles.stream()
-                .map(this::parseArticle)
+        Elements memeBlocks = document.select(".media-element");
+        List<Meme> memes = memeBlocks.stream()
+                .map(this::parseMemeBlock)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .peek(meme -> URLUtils.getPathId(meme.getUrl()).ifPresent(s -> meme.setViewUrl(String.format("/kwejk/%s", s))))
