@@ -34,88 +34,91 @@ import java.util.stream.Collectors;
 public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
     private final static String SEQUENCE_404 = "404 - strona";
 
-    private final static String KWEJK_COMMENTS_URL = "https://kwejk.pl/comments/ajax/load";
+    private final static String KWEJK_COMMENTS_URL = "https://kwejk.pl/comment/get";
 
     private boolean is404(String title) {
         return title.contains(SEQUENCE_404);
     }
 
-    private List<String> parseGallery(Element article) {
-        List<String> list = new ArrayList<>(25);
-        Elements thumbnails = article.select(".jcarousel img");
-        thumbnails.forEach((Element thumbnail) -> list.add(thumbnail.attr("src").replace("_thumb", "")));
-        return list;
-    }
-
-    private Optional<Meme> parseArticle(Element article) {
+    private Optional<Meme> parseMemeBlock(Element block) {
         String title = null;
         String url = null;
-        String viewUrl = null;
-        String absUrl = null;
-        int comments = 0;
+        int commentAmount = 0;
         int votes = 0;
 
-        //Get header
-        Elements headers = article.select("h1 > art-ah0 > a");
-        if (headers.size() > 0) {
-            Element headerElement = headers.get(0);
-            title = headerElement.text();
-            url = headerElement.attr("href");
-        }
-
-        //Get author
-        Element authorElement = article.select(".author > .info > a").first();
-        String nick = authorElement.text().trim();
-        String profile_url = authorElement.attr("href");
-        Author author = new Author(nick, profile_url);
-
-        //Get comments
-        Elements commentElements = article.select(".comments-num");
-        if (commentElements.size() > 0) {
-            Element commentElement = commentElements.get(0);
-            comments = Integer.parseInt(commentElement.text());
-        }
-
-        //Get votes
-        Elements voteElements = article.select(".votes > span.bubble");
-        if (voteElements.size() > 0) {
-            Element voteElement = voteElements.get(0);
-            votes = Integer.parseInt(voteElement.text());
+        // Get title
+        Element titleElement = block.select(".content > h2 > a").first();
+        if (titleElement != null) {
+            title = titleElement.text();
+            url = titleElement.attr("href");
         }
 
         //If no header was found, skip this article
         if (title == null || url == null)
             return Optional.empty();
 
-        //Get id (for comments)
-        Element idHolder = article.select("div.actions").first();
-        String id = idHolder.attr("data-id");
+        //Get author
+        Author author = null;
+        Element authorElement = block.select("div.user-bar > div.content > a").first();
+        if (authorElement != null) {
+            author = new Author(
+                    authorElement.getElementsByClass("name").first().text(),
+                    authorElement.attr("href"));
+        }
 
-        Meme meme = new Meme();
-        meme.setTitle(title);
-        meme.setUrl(url);
-        meme.setViewUrl(String.format("/kwejk/%s", id));
-        meme.setPoints(votes);
-        meme.setCommentAmount(comments);
-        meme.setAuthor(author);
-        meme.setComments(getComments(id));
-        meme.setTags(getTags(article));
+        //Get comments and votes
+        try {
+            commentAmount = Integer.parseInt(block.attr("data-comments-count"));
+        } catch (NumberFormatException e) {
+            commentAmount = 0;
+        }
 
-        Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(article, url);
+        try {
+            votes = Integer.parseInt(block.attr("data-vote-up")) - Integer.parseInt(block.attr("data-vote-down"));
+        } catch (NumberFormatException e) {
+            votes = 0;
+        }
+
+        //Get tags
+        Elements tagElements = block.select("div.tag-list > a");
+        List<Tag> tags = null;
+        if (!tagElements.isEmpty()) {
+            tags = tagElements.stream().map(e ->
+                    new Tag(e.text().replace("#", ""),
+                            e.attr("href"),
+                            URLUtils.cutToSecondSlash(e.attr("href")).orElse("  ").substring(1)
+                    )
+            ).collect(Collectors.toList());
+        }
+
+        //Get comments
+        List<Comment> comments = null; //etComments();
+
+
+        Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(block);
         if (galleryContent.isPresent()) {
-            meme.setContent(galleryContent.get());
+            Meme meme = new Meme(title, galleryContent.get(), url, commentAmount, votes);
+            meme.setAuthor(author);
+            meme.setTags(tags);
+            meme.setComments(comments);
             return Optional.of(meme);
         }
 
-        Optional<VideoContent> videoContent = tryToParseAsVideoContent(article);
+        Optional<VideoContent> videoContent = tryToParseAsVideoContent(block);
         if (videoContent.isPresent()) {
-            meme.setContent(videoContent.get());
+            Meme meme = new Meme(title, videoContent.get(), url, commentAmount, votes);
+            meme.setAuthor(author);
+            meme.setTags(tags);
+            meme.setComments(comments);
             return Optional.of(meme);
         }
 
-        Optional<ImageContent> imageContent = tryToParseAsImageContent(article);
+        Optional<ImageContent> imageContent = tryToParseAsImageContent(block);
         if (imageContent.isPresent()) {
-            meme.setContent(imageContent.get());
+            Meme meme = new Meme(title, imageContent.get(), url, commentAmount, votes);
+            meme.setAuthor(author);
+            meme.setTags(tags);
+            meme.setComments(comments);
             return Optional.of(meme);
         }
 
@@ -123,41 +126,24 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private Optional<ImageContent> tryToParseAsImageContent(Element article) {
-        Elements images = article.select(".object img");
-        if (images.size() > 0) {
-            Element contentElement = images.get(0);
-            return Optional.of(new ImageContent(contentElement.attr("src")));
-        } else
-            return Optional.empty();
+        Optional<Element> image = Optional.ofNullable(article.select("figure > a > img").first());
+        return image.map(element -> new ImageContent(element.attr("src")));
     }
 
     private Optional<VideoContent> tryToParseAsVideoContent(Element article) {
-        Elements videos = article.select(".object video");
-        if (videos.size() > 0) {
-            Element contentElement = videos.get(0);
-            return Optional.of(new VideoContent(contentElement.attr("src")));
-        } else
-            return Optional.empty();
+        Optional<Element> video = Optional.ofNullable(article.getElementsByTag("video").first());
+        return video.map(element -> new VideoContent(element.attr("src")));
     }
 
-    private Optional<GalleryContent> tryToParseAsGalleryContent(Element article, String headerURL) {
-        if (headerURL.contains("/przegladaj/")) {
-            return Optional.of(new GalleryContent(parseGallery(article)));
-        } else
+    private Optional<GalleryContent> tryToParseAsGalleryContent(Element block) {
+        Elements thumbnails = block.select(".slider-nav > li > a > img");
+        if (thumbnails.isEmpty())
             return Optional.empty();
-    }
 
-    private List<Tag> getTags(Element article) {
-        Elements tagElements = article.select("div.tags > a");
-        if (tagElements.size() > 0) {
-            return tagElements.stream().map(e ->
-                    new Tag(e.text().replace("#", ""),
-                            e.attr("href"),
-                            URLUtils.cutToSecondSlash(e.attr("href")).get().substring(1)
-                    )
-            ).collect(Collectors.toList());
-        }
-        return null;
+        List<String> urls = thumbnails.stream()
+                .map(element -> element.attr("src").replace("_thumb", ""))
+                .collect(Collectors.toList());
+        return Optional.of(new GalleryContent(urls));
     }
 
     private List<Comment> getComments(String id) {
@@ -229,11 +215,11 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
 
     @Override
     public Optional<Meme> parseMeme(Document document) {
-        Element article = document.select("article.content").first();
+        Element article = document.select(".media-element").first();
         if (article == null)
             throw new CouldNotParseMemeException();
 
-        Optional<Meme> memeOptional = parseArticle(article);
+        Optional<Meme> memeOptional = parseMemeBlock(article);
         if (!memeOptional.isPresent())
             throw new CouldNotParseMemeException();
 
