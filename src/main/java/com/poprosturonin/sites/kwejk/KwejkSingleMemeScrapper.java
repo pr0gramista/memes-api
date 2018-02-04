@@ -11,8 +11,8 @@ import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.sites.SingleMemeScrapper;
 import com.poprosturonin.utils.URLUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -92,7 +92,7 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
         }
 
         //Get comments
-        List<Comment> comments = null; //etComments();
+        List<Comment> comments = getComments(block.attr("data-id"));
 
 
         Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(block);
@@ -148,37 +148,41 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
 
     private List<Comment> getComments(String id) {
         // TODO: handle multiple pages of comments
-        JSONObject response = new JSONObject(getCommentJSON(id));
-        String commentsHTML = response.getString("html");
-        Document commentDocument = Jsoup.parse(commentsHTML);
+        String rawJson = getCommentJSON(id);
+        System.out.println(rawJson);
+        JSONObject response = new JSONObject(rawJson);
+        JSONArray commentsData = response.getJSONObject("comments").getJSONArray("data");
 
-        List<KwejkComment> comments = new ArrayList<>(30);
+        List<KwejkComment> comments = new ArrayList<>(20);
+        KwejkComment commentTop = null;
 
-        Elements commentElements = commentDocument.select("article");
-        for (Element commentElement : commentElements) {
-            Element authorElement = commentElement.select(".info > div").first().child(0);
-            Author author = null;
-            if (authorElement.tag().getName().equals("a")) {
-                author = new Author(authorElement.attr("title").trim(), authorElement.attr("href"));
-            }
+        for (int i = 0; i < commentsData.length(); i++) {
+            JSONObject commentData = commentsData.getJSONObject(i);
 
-            String content = commentElement.select("div.p").first().text().trim();
-            int points = Integer.parseInt(commentElement.select(".votes > span[data-container=\"bubble\"]").text());
-            int cid = Integer.parseInt(commentElement.attr("data-id"));
-            int parent_cid = Integer.parseInt(commentElement.attr("data-parent-id"));
-
-            KwejkComment kwejkComment = new KwejkComment(content, author, points);
-            kwejkComment.setId(cid);
-
-            if (parent_cid != 0) {
-                for (KwejkComment comment : comments) {
-                    if (comment.getId() == parent_cid) {
-                        comment.getResponses().add(kwejkComment);
-                        break;
-                    }
-                }
+            // Parse comment
+            String content = commentData.getString("comment");
+            Author author;
+            if (commentData.isNull("user")) {
+                author = new Author("Anonimowy", "");
             } else {
-                comments.add(kwejkComment);
+                JSONObject userObject = commentData.getJSONObject("user");
+                author = new Author(
+                        userObject.getString("uacc_fullname"),
+                        userObject.getString("uacc_profile_url")
+                );
+            }
+            boolean isChild = commentData.getBoolean("is_child");
+            int points = commentData.getInt("plus") - commentData.getInt("minus");
+            KwejkComment comment = new KwejkComment(content, author, points);
+
+            // Add to responses or to main list
+            if (isChild && commentTop != null) {
+                List<Comment> responses = commentTop.getResponses();
+                responses.add(comment);
+                commentTop.setResponses(responses);
+            } else {
+                comments.add(comment);
+                commentTop = comment;
             }
         }
 
@@ -187,14 +191,13 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
 
     private String getCommentJSON(String id) {
         try {
-            String data = "id=" + id + "&page=1"; //fe. id=3039657
-            String type = "application/x-www-form-urlencoded";
+            String data = "id=" + id + "&page=1&mode=media"; //fe. id=3039657
             URL downloadURL = new URL(KWEJK_COMMENTS_URL);
             HttpURLConnection connection = (HttpURLConnection) downloadURL.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("x-requested-with", "XMLHttpRequest");
-            connection.setRequestProperty("Content-Type", type);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Content-Length", String.valueOf(data.length()));
             OutputStream os = connection.getOutputStream();
             os.write(data.getBytes());
