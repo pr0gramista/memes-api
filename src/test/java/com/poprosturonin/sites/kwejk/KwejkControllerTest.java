@@ -1,4 +1,4 @@
-package com.poprosturonin.sites.mistrzowie;
+package com.poprosturonin.sites.kwejk;
 
 import com.poprosturonin.utils.URLUtils;
 import org.junit.Test;
@@ -21,28 +21,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MistrzowieControllerTest {
+public class KwejkControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void shouldReturnJson() throws Exception {
-        mockMvc.perform(get("/mistrzowie/"))
+        mockMvc.perform(get("/kwejk/"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
-        mockMvc.perform(get("/mistrzowie/page/2000"))
+        mockMvc.perform(get("/kwejk/page/37000"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
-    }
-
-    @Test
-    public void shouldReturnEmptyPage() throws Exception {
-        mockMvc.perform(get("/mistrzowie/page/-1"))
-                .andExpect(status().isNotFound());
     }
 }

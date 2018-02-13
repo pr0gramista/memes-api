@@ -1,4 +1,4 @@
-package com.poprosturonin.sites.mistrzowie;
+package com.poprosturonin.sites.kwejk;
 
 import com.poprosturonin.data.Page;
 import com.poprosturonin.exceptions.PageIsEmptyException;
@@ -27,32 +27,32 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class MistrzowiePageScrapperTest {
+public class KwejkPageScrapperTest {
 
     private static String CHARSET = "UTF-8";
 
     private static Document testDocument;
 
     @Autowired
-    private MistrzowiePageScrapper mistrzowieScrapper;
+    private KwejkPageScrapper kwejkScrapper;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        testDocument = Jsoup.parse(new File(MistrzowiePageScrapperTest.class
+        testDocument = Jsoup.parse(new File(KwejkPageScrapperTest.class
                 .getClassLoader()
-                .getResource("sites/mistrzowie.html")
+                .getResource("sites/kwejk.html")
                 .toURI()), CHARSET);
     }
 
     @Test(expected = PageIsEmptyException.class)
     public void pageIsEmptyExceptionWasCalled() throws Exception {
         Document document = new Document("test");
-        mistrzowieScrapper.parsePage(document);
+        kwejkScrapper.parsePage(document);
     }
 
     @Test
     public void parsesOk() throws Exception {
-        Page page = mistrzowieScrapper.parsePage(testDocument);
+        Page page = kwejkScrapper.parsePage(testDocument);
 
         assertNotNull(page);
         assertFalse(page.isEmpty());
@@ -63,22 +63,22 @@ public class MistrzowiePageScrapperTest {
     @Test
     @SuppressWarnings("unchecked")
     public void gotMemesProperly() throws Exception {
-        Page page = mistrzowieScrapper.parsePage(testDocument);
+        Page page = kwejkScrapper.parsePage(testDocument);
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("Kim jest?")),
-                        hasProperty("url", equalTo("http://mistrzowie.org/679961/Kim-jest")),
-                        hasProperty("commentAmount", is(3)),
-                        hasProperty("points", is(233)),
-                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071055_by_Nightstalker.jpg?1479071055")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("miał farta")),
+                        hasProperty("url", equalTo("https://kwejk.pl/obrazek/3143697/mial-farta.html")),
+                        hasProperty("commentAmount", is(5)),
+                        hasProperty("points", is(73)),
+                        hasProperty("content", hasProperty("url", equalTo("https://i1.kwejk.pl/k/obrazki/2018/02/lqXPRFvJzmDzSmdI.jpg")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("Satyrycy oglądają youtuberów")),
-                        hasProperty("url", equalTo("http://mistrzowie.org/679963/Satyrycy-ogladaja-youtuberow")),
-                        hasProperty("commentAmount", is(3)),
-                        hasProperty("points", is(216)),
-                        hasProperty("content", hasProperty("url", equalTo("http://mistrzowie.org/uimages/services/mistrzowie/i18n/pl_PL/201611/1479071999_by_bartekkk1.jpg?1479071999")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("Patologia w Polsce")),
+                        hasProperty("url", equalTo("https://kwejk.pl/obrazek/3143691/patologia-w-polsce.html")),
+                        hasProperty("commentAmount", is(5)),
+                        hasProperty("points", is(125)),
+                        hasProperty("content", hasProperty("url", equalTo("https://i1.kwejk.pl/k/obrazki/2018/02/xyPmsaVrZZ8sVXbr.jpg")))
                 )
         ));
     }
@@ -86,8 +86,8 @@ public class MistrzowiePageScrapperTest {
     @Configuration
     static class Config {
         @Bean
-        public MistrzowiePageScrapper getMistrzowieScrapper() {
-            return new MistrzowiePageScrapper();
+        public KwejkPageScrapper getKwejkScrapper() {
+            return new KwejkPageScrapper();
         }
     }
 }
