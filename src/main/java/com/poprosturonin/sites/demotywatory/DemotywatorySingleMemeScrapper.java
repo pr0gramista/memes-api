@@ -19,6 +19,7 @@ import java.util.Optional;
 @Component
 public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     private static final String USER_URL = "http://demotywatory.pl/user/";
+    private static final String ROOT_URL = "http://m.demotywatory.pl";
 
     private DemotywatoryGalleryParser galleryParser = new DemotywatoryGalleryParser();
 
@@ -87,7 +88,7 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     private String getViewURL(String url) {
         String s = URLUtils.cutToFirstSlash(url).orElse(null);
         if (s != null)
-            return String.format("/demotywatory/%s", s);
+            return String.format("/demotywatory%s", s);
         else
             return null;
     }
@@ -144,7 +145,7 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private VideoContent parseAsVideo(Element demot) {
-        return new VideoContent(demot.getElementsByTag("source").attr("src"));
+        return new VideoContent(ROOT_URL + demot.getElementsByTag("source").attr("src"));
     }
 
     private ImageContent parseAsImage(Element demot) {
