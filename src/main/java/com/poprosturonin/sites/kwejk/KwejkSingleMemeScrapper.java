@@ -47,7 +47,7 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
         int votes = 0;
 
         // Get title
-        Element titleElement = block.select(".content > h2 > a").first();
+        Element titleElement = block.select(".content > h1 > a").first();
         if (titleElement != null) {
             title = titleElement.text();
             url = titleElement.attr("href");
