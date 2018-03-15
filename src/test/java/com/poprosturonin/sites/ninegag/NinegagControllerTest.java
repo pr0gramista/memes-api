@@ -1,5 +1,6 @@
 package com.poprosturonin.sites.ninegag;
 
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.regex.Pattern;
 
@@ -31,7 +33,16 @@ public class NinegagControllerTest {
 
     @Test
     public void shouldReturnJson() throws Exception {
-        mockMvc.perform(get("/9gag/"))
+        MvcResult first = mockMvc.perform(get("/9gag/"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("nextPage", matchesPattern(good9GAGURLPattern)))
+                .andReturn();
+
+        JSONObject firstContent = new JSONObject(first.getResponse().getContentAsString());
+
+        mockMvc.perform(get(firstContent.getString("nextPage")))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
