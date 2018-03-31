@@ -3,7 +3,7 @@ jdk: oraclejdk8
 before_deploy:
 - git config --local user.name "Bartosz Wiśniewski"
 - git config --local user.email "kontakt@pr0gramista.pl"
-- git tag "$(git log --format=%h -1)-$(printenv TRAVIS_COMMIT_MESSAGE)"
+- git tag "$(printenv TRAVIS_BUILD_NUMBER)-$(git log --format=%h -1)"
 deploy:
   provider: releases
   api_key:
