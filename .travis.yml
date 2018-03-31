@@ -6,6 +6,7 @@ before_deploy:
 - git tag "$(printenv TRAVIS_BUILD_NUMBER)-$(git log --format=%h -1)"
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: rYezboLGZZjgfCCzWVMfAGqBITXq06OFyJOSIL6N0v33/yz9GhplNMNHMIsRw1NwqtyYH2SuAbCDOCBNlF0SNSB06uJARB6S7+OZ0R80ZbwTXR9KruxIXHij0sbjAK6loYANSR6MtuoGJFyI5tg0cbH4/9orxsTb19rBct1M9SOCCtqEF2AUF5tewnvTruL7XGzzBNgQ2cPNXdoPgSMOKlHzBxRG0lzAnVUT/ju/XeqpcV1/n3qPqCs2YRmX/YfqOlEw44k4vnSKCtzlKLwI83DEwMNAmTVeuylTVZ4Gp7AtYNkMV7JkK7J5C57v0n5gpIJw9203IIe4MMfTGhKw+ChDULKPngmXnL/1996/J1np354NcalabgoCzasJ60VtNJJAKd4zeWux7S/EFXoj5sSH2gFaCbxosI8Vfs062TIOMU0RFith3K7FZ2gn6D2WoCfzA82sO1n8cGfiDpYJ9jc2Q1xo1nSqUSjRPINUJ2gErJ5vg9yw2Zv8GPOpHfZ5Z9gg6H8P+RIA5aYCtv28zw0p1pXLxAEU+Flpx+8NgRksz1Rzfh8GOXTHFbLO79FWQ2etBqs1xV4tsCRkfl6P4sdwCsM75ZL/KMCtyZhlocutKRG2ZlboB3HEWkJTNjcCAas/qO1TI+EXFoveCDm3JLe4lkOdaGpnU4tPrUkY8Ls=
   file: build/libs/memes-api.jar
