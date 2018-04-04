@@ -5,6 +5,7 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.TextContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.PageScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -40,13 +41,7 @@ public class AnonimowePageScrapper implements PageScrapper {
     }
 
     private int getVotes(Element article) {
-        int votes;
-        try {
-            votes = Integer.parseInt(article.select("span.points").first().text());
-        } catch (NumberFormatException | NullPointerException exception) {
-            return 0;
-        }
-        return votes;
+        return ParsingUtils.parseIntOrGetZero(article.select("span.points").first().text());
     }
 
     public Page parsePage(Document document) {

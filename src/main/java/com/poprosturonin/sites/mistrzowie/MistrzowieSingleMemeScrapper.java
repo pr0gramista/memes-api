@@ -7,6 +7,7 @@ import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.sites.SingleMemeScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,8 +48,6 @@ public class MistrzowieSingleMemeScrapper implements SingleMemeScrapper {
 
         Elements commentElements = commentsElement.select(".comment");
         for (Element commentElement : commentElements) {
-            //Comment comment = new Comment()
-
             String nick = commentElement.select(".username a").first().text().trim();
             Author author = new Author(nick, USER_URL + nick);
             String content = commentElement.select("p.commcontent").text().trim();
@@ -99,13 +98,7 @@ public class MistrzowieSingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private int getVotes(Element mistrz) {
-        int votes;
-        try {
-            votes = Integer.parseInt(mistrz.getElementsByClass("total_votes_up > span.value").text());
-        } catch (NumberFormatException exception) {
-            return 0;
-        }
-        return votes;
+        return ParsingUtils.parseIntOrGetZero(mistrz.getElementsByClass("total_votes_up > span.value").text());
     }
 
     private ImageContent parseAsImage(Element mistrz) {

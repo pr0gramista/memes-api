@@ -6,6 +6,7 @@ import com.poprosturonin.data.contents.Content;
 import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.PageScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,26 +30,25 @@ public class MistrzowiePageScrapper implements PageScrapper {
 
     private Optional<Meme> parsePicture(Element mistrz) {
         Elements realImage = mistrz.select("img.pic");
-        if (realImage.size() > 0)
+        if (!realImage.isEmpty())
             return parseAsImage(mistrz);
 
         return Optional.empty();
     }
 
     private Optional<Meme> parseAsImage(Element mistrz) {
-        String title;
-        String url;
+        String title, url;
         Content content;
 
-        //Get content
+        // Get content
         Elements contentElement = mistrz.select("img.pic");
         content = new ImageContent(ROOT_URL + contentElement.attr("src"));
 
-        //Get title
+        // Get title
         Element header = mistrz.select("h1.picture > a").first();
         title = header.text();
 
-        //Get url
+        // Get url
         url = ROOT_URL + header.attr("href");
 
         return Optional.of(new Meme(title, content, url, getComments(mistrz), getVotes(mistrz)));
@@ -58,34 +58,24 @@ public class MistrzowiePageScrapper implements PageScrapper {
         Matcher m = commentPattern.matcher(mistrz.select("a.lcomment").text());
 
         if (m.find()) {
-            try {
-                return Integer.parseInt(m.group(1));
-            } catch (NumberFormatException exception) {
-                return 0;
-            }
+            return ParsingUtils.parseIntOrGetZero(m.group(1));
         }
         return 0;
     }
 
     private int getVotes(Element mistrz) {
-        int votes;
-        try {
-            votes = Integer.parseInt(mistrz.select("span.total_votes_up > span.value").text());
-        } catch (NumberFormatException exception) {
-            return 0;
-        }
-        return votes;
+        return ParsingUtils.parseIntOrGetZero(mistrz.select("span.total_votes_up > span.value").text());
     }
 
     public Page parsePage(Document document) {
         Page page = new Page();
 
-        //Get next link page
+        // Get next link page
         Elements nextPageElement = document.getElementsByClass("prefetch list_next_page_button");
-        if (nextPageElement.size() > 0)
+        if (!nextPageElement.isEmpty())
             page.setNextPage("/mistrzowie/page" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
-        //Get content
+        // Get content
         Elements pictures = document.select("div.pic");
         List<Meme> memes = pictures.stream()
                 .map(this::parsePicture)

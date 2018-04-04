@@ -38,12 +38,12 @@ public class TheCodingLovePageScrapper implements PageScrapper {
     public Page parsePage(Document document) {
         Page page = new Page();
 
-        //Get next link page
+        // Get next link page
         Element nextPageElement = document.select("a.previouslink").last();
         if (nextPageElement != null)
             page.setNextPage("/thecodinglove/page" + URLUtils.cutOffParameters(nextPageElement.attr("href")).replace("/page", ""));
 
-        //Get content
+        // Get content
         Elements pictures = document.select("div.post");
         List<Meme> memes = pictures.stream()
                 .map(this::parsePicture)
