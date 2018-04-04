@@ -15,4 +15,4 @@ ADD gradle /memes-api/gradle
 
 RUN ./gradlew assemble
 
-CMD ["java", "-jar", "/memes-api/build/libs/memes-api-0.1.8.jar"]
+CMD ["java", "-jar", "/memes-api/build/libs/memes-api.jar"]
