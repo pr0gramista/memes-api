@@ -9,6 +9,7 @@ import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.PageScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -59,28 +60,26 @@ public class JbzdPageScrapper implements PageScrapper {
     }
 
     private Content getContent(Element mediaElement) {
-        Elements images = mediaElement.select("img");
-        if (images.size() > 0) {
-            if (images.attr("src").endsWith(".gif"))
-                return new GIFContent(images.attr("src"));
+        Element image = mediaElement.select("img").first();
+        if (image != null) {
+            if (image.attr("src").endsWith(".gif"))
+                return new GIFContent(image.attr("src"));
             else
-                return new ImageContent(images.attr("src"));
+                return new ImageContent(image.attr("src"));
         }
 
         Elements videos = mediaElement.select("video > source");
-        if (videos.size() > 0)
+        if (!videos.isEmpty())
             return new VideoContent(videos.attr("src"));
 
         return null;
     }
 
     private Optional<Meme> parseListElement(Element element) {
-        String title = null;
-        String url = null;
-        int comments = 0;
-        int votes = 0;
+        String title, url;
+        int comments, votes = 0;
 
-        //Get header
+        // Get header
         Element titleElement = element.select("div.title > a").first();
         if (titleElement != null) {
             title = titleElement.text();
@@ -88,17 +87,21 @@ public class JbzdPageScrapper implements PageScrapper {
         } else
             return Optional.empty();
 
-        //Get votes
+        // Get content
+        Content content = getContent(element.select("div.media").first());
+        if (content == null)
+            return Optional.empty();
+
+        // Get votes
         Element plusOneElement = element.select("a.btn-plus").first();
         if (plusOneElement != null) {
-            votes = Integer.parseInt(plusOneElement.select("span").text());
+            votes = ParsingUtils.parseIntOrGetZero(plusOneElement.select("span").text());
         }
 
-        //Get comments
-        String commentsString = element.select("span.comments").first().ownText().trim();
-        comments = Integer.parseInt(commentsString);
+        // Get comments
+        comments = ParsingUtils.parseIntOrGetZero(element.select("span.comments").first().ownText());
 
-        //Get tags
+        // Get tags
         List<Tag> tags = null;
         Element tagListElement = element.select("div.tags").first();
         if (tagListElement != null) {
@@ -110,11 +113,6 @@ public class JbzdPageScrapper implements PageScrapper {
                             URLUtils.cutToSecondSlash(e.attr("href")).orElse(" ").substring(1)))
                     .collect(Collectors.toList());
         }
-
-
-        Content content = getContent(element.select("div.media").first());
-        if (content == null)
-            return Optional.empty();
 
         Meme meme = new Meme(title, content, url, comments, votes);
         meme.setTags(tags);

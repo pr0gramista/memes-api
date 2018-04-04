@@ -10,6 +10,7 @@ import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.sites.SingleMemeScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,23 +42,19 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private Optional<Meme> parseMemeBlock(Element block) {
-        String title = null;
-        String url = null;
-        int commentAmount = 0;
-        int votes = 0;
+        String title, url;
+        int commentAmount, votes;
 
         // Get title
         Element titleElement = block.select(".content > h1 > a").first();
-        if (titleElement != null) {
-            title = titleElement.text();
-            url = titleElement.attr("href");
-        }
-
-        //If no header was found, skip this article
-        if (title == null || url == null)
+        if (titleElement == null) {
+            // If no header was found, skip this article
             return Optional.empty();
+        }
+        title = titleElement.text();
+        url = titleElement.attr("href");
 
-        //Get author
+        // Get author
         Author author = null;
         Element authorElement = block.select("div.user-bar > div.content > a").first();
         if (authorElement != null) {
@@ -66,20 +63,12 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
                     authorElement.attr("href"));
         }
 
-        //Get comments and votes
-        try {
-            commentAmount = Integer.parseInt(block.attr("data-comments-count"));
-        } catch (NumberFormatException e) {
-            commentAmount = 0;
-        }
+        // Get comments and votes
+        commentAmount = ParsingUtils.parseIntOrGetZero(block.attr("data-comments-count"));
+        votes = ParsingUtils.parseIntOrGetZero(block.attr("data-vote-up"))
+                - ParsingUtils.parseIntOrGetZero(block.attr("data-vote-down"));
 
-        try {
-            votes = Integer.parseInt(block.attr("data-vote-up")) - Integer.parseInt(block.attr("data-vote-down"));
-        } catch (NumberFormatException e) {
-            votes = 0;
-        }
-
-        //Get tags
+        // Get tags
         Elements tagElements = block.select("div.tag-list > a");
         List<Tag> tags = null;
         if (!tagElements.isEmpty()) {
@@ -91,9 +80,8 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
             ).collect(Collectors.toList());
         }
 
-        //Get comments
+        // Get comments
         List<Comment> comments = getComments(block.attr("data-id"));
-
 
         Optional<GalleryContent> galleryContent = tryToParseAsGalleryContent(block);
         if (galleryContent.isPresent()) {

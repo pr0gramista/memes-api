@@ -11,6 +11,7 @@ import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.sites.SingleMemeScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,30 +51,30 @@ public class JbzdSingleMemeScrapper implements SingleMemeScrapper {
         } else
             throw new CouldNotParseMemeException();
 
-        //Get votes
+        // Get votes
         Element plusOneElement = memeElement.select("a.btn-plus").first();
         if (plusOneElement != null) {
-            votes = Integer.parseInt(plusOneElement.select("span").text());
+            votes = ParsingUtils.parseIntOrGetZero(plusOneElement.select("span").text());
         }
 
-        //Get content
+        // Get content
         Content content = getContent(memeElement.select("div.media").first());
         if (content == null)
             throw new CouldNotParseMemeException();
 
-        //Get comments
+        // Get comments
         List<Comment> comments = getComments(document);
 
-        //Get amount of comments
+        // Get amount of comments
         int responses = 0;
         for (Comment comment : comments) {
             responses += comment.getResponses().size();
         }
 
-        //Get tags
+        // Get tags
         List<Tag> tags = getTags(memeElement);
 
-        //Get author
+        // Get author
         Element authorElement = memeElement.select("div.info > a").first();
         Author author = null;
         if (authorElement != null)

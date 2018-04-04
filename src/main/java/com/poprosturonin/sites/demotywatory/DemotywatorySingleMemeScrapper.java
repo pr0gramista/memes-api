@@ -6,6 +6,7 @@ import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.contents.*;
 import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.sites.SingleMemeScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -50,13 +51,11 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
 
         Elements commentElements = commentsElement.select(".comment");
         for (Element commentElement : commentElements) {
-            //Comment comment = new Comment()
-
             String nick = commentElement.select("a.username").text().trim();
             Author author = new Author(nick, USER_URL + nick);
             String content = commentElement.select("p.comment-content").text().trim();
 
-            int points = Integer.parseInt(commentElement.select("span.total_points").text());
+            int points = ParsingUtils.parseIntOrGetZero(commentElement.select("span.total_points").text());
 
             Comment comment = new Comment(content, author, points);
             if (commentElement.hasClass("reply")) {
@@ -121,23 +120,11 @@ public class DemotywatorySingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private int getCommentAmount(Element demot) {
-        int comments;
-        try {
-            comments = Integer.parseInt(demot.getElementsByClass("demot-comments").select("a").text());
-        } catch (NumberFormatException exception) {
-            return 0;
-        }
-        return comments;
+        return ParsingUtils.parseIntOrGetZero(demot.getElementsByClass("demot-comments").select("a").text());
     }
 
     private int getVotes(Element demot) {
-        int votes;
-        try {
-            votes = Integer.parseInt(demot.getElementsByClass("up_votes").text());
-        } catch (NumberFormatException exception) {
-            return 0;
-        }
-        return votes;
+        return ParsingUtils.parseIntOrGetZero(demot.getElementsByClass("up_votes").text());
     }
 
     private GIFContent parseAsGIF(Element demot) {

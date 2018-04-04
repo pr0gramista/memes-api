@@ -44,7 +44,7 @@ class DemotywatoryGalleryParser {
             }
         }
 
-        //Remove false slides
+        // Remove false slides
         slides = slides.stream()
                 .filter(captionedGallerySlide -> !captionedGallerySlide.getUrl().endsWith("demotywatory.pl"))
                 .collect(Collectors.toList());

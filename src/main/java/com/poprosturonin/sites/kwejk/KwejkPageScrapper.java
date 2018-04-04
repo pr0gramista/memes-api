@@ -9,6 +9,7 @@ import com.poprosturonin.data.contents.ImageContent;
 import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.PageScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -34,7 +35,7 @@ public class KwejkPageScrapper implements PageScrapper {
     }
 
     private List<String> parseGallery(String url) {
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>(14);
         try {
             Document document = Jsoup.connect(url).userAgent(USER_AGENT).get();
             Elements thumbnails = document.select(".slider-nav > li > a > img");
@@ -46,23 +47,20 @@ public class KwejkPageScrapper implements PageScrapper {
     }
 
     private Optional<Meme> parseMemeBlock(Element block) {
-        String title = null;
-        String url = null;
-        int comments = 0;
-        int votes = 0;
+        String title, url;
+        int comments, votes;
 
         // Get title
         Element titleElement = block.select(".content > h2 > a").first();
-        if (titleElement != null) {
-            title = titleElement.text();
-            url = titleElement.attr("href");
+        if (titleElement == null) {
+            // If no header was found, skip this article
+            return Optional.empty();
         }
 
-        //If no header was found, skip this article
-        if (title == null || url == null)
-            return Optional.empty();
+        title = titleElement.text();
+        url = titleElement.attr("href");
 
-        //Get author
+        // Get author
         Author author = null;
         Element authorElement = block.select("div.user-bar > div.content > a").first();
         if (authorElement != null) {
@@ -71,20 +69,12 @@ public class KwejkPageScrapper implements PageScrapper {
                     authorElement.attr("href"));
         }
 
-        //Get comments and votes
-        try {
-            comments = Integer.parseInt(block.attr("data-comments-count"));
-        } catch (NumberFormatException e) {
-            comments = 0;
-        }
+        // Get comments and votes
+        comments = ParsingUtils.parseIntOrGetZero(block.attr("data-comments-count"));
+        votes = ParsingUtils.parseIntOrGetZero(block.attr("data-vote-up"))
+                - ParsingUtils.parseIntOrGetZero(block.attr("data-vote-down"));
 
-        try {
-            votes = Integer.parseInt(block.attr("data-vote-up")) - Integer.parseInt(block.attr("data-vote-down"));
-        } catch (NumberFormatException e) {
-            votes = 0;
-        }
-
-        //Get tags
+        // Get tags
         Elements tagElements = block.select("div.tag-list > a");
         List<Tag> tags = null;
         if (!tagElements.isEmpty()) {

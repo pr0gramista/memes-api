@@ -5,6 +5,7 @@ import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.*;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.PageScrapper;
+import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -47,17 +48,17 @@ public class DemotywatoryPageScrapper implements PageScrapper {
         String url;
         Content content;
 
-        //Get content
+        // Get content
         Elements contentElement = demot.getElementsByTag("img");
         content = new GIFContent(contentElement.attr("src"));
 
-        //Get title
+        // Get title
         title = demot.getElementsByClass("demot_title").text();
 
-        //Get description
+        // Get description
         description = demot.getElementsByClass("demot_description").text();
 
-        //Get url
+        // Get url
         Elements urlElements = demot.getElementsByClass("demot_link");
         url = ROOT_URL + urlElements.attr("href");
 
@@ -65,18 +66,17 @@ public class DemotywatoryPageScrapper implements PageScrapper {
     }
 
     private Optional<Meme> parseAsImage(Element demot) {
-        String title;
-        String url;
+        String title, url;
         Content content;
 
-        //Get content
+        // Get content
         Elements contentElement = demot.getElementsByTag("img");
         content = new ImageContent(contentElement.attr("src"));
 
-        //Get title
+        // Get title
         title = contentElement.attr("alt");
 
-        //Get url
+        // Get url
         Elements urlElements = demot.getElementsByTag("a");
         url = ROOT_URL + urlElements.attr("href");
 
@@ -84,22 +84,20 @@ public class DemotywatoryPageScrapper implements PageScrapper {
     }
 
     private Optional<Meme> parseAsVideo(Element demot) {
-        String title;
-        String description;
-        String url;
+        String title, description, url;
         Content content;
 
         //Get content
         Elements contentElement = demot.getElementsByTag("source");
         content = new VideoContent(ROOT_URL + contentElement.attr("src"));
 
-        //Get title
+        // Get title
         title = demot.getElementsByClass("demot_title").text();
 
-        //Get description
+        // Get description
         description = demot.getElementsByClass("demot_description").text();
 
-        //Get url
+        // Get url
         Elements urlElements = demot.getElementsByClass("demot_link");
         url = ROOT_URL + urlElements.attr("href");
 
@@ -112,12 +110,12 @@ public class DemotywatoryPageScrapper implements PageScrapper {
         String url = ROOT_URL + demot.getElementsByTag("a").attr("href");
         List<CaptionedGalleryContent.CaptionedGallerySlide> singles = new ArrayList<>();
 
-        //Put gallery thumbnail as first image
+        // Put gallery thumbnail as first image
         singles.add(new CaptionedGalleryContent.CaptionedGallerySlide(
                 galleryThumbnail.attr("src")
         ));
 
-        //Put slides
+        // Put slides
         CaptionedGalleryContent galleryContent = new CaptionedGalleryContent(singles);
         try {
             galleryContent.getImages().addAll(galleryParser.parse(Jsoup.connect(url).userAgent(USER_AGENT).get()));
@@ -130,34 +128,22 @@ public class DemotywatoryPageScrapper implements PageScrapper {
     }
 
     private int getComments(Element demot) {
-        int comments;
-        try {
-            comments = Integer.parseInt(demot.getElementsByClass("demot-comments").select("a").text());
-        } catch (NumberFormatException exception) {
-            return 0;
-        }
-        return comments;
+        return ParsingUtils.parseIntOrGetZero(demot.getElementsByClass("demot-comments").select("a").text());
     }
 
     private int getVotes(Element demot) {
-        int votes;
-        try {
-            votes = Integer.parseInt(demot.getElementsByClass("up_votes").text());
-        } catch (NumberFormatException exception) {
-            return 0;
-        }
-        return votes;
+        return ParsingUtils.parseIntOrGetZero(demot.getElementsByClass("up_votes").text());
     }
 
     public Page parsePage(Document document) {
         Page page = new Page();
 
-        //Get next link page
+        // Get next link page
         Elements nextPageElement = document.getElementsByClass("next-page");
         if (nextPageElement.size() > 0)
             page.setNextPage("/demotywatory/page" + URLUtils.cutToSecondSlash(URLUtils.cutOffParameters(nextPageElement.get(0).attr("href"))).get());
 
-        //Get content
+        // Get content
         Elements pictures = document.getElementsByClass("demot_pic");
         List<Meme> memes = pictures.stream()
                 .map(this::parsePicture)
