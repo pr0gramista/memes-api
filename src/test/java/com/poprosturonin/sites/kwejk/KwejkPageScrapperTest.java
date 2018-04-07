@@ -23,7 +23,7 @@ import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.junit.Assert.*;
 
 /**
- * Tests for mistrzowie scrapper
+ * Tests for kwejk scrapper
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration

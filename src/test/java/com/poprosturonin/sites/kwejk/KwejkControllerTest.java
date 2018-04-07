@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Mistrzowie tests
+ * Kwejk tests
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
