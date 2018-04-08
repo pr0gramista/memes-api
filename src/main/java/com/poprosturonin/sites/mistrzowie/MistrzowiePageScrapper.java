@@ -81,6 +81,7 @@ public class MistrzowiePageScrapper implements PageScrapper {
                 .map(this::parsePicture)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .peek(meme -> URLUtils.getPathId(meme.getUrl()).ifPresent(s -> meme.setViewUrl(String.format("/mistrzowie/%s", s))))
                 .collect(Collectors.toList());
 
         page.getMemes().addAll(memes);

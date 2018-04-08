@@ -9,18 +9,22 @@ import com.poprosturonin.exceptions.CouldNotParseMemeException;
 import com.poprosturonin.sites.SingleMemeScrapper;
 import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class MistrzowieSingleMemeScrapper implements SingleMemeScrapper {
-    private static final String USER_URL = "http://mistrzowie.org/user/";
+    private static final String ABS_URL = "http://mistrzowie.org";
+    private static final String USER_URL = ABS_URL + "/user/";
 
     @Override
     public Optional<Meme> parseMeme(Document document) {
@@ -37,24 +41,30 @@ public class MistrzowieSingleMemeScrapper implements SingleMemeScrapper {
 
         meme.setUrl(getURL(document));
         meme.setViewUrl(getViewURL(meme.getUrl()));
-        meme.setComments(getComments(document));
+        meme.setComments(getComments(meme.getViewUrl()));
 
         return Optional.of(meme);
     }
 
-    private List<Comment> getComments(Element document) {
-        List<Comment> comments = new ArrayList<>(20);
-        Element commentsElement = document.select("#comments").first();
+    private List<Comment> getComments(String viewUrl) {
+        String id = viewUrl.replace("/mistrzowie/", "");
+        Document commentsSnippet;
+        try {
+            commentsSnippet = Jsoup.parse(new URL(String.format("http://mistrzowie.org/pic/komentarze/%s", id)), 2000);
+        } catch (IOException e) {
+            return null;
+        }
 
-        Elements commentElements = commentsElement.select(".comment");
-        for (Element commentElement : commentElements) {
-            String nick = commentElement.select(".username a").first().text().trim();
-            Author author = new Author(nick, USER_URL + nick);
+        List<Comment> comments = new ArrayList<>(20);
+        Elements commentsElements = commentsSnippet.getElementsByClass("comment-box");
+        for (Element commentElement : commentsElements) {
+            Element userLink = commentElement.select(".username a").first();
+            String nick = userLink.text().trim();
+            Author author = new Author(nick, ABS_URL + userLink.attr("href"));
+
             String content = commentElement.select("p.commcontent").text().trim();
 
-            int points = Integer.parseInt(commentElement.select("span.points").text());
-
-            Comment comment = new Comment(content, author, points);
+            Comment comment = new Comment(content, author, 0);
             if (commentElement.hasClass("reply")) {
                 comment.setReply(true);
                 comments.get(comments.size() - 1).getResponses().add(comment);
@@ -78,13 +88,18 @@ public class MistrzowieSingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private String getURL(Document document) {
-        return document.baseUri();
+        Element canonical = document.select("link[rel=\"canonical\"]").first();
+        if (canonical != null) {
+            return canonical.attr("href");
+        } else {
+            return document.baseUri();
+        }
     }
 
     private String getViewURL(String url) {
         String s = URLUtils.cutToFirstSlash(url).orElse(null);
         if (s != null)
-            return String.format("/mistrzowie/%s", s);
+            return String.format("/mistrzowie%s", s);
         else
             return null;
     }
@@ -98,10 +113,10 @@ public class MistrzowieSingleMemeScrapper implements SingleMemeScrapper {
     }
 
     private int getVotes(Element mistrz) {
-        return ParsingUtils.parseIntOrGetZero(mistrz.getElementsByClass("total_votes_up > span.value").text());
+        return ParsingUtils.parseIntOrGetZero(mistrz.select(".count .value").text());
     }
 
     private ImageContent parseAsImage(Element mistrz) {
-        return new ImageContent(mistrz.select("img.pic").attr("src"));
+        return new ImageContent(ABS_URL + URLUtils.cutOffParameters(mistrz.select("img.pic").attr("src")));
     }
 }
