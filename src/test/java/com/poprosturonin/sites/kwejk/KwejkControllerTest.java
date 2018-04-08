@@ -38,5 +38,21 @@ public class KwejkControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("nextPage", matchesPattern(URLUtils.CUT_URL_PATTERN)));
+        mockMvc.perform(get("/kwejk/245000"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+    }
+
+    @Test
+    public void shouldReturnEmptyPage() throws Exception {
+        mockMvc.perform(get("/kwejk/page/-1"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void shouldReturnNoMeme() throws Exception {
+        mockMvc.perform(get("/kwejk/-1"))
+                .andExpect(status().isNotFound());
     }
 }
