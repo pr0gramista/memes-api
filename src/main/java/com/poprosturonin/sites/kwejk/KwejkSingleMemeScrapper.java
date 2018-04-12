@@ -12,6 +12,7 @@ import com.poprosturonin.exceptions.MemeSiteResponseFailedException;
 import com.poprosturonin.sites.SingleMemeScrapper;
 import com.poprosturonin.utils.ParsingUtils;
 import com.poprosturonin.utils.URLUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.nodes.Document;
@@ -148,7 +149,7 @@ public class KwejkSingleMemeScrapper implements SingleMemeScrapper {
             JSONObject commentData = commentsData.getJSONObject(i);
 
             // Parse comment
-            String content = commentData.getString("comment");
+            String content = StringEscapeUtils.unescapeHtml4(commentData.getString("comment"));
             Author author;
             if (commentData.isNull("user")) {
                 author = new Author("Anonimowy", "");
