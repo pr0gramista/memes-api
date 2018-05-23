@@ -16,14 +16,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Mistrzowie scrapper
+ * TheCodingLove scrapper
  */
 @Component
 public class TheCodingLovePageScrapper implements PageScrapper {
 
     private Optional<Meme> parsePicture(Element post) {
-        Element titleAsLink = post.select("h3 > a").first();
-        Element realImage = post.select("img").first();
+        Element titleAsLink = post.select("h1.blog-post-title > a").first();
+        Element realImage = post.select(".blog-post-content img").first();
 
         return Optional.of(
                 new Meme(
@@ -39,12 +39,12 @@ public class TheCodingLovePageScrapper implements PageScrapper {
         Page page = new Page();
 
         // Get next link page
-        Element nextPageElement = document.select("a.previouslink").last();
+        Element nextPageElement = document.select(".next-posts-btn").last();
         if (nextPageElement != null)
-            page.setNextPage("/thecodinglove/page" + URLUtils.cutOffParameters(nextPageElement.attr("href")).replace("/page", ""));
+            page.setNextPage("/thecodinglove/page" + URLUtils.cutToSecondSlash(nextPageElement.attr("href")).get());
 
         // Get content
-        Elements pictures = document.select("div.post");
+        Elements pictures = document.select(".blog-post");
         List<Meme> memes = pictures.stream()
                 .map(this::parsePicture)
                 .filter(Optional::isPresent)

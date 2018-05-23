@@ -65,14 +65,14 @@ public class TheCodingLovePageScrapperTest {
 
         assertThat(page.getMemes(), hasItems(
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("When a feature does more than expected")),
-                        hasProperty("url", equalTo("http://thecodinglove.com/post/153260172278/when-a-feature-does-more-than-expected")),
-                        hasProperty("content", hasProperty("url", equalTo("http://ljdchost.com/gOwS4tK.gif")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("When I discover that I can earn cash with an open source contest")),
+                        hasProperty("url", equalTo("https://thecodinglove.com/when-i-discover-that-i-can-earn-cash-with-an-open-source-contest")),
+                        hasProperty("content", hasProperty("url", equalTo("https://ljdchost.com/ZOVBzyn.gif")))
                 ),
                 allOf(
-                        hasProperty("title", equalToIgnoringWhiteSpace("When updating libraries fixes bugs")),
-                        hasProperty("url", equalTo("http://thecodinglove.com/post/153257122542/when-updating-libraries-fixes-bugs")),
-                        hasProperty("content", hasProperty("url", equalTo("http://ljdchost.com/k3Lrab8.gif")))
+                        hasProperty("title", equalToIgnoringWhiteSpace("When I’m searching for a command in my Linux history")),
+                        hasProperty("url", equalTo("https://thecodinglove.com/when-im-searching-for-a-command-in-my-linux-history")),
+                        hasProperty("content", hasProperty("url", equalTo("https://ljdchost.com/KwzJ3D8.gif")))
                 )
         ));
     }
