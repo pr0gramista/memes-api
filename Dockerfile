@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine as builder
 
 EXPOSE 8080
 
@@ -15,4 +15,6 @@ ADD gradle /memes-api/gradle
 
 RUN ./gradlew assemble
 
-CMD ["java", "-jar", "/memes-api/build/libs/memes-api.jar"]
+FROM openjdk:8-jdk-alpine
+COPY --from=builder /memes-api/build/libs/memes-api.jar memes-api.jar
+CMD ["java", "-jar", "memes-api.jar"]
