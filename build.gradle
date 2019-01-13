@@ -1,17 +1,13 @@
-group 'com.poprosturonin'
-version ''
-
 buildscript {
-    ext {
-        springBootVersion = '2.0.0.BUILD-SNAPSHOT'
-    }
-    repositories {
-        mavenCentral()
-        maven { url 'https://repo.spring.io/libs-snapshot' }
-    }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    }
+	ext {
+		springBootVersion = '2.1.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
 
 apply plugin: 'java'
@@ -20,37 +16,36 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
 
 jar {
-    baseName = 'memes-api'
-    version = ''
+	version = ''
 }
 
 jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled true
-    }
+	reports {
+		xml.enabled true
+		html.enabled true
+	}
 }
 
 check.dependsOn jacocoTestReport
 
+group 'com.poprosturonin'
+version ''
+sourceCompatibility = '11'
+
 repositories {
-    mavenCentral()
-    maven { url 'https://repo.spring.io/libs-snapshot' }
+	mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
-    compile 'org.jsoup:jsoup:1.10.1'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-    compile group: 'org.json', name: 'json', version: '20140107'
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.boot:spring-boot-devtools")
-
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
-    testCompile("junit:junit")
+	compile 'org.jsoup:jsoup:1.10.1'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+	compile group: 'org.json', name: 'json', version: '20140107'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testCompile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
+	testCompile("junit:junit")
 }
