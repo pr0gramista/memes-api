@@ -3,6 +3,7 @@ package com.poprosturonin.sites.thecodinglove;
 import com.poprosturonin.data.Meme;
 import com.poprosturonin.data.Page;
 import com.poprosturonin.data.contents.GIFContent;
+import com.poprosturonin.data.contents.VideoContent;
 import com.poprosturonin.exceptions.PageIsEmptyException;
 import com.poprosturonin.sites.PageScrapper;
 import com.poprosturonin.utils.URLUtils;
@@ -22,17 +23,28 @@ import java.util.stream.Collectors;
 public class TheCodingLovePageScrapper implements PageScrapper {
 
     private Optional<Meme> parsePicture(Element post) {
-        Element titleAsLink = post.select("h1.blog-post-title > a").first();
-        Element realImage = post.select(".blog-post-content img").first();
+        Element titleAsLink = post.select(".blog-post-title > a").first();
+        Optional<Element> image = Optional.ofNullable(post.select(".blog-post-content img").first());
 
-        return Optional.of(
-                new Meme(
-                        titleAsLink.text(),
-                        new GIFContent(realImage.attr("src")),
-                        titleAsLink.attr("href"),
-                        0,
-                        0)
-        );
+        if (image.isPresent()) {
+            return Optional.of(
+                    new Meme(
+                            titleAsLink.text(),
+                            new GIFContent(image.get().attr("src")),
+                            titleAsLink.attr("href"),
+                            0,
+                            0)
+            );
+        }
+
+        Optional<Element> video = Optional.ofNullable(post.select(".blog-post-content video > source").first());
+
+        return video.map(element -> new Meme(
+                titleAsLink.text(),
+                new VideoContent(element.attr("src")),
+                titleAsLink.attr("href"),
+                0,
+                0));
     }
 
     public Page parsePage(Document document) {
