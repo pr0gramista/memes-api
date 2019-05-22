@@ -1,4 +1,4 @@
-﻿# Memes API [![Build Status](https://travis-ci.org/pr0gramista/memes-api.svg?branch=master)](https://travis-ci.org/pr0gramista/memes-api) [![codecov](https://codecov.io/gh/pr0gramista/memes-api/branch/master/graph/badge.svg)](https://codecov.io/gh/pr0gramista/memes-api)
+﻿# Memes API
 
 API for scrapping common meme sites.
 Currently supports:
