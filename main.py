@@ -5,8 +5,8 @@ from flask import Flask
 app = Flask(__name__)
 
 
-def to_response(memes):
-    return jsons.dumps([meme.__dict__ for meme in memes])
+def to_response(page):
+    return jsons.dumps(page)
 
 
 @app.route("/")
@@ -85,7 +85,7 @@ def ninegag_page(page):
 @app.route("/9gagnsfw")
 def ninegagnsfw_root():
     return to_response(
-        ninegag.scrap("https://9gag.com/v1/group-posts/group/nsfw/type/hot")
+        ninegag.scrap("https://9gag.com/v1/group-posts/group/nsfw/type/hot", nsfw=True)
     )
 
 
@@ -95,7 +95,8 @@ def ninegagnsfw_page(page):
         ninegag.scrap(
             "https://9gag.com/v1/group-posts/group/nsfw/type/hot?c=10&after={}".format(
                 page
-            )
+            ),
+            nsfw=True,
         )
     )
 

@@ -4,8 +4,9 @@ from utils import (
     remove_big_whitespaces_selector,
     find_id_in_url,
     catch_errors,
+    get_last_part_url,
 )
-from data import VideoContent, GalleryContent, ImageContent, Meme, Author
+from data import VideoContent, GalleryContent, ImageContent, Meme, Author, Page
 import re
 
 
@@ -26,7 +27,13 @@ def parse(html):
     memes = [
         catch_errors(parse_meme, element) for element in document.css(".demotivator")
     ]
-    return [meme for meme in memes if meme is not None]
+    memes = [meme for meme in memes if meme is not None]
+
+    title = document.css("title::text").get()
+    next_page_url = "/demotywatory/page/" + get_last_part_url(
+        document.css("a.next-page::attr(href)").get()
+    )
+    return Page(title, memes, next_page_url)
 
 
 def parse_gallery(html):
@@ -37,12 +44,12 @@ def parse_gallery(html):
     gallery_html = download(ROOT + url)
     results = GALLERY_IMAGE_SCRIPT.finditer(gallery_html)
     for result in results:
-        slide = result.group(1).replace("\\/", "/") + ".jpg"
+        slide = result.group(1).replace("\\/", "/").replace("//upl", "/upl") + ".jpg"
         slides = slides + [slide]
 
     results = GALLERY_VIDEO_SCRIPT.finditer(gallery_html)
     for result in results:
-        slide = result.group(1).replace("\\/", "/") + ".mp4"
+        slide = result.group(1).replace("\\/", "/").replace("//upl", "/upl") + ".mp4"
         slides = slides + [slide]
 
     return (title, url, GalleryContent(slides), None)
@@ -56,12 +63,12 @@ def parse_content(html):
     elif "image" in clazz or "image_gif" in clazz:
         image = html.css("img.demot_pic")
         title = image.attrib["alt"]
-        src = image.attrib["src"]
+        src = image.attrib["src"].replace("//upl", "/upl")
         url = html.css("a::attr(href)").get()
 
         return (title, url, ImageContent(src), None)
     elif "video_mp4" in clazz:
-        src = html.css("source::attr(src)").get()
+        src = html.css("source::attr(src)").get().replace("//upl", "/upl")
         title = html.css(".demot_title::text").get()
         description = html.css(".demot_description::text").get()
         url = html.css("a::attr(href)").get()

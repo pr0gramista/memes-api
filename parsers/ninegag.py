@@ -1,21 +1,33 @@
 from parsel import Selector
 from utils import download, get_last_part_url, catch_errors
-from data import VideoContent, ImageContent, Meme, Author, Tag
+from data import VideoContent, ImageContent, Meme, Author, Tag, Page
 import json
 import html
+import re
 
 ROOT = "https://9gag.com"
+NEXT_CURSOR = re.compile("after=(.+)&c=(\\d+)")
 
 
-def scrap(url):
+def scrap(url, nsfw=False):
     data = download(url)
-    return parse(json.loads(data))
+    return parse(json.loads(data), nsfw=nsfw)
 
 
-def parse(json):
+def parse(json, nsfw=False):
     posts = json["data"]["posts"]
     memes = [catch_errors(parse_meme, post) for post in posts]
-    return [meme for meme in memes if meme is not None]
+    memes = [meme for meme in memes if meme is not None]
+
+    next_page_url = None
+    result = NEXT_CURSOR.match(json["data"]["nextCursor"])
+    if result:
+        if nsfw is True:
+            next_page_url = "/9gagnsfw/page/" + result.group(1)
+        else:
+            next_page_url = "/9gag/page/" + result.group(1)
+
+    return Page(None, memes, next_page_url)
 
 
 def parse_meme(m):

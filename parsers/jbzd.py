@@ -4,8 +4,9 @@ from utils import (
     find_id_in_url,
     remove_big_whitespaces_selector,
     catch_errors,
+    get_last_part_url,
 )
-from data import VideoContent, ImageContent, Meme, Author, Tag
+from data import VideoContent, ImageContent, Meme, Author, Tag, Page
 
 
 def scrap(url):
@@ -19,7 +20,13 @@ def parse(html):
         catch_errors(parse_meme, element)
         for element in document.css("div.content > section > article.resource-object")
     ]
-    return [meme for meme in memes if meme is not None]
+    memes = [meme for meme in memes if meme is not None]
+
+    title = document.css("title::text").get()
+    next_page_url = "/jbzd/page/" + get_last_part_url(
+        document.css(".btn-next-page::attr(href)").get()
+    )
+    return Page(title, memes, next_page_url)
 
 
 def parse_content(html):

@@ -1,6 +1,6 @@
 from parsel import Selector
-from utils import download, find_id_in_url, catch_errors
-from data import ImageContent, GalleryContent, VideoContent, Meme, Author, Tag
+from utils import download, find_id_in_url, catch_errors, get_last_part_url
+from data import ImageContent, GalleryContent, VideoContent, Meme, Author, Tag, Page
 
 
 def scrap(url):
@@ -14,7 +14,12 @@ def parse(html):
         catch_errors(parse_meme, element)
         for element in document.css("main .media-element")
     ]
-    return [meme for meme in memes if meme is not None]
+    memes = [meme for meme in memes if meme is not None]
+    title = document.css("title::text").get()
+    next_page_url = "/kwejk/page/" + get_last_part_url(
+        document.css(".btn-next::attr(href)").get()
+    )
+    return Page(title, memes, next_page_url)
 
 
 def parse_simple_content(html):
