@@ -28,7 +28,6 @@ def parse(html):
 
 def parse_gallery(html):
     title = html.css("img::attr(alt)").get()
-    print(title)
     url = html.css("a::attr(href)").get()
     slides = []
 
