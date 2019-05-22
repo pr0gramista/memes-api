@@ -50,12 +50,3 @@ def catch_errors(f, data):
     except Exception:
         print(traceback.print_exc())
     return None
-
-
-# def unescape_unicode(data):
-#     return data
-#     data = data.encode('unicode-escape')
-#     print(data)
-#     data = data.replace(b"\\\\", b"\\")
-#     print(data)
-#     return data.decode('unicode-escape')
