@@ -10,7 +10,8 @@ import re
 
 
 ROOT = "https://m.demotywatory.pl"
-GALLERY_SCRIPT = re.compile(r"<img\\n\\tclass=\\\"rsImg \\\"\\n\\tsrc=\\\"(.+?)\.jpg")
+GALLERY_IMAGE_SCRIPT = re.compile(r"<img\\n\\tclass=\\\"rsImg \\\"\\n\\tsrc=\\\"(.+?)\.jpg")
+GALLERY_VIDEO_SCRIPT = re.compile(r"<source\\n\\t\\t\\tsrc=\\\"(.+?)\.mp4")
 
 
 def scrap(url):
@@ -32,9 +33,14 @@ def parse_gallery(html):
     slides = []
 
     gallery_html = download(ROOT + url)
-    results = GALLERY_SCRIPT.findall(gallery_html)
+    results = GALLERY_IMAGE_SCRIPT.finditer(gallery_html)
     for result in results:
-        slide = result.replace("\\/", "/") + ".jpg"
+        slide = result.group(1).replace("\\/", "/") + ".jpg"
+        slides = slides + [slide]
+
+    results = GALLERY_VIDEO_SCRIPT.finditer(gallery_html)
+    for result in results:
+        slide = result.group(1).replace("\\/", "/") + ".mp4"
         slides = slides + [slide]
 
     return (title, url, GalleryContent(slides), None)
@@ -43,7 +49,9 @@ def parse_gallery(html):
 def parse_content(html):
     clazz = html.attrib["class"]
 
-    if "image " in clazz or "image_gif" in clazz:
+    if "image_gallery" in clazz:
+        return parse_gallery(html)
+    elif "image" in clazz or "image_gif" in clazz:
         image = html.css("img.demot_pic")
         title = image.attrib["alt"]
         src = image.attrib["src"]
@@ -57,8 +65,6 @@ def parse_content(html):
         url = html.css("a::attr(href)").get()
 
         return (title, url, VideoContent(src), description)
-    elif "image_gallery" in clazz:
-        return parse_gallery(html)
 
     return (None, None, None, None)
 
