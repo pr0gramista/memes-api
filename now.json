@@ -2,7 +2,7 @@
   "version": 2,
   "name": "memes-api",
   "builds": [
-    { "src": "app.py", "use": "@now/python", "config": { "maxLambdaSize": "15mb" } }
+    { "src": "main.py", "use": "@now/python", "config": { "maxLambdaSize": "15mb" } }
   ],
   "routes": [
     { "src": "/.*", "dest": "/main.py"}
