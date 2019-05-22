@@ -21,10 +21,11 @@ def test_jbzd_parse(files, snapshot):
 
 def test_demotywatory_parse(files, snapshot, monkeypatch):
     def fake_download(url):
-      f = "demot-{}.html".format(utils.get_last_part_url(url)) 
-      if f in files:
-        return files[f]
-      raise Exception()
-    monkeypatch.setattr('parsers.demoty.download', fake_download)
-    
+        f = "demot-{}.html".format(utils.get_last_part_url(url))
+        if f in files:
+            return files[f]
+        raise Exception()
+
+    monkeypatch.setattr("parsers.demoty.download", fake_download)
+
     snapshot.assert_match(jsons.dumps(demoty.parse(files["demotywatory.html"])))

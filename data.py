@@ -1,3 +1,10 @@
+class Page:
+    def __init__(self, title, memes, next_page_url):
+        self.title = title
+        self.memes = memes
+        self.next_page_url = next_page_url
+
+
 class TextContent:
     def __init__(self, text):
         self.type = "TEXT"

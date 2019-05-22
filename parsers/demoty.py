@@ -10,7 +10,9 @@ import re
 
 
 ROOT = "https://m.demotywatory.pl"
-GALLERY_IMAGE_SCRIPT = re.compile(r"<img\\n\\tclass=\\\"rsImg \\\"\\n\\tsrc=\\\"(.+?)\.jpg")
+GALLERY_IMAGE_SCRIPT = re.compile(
+    r"<img\\n\\tclass=\\\"rsImg \\\"\\n\\tsrc=\\\"(.+?)\.jpg"
+)
 GALLERY_VIDEO_SCRIPT = re.compile(r"<source\\n\\t\\t\\tsrc=\\\"(.+?)\.mp4")
 
 
