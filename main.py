@@ -11,7 +11,17 @@ def to_response(page):
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return to_response(
+        [
+            "/kwejk",
+            "/jbzd",
+            "/9gag",
+            "/9gagnsfw",
+            "/demotywatory",
+            "/mistrzowie",
+            "/anonimowe",
+        ]
+    )
 
 
 @app.route("/kwejk")
