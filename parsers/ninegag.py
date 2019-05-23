@@ -1,7 +1,7 @@
 from parsel import Selector
 from utils import download, get_last_part_url, catch_errors
 from data import VideoContent, ImageContent, Meme, Author, Tag, Page
-import json
+from json import loads
 import html
 import re
 
@@ -11,10 +11,11 @@ NEXT_CURSOR = re.compile("after=(.+)&c=(\\d+)")
 
 def scrap(url, nsfw=False):
     data = download(url)
-    return parse(json.loads(data), nsfw=nsfw)
+    return parse(data, nsfw=nsfw)
 
 
-def parse(json, nsfw=False):
+def parse(raw, nsfw=False):
+    json = loads(raw)
     posts = json["data"]["posts"]
     memes = [catch_errors(parse_meme, post) for post in posts]
     memes = [meme for meme in memes if meme is not None]

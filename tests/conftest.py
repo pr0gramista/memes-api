@@ -5,7 +5,6 @@ import pytest
 @pytest.fixture
 def files():
     files = os.listdir(path="tests/snapshots")
-    
 
     f = dict()
     for file in files:

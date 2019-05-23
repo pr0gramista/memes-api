@@ -1,4 +1,4 @@
-from parsers import kwejk, anonimowe, mistrzowie, jbzd, demoty
+from parsers import kwejk, anonimowe, mistrzowie, jbzd, demoty, ninegag
 import jsons
 import utils
 
@@ -17,6 +17,10 @@ def test_mistrzowie_parse(files, snapshot):
 
 def test_jbzd_parse(files, snapshot):
     snapshot.assert_match(jsons.dumps(jbzd.parse(files["jbzd.html"])))
+
+
+def test_ninegag_parse(files, snapshot):
+    snapshot.assert_match(jsons.dumps(ninegag.parse(files["9gag.json"])))
 
 
 def test_demotywatory_parse(files, snapshot, monkeypatch):
