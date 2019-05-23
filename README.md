@@ -5,7 +5,6 @@ Currently supports:
 * [demotywatory.pl](http://demotywatory.pl)
 * [kwejk.pl](http://kwejk.pl)
 * [mistrzowie.org](http://mistrzowie.org)
-* [thecodinglove.com](http://thecodinglove.com)
 * [jbzd.pl](https://jbzdy.pl)
 * [9gag.com](http://9gag.com)
 
@@ -30,29 +29,34 @@ Then you can access them by accessing fe. `/kwejk`
 ```
 //shortened response
 {
-  "title": "KWEJK.pl - Najlepszy zbiór obrazków z Internetu!",
   "memes": [
     {
-      "title": "Dziewczyna z piłką",
-      "content": {
-        "url": "http://i1.kwejk.pl/k/obrazki/2016/11/7479f6497e46508ab0d515fcc7047b72.mp4",
-        "contentType": "VIDEO"
+      "author": {
+        "name": "Camaris",
+        "url": "https://kwejk.pl/uzytkownik/camaris"
       },
-      "url": "http://kwejk.pl/obrazek/2814335/dziewczyna-z-pilka.html",
-      "commentAmount": 6,
-      "points": 125
-    },
-    {
-      "title": "Ma szansę być prezydentem",
+      "comment_count": 19,
       "content": {
-        "url": "http://i1.kwejk.pl/k/obrazki/2016/11/09100a20e1dd607694e91f408e15c761.jpg",
-        "contentType": "IMAGE"
+        "src": "https://i1.kwejk.pl/k/obrazki/2019/05/bhkOlFp6BnQhQHYr.jpg",
+        "type": "IMAGE"
       },
-      "url": "http://kwejk.pl/obrazek/2814963/ma-szanse-byc-prezydentem.html",
-      "commentAmount": 6,
-      "points": 126
+      "points": 278,
+      "tags": [
+        {
+          "name": "#film",
+          "url": "https://kwejk.pl/tag/film"
+        },
+        {
+          "name": "#obrazek",
+          "url": "https://kwejk.pl/tag/obrazek"
+        }
+      ],
+      "title": "a zwłaszcza z przyjaciolmi",
+      "url": "https://kwejk.pl/obrazek/3388289/a-zwlaszcza-z-przyjaciolmi.html",
+      "view_url": "/kwejk/3388289"
     }
   ],
-  "nextPage": "/kwejk/page/31310"
+  "next_page_url": "/kwejk/page/40878",
+  "title": "Ministerstwo memów, zdjęć i innych śmiesznych obrazków - KWEJK.pl"
 }
 ```
