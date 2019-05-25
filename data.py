@@ -7,26 +7,26 @@ class Page:
 
 class TextContent:
     def __init__(self, text):
-        self.type = "TEXT"
+        self.contentType = "TEXT"
         self.text = text
 
 
 class VideoContent:
-    def __init__(self, src):
-        self.type = "VIDEO"
-        self.src = src
+    def __init__(self, url):
+        self.contentType = "VIDEO"
+        self.url = url
 
 
 class GalleryContent:
     def __init__(self, images):
-        self.type = "GALLERY"
-        self.images = images
+        self.contentType = "GALLERY"
+        self.urls = images
 
 
 class ImageContent:
     def __init__(self, src):
-        self.type = "IMAGE"
-        self.src = src
+        self.contentType = "IMAGE"
+        self.url = src
 
 
 class Tag:
