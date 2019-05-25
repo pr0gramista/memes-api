@@ -1,8 +1,10 @@
 import jsons
 from parsers import kwejk, jbzd, demoty, mistrzowie, anonimowe, ninegag
 from flask import Flask
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 def to_response(page):
