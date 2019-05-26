@@ -1,6 +1,6 @@
 ﻿# Memes API [![Build Status](https://travis-ci.org/pr0gramista/memes-api.svg?branch=master)](https://travis-ci.org/pr0gramista/memes-api) [![codecov](https://codecov.io/gh/pr0gramista/memes-api/branch/master/graph/badge.svg)](https://codecov.io/gh/pr0gramista/memes-api)
 
-API for scrapping common meme sites.
+API for scrapping common meme sites. Written in Python using [parsel](https://github.com/scrapy/parsel) and [Flask](https://github.com/pallets/flask).
 Currently supports:
 * [demotywatory.pl](http://demotywatory.pl)
 * [kwejk.pl](http://kwejk.pl)
@@ -68,3 +68,18 @@ Then you can access them by accessing fe. `/kwejk`
   "title": "Ministerstwo memów, zdjęć i innych śmiesznych obrazków - KWEJK.pl"
 }
 ```
+
+## Development
+1. Install dependencies with [pipenv](https://github.com/pypa/pipenv.)
+2. Run development server with `python main.py`
+3. Make your changes
+4. Write and run tests with `pytest` in project directory
+5. Format your code using `black`
+6. If you added new packages run `pipenv run pipenv_to_requirements -f`
+7. Make a pull request and be happy :)
+
+## Deploying Memes API
+There are couple ways to deploy Memes API. For now supported options are:
+* Docker image (Dockerfile)
+* ZEIT Now (now.json)
+* Google App Engine (app.yaml)
