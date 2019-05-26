@@ -1,11 +1,10 @@
 ﻿# Memes API [![Build Status](https://travis-ci.org/pr0gramista/memes-api.svg?branch=master)](https://travis-ci.org/pr0gramista/memes-api) [![codecov](https://codecov.io/gh/pr0gramista/memes-api/branch/master/graph/badge.svg)](https://codecov.io/gh/pr0gramista/memes-api)
 
-API for scrapping common meme sites.
+API for scrapping common meme sites. Written in Python using [parsel](https://github.com/scrapy/parsel) and [Flask](https://github.com/pallets/flask).
 Currently supports:
 * [demotywatory.pl](http://demotywatory.pl)
 * [kwejk.pl](http://kwejk.pl)
 * [mistrzowie.org](http://mistrzowie.org)
-* [thecodinglove.com](http://thecodinglove.com)
 * [jbzd.pl](https://jbzdy.pl)
 * [9gag.com](http://9gag.com)
 
@@ -30,29 +29,57 @@ Then you can access them by accessing fe. `/kwejk`
 ```
 //shortened response
 {
-  "title": "KWEJK.pl - Najlepszy zbiór obrazków z Internetu!",
   "memes": [
     {
-      "title": "Dziewczyna z piłką",
-      "content": {
-        "url": "http://i1.kwejk.pl/k/obrazki/2016/11/7479f6497e46508ab0d515fcc7047b72.mp4",
-        "contentType": "VIDEO"
+      "title": "Czasy się zmieniają",
+      "url": "https://kwejk.pl/obrazek/3387625/czasy-sie-zmieniaja.html",
+      "view_url": "/kwejk/3387625",
+      "author": {
+        "name": "Torendil",
+        "url": "https://kwejk.pl/uzytkownik/torendil"
       },
-      "url": "http://kwejk.pl/obrazek/2814335/dziewczyna-z-pilka.html",
-      "commentAmount": 6,
-      "points": 125
-    },
-    {
-      "title": "Ma szansę być prezydentem",
+      "comment_count": 18,
       "content": {
-        "url": "http://i1.kwejk.pl/k/obrazki/2016/11/09100a20e1dd607694e91f408e15c761.jpg",
-        "contentType": "IMAGE"
+        "contentType": "IMAGE",
+        "url": "https://i1.kwejk.pl/k/obrazki/2019/05/lJUqdnyKqJf1Katl.jpg"
       },
-      "url": "http://kwejk.pl/obrazek/2814963/ma-szanse-byc-prezydentem.html",
-      "commentAmount": 6,
-      "points": 126
+      "points": 205,
+      "tags": [
+        {
+          "name": "#obrazek",
+          "url": "https://kwejk.pl/tag/obrazek"
+        },
+        {
+          "name": "#humor",
+          "url": "https://kwejk.pl/tag/humor"
+        },
+        {
+          "name": "#mem",
+          "url": "https://kwejk.pl/tag/mem"
+        },
+        {
+          "name": "#true",
+          "url": "https://kwejk.pl/tag/true"
+        }
+      ]
     }
   ],
-  "nextPage": "/kwejk/page/31310"
+  "next_page_url": "/kwejk/page/40878",
+  "title": "Ministerstwo memów, zdjęć i innych śmiesznych obrazków - KWEJK.pl"
 }
 ```
+
+## Development
+1. Install dependencies with [pipenv](https://github.com/pypa/pipenv.)
+2. Run development server with `python main.py`
+3. Make your changes
+4. Write and run tests with `pytest` in project directory
+5. Format your code using `black`
+6. If you added new packages run `pipenv run pipenv_to_requirements -f`
+7. Make a pull request and be happy :)
+
+## Deploying Memes API
+There are couple ways to deploy Memes API. For now supported options are:
+* Docker image (Dockerfile)
+* ZEIT Now (now.json)
+* Google App Engine (app.yaml)

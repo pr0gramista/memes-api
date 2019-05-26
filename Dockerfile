@@ -1,18 +1,16 @@
-FROM adoptopenjdk/openjdk11-openj9:alpine as builder
+FROM python:3-alpine
 
-EXPOSE 8080
+WORKDIR /app
 
-WORKDIR memes-api
+COPY requirements.txt ./
 
-ADD build.gradle /memes-api
-ADD gradlew /memes-api
-ADD gradlew.bat /memes-api
-ADD settings.gradle /memes-api
-ADD src /memes-api/src
-ADD gradle /memes-api/gradle
+RUN apk add --update --no-cache py3-lxml libxslt-dev g++ python-dev
 
-RUN ./gradlew assemble
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install gunicorn
 
-FROM adoptopenjdk/openjdk11-openj9:alpine
-COPY --from=builder /memes-api/build/libs/memes-api.jar memes-api.jar
-CMD ["java", "-jar", "memes-api.jar"]
+COPY . .
+
+EXPOSE 80
+
+CMD [ "gunicorn", "-b", "0.0.0.0:80", "-w", "4", "main:app" ]
