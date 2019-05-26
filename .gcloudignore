@@ -7,15 +7,15 @@
 #   $ gcloud topic gcloudignore
 #
 .gcloudignore
-# If you would like to upload your .git directory, .gitignore file or files
-# from your .gitignore file, remove the corresponding line
-# below:
 .git
 .gitignore
+tests
 Pipfile
 Pipfile.lock
-
-# Python pycache:
+.pytest_cache
+.vscode
+.coverage
 __pycache__/
-# Ignored by the build system
 /setup.cfg
+.travis.yml
+now.json

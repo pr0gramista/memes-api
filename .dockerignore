@@ -1,0 +1,13 @@
+.gcloudignore
+.git
+.gitignore
+tests
+Pipfile
+Pipfile.lock
+.pytest_cache
+.vscode
+.coverage
+__pycache__/
+/setup.cfg
+.travis.yml
+now.json
