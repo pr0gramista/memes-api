@@ -1,16 +1,20 @@
-import httplib2
 import re
 import traceback
+import requests
 from parsel import Selector
 
 FIND_ID_REGEX = re.compile("/([0-9]+)")
 
-http = httplib2.Http()
+
+session = requests.Session()
+session.trust_env = False
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+}
 
 
 def download(url):
-    (resp_headers, content) = http.request(url, "GET")
-    return content.decode("utf-8")
+    return session.get(url, headers=headers).text
 
 
 def download_multiple(urls):
