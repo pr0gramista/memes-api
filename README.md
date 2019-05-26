@@ -1,4 +1,4 @@
-﻿# Memes API
+﻿# Memes API [![Build Status](https://travis-ci.org/pr0gramista/memes-api.svg?branch=master)](https://travis-ci.org/pr0gramista/memes-api) [![codecov](https://codecov.io/gh/pr0gramista/memes-api/branch/master/graph/badge.svg)](https://codecov.io/gh/pr0gramista/memes-api)
 
 API for scrapping common meme sites.
 Currently supports:
@@ -31,29 +31,37 @@ Then you can access them by accessing fe. `/kwejk`
 {
   "memes": [
     {
+      "title": "Czasy się zmieniają",
+      "url": "https://kwejk.pl/obrazek/3387625/czasy-sie-zmieniaja.html",
+      "view_url": "/kwejk/3387625",
       "author": {
-        "name": "Camaris",
-        "url": "https://kwejk.pl/uzytkownik/camaris"
+        "name": "Torendil",
+        "url": "https://kwejk.pl/uzytkownik/torendil"
       },
-      "comment_count": 19,
+      "comment_count": 18,
       "content": {
-        "src": "https://i1.kwejk.pl/k/obrazki/2019/05/bhkOlFp6BnQhQHYr.jpg",
-        "type": "IMAGE"
+        "contentType": "IMAGE",
+        "url": "https://i1.kwejk.pl/k/obrazki/2019/05/lJUqdnyKqJf1Katl.jpg"
       },
-      "points": 278,
+      "points": 205,
       "tags": [
-        {
-          "name": "#film",
-          "url": "https://kwejk.pl/tag/film"
-        },
         {
           "name": "#obrazek",
           "url": "https://kwejk.pl/tag/obrazek"
+        },
+        {
+          "name": "#humor",
+          "url": "https://kwejk.pl/tag/humor"
+        },
+        {
+          "name": "#mem",
+          "url": "https://kwejk.pl/tag/mem"
+        },
+        {
+          "name": "#true",
+          "url": "https://kwejk.pl/tag/true"
         }
-      ],
-      "title": "a zwłaszcza z przyjaciolmi",
-      "url": "https://kwejk.pl/obrazek/3388289/a-zwlaszcza-z-przyjaciolmi.html",
-      "view_url": "/kwejk/3388289"
+      ]
     }
   ],
   "next_page_url": "/kwejk/page/40878",
