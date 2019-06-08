@@ -19,7 +19,6 @@ Response: available sites
   "/demotywatory",
   "/kwejk",
   "/mistrzowie",
-  "/thecodinglove",
   "/jbzd",
   "/9gag"
 ]
