@@ -18,19 +18,19 @@ def parse(html):
     document = Selector(text=html)
     memes = [
         catch_errors(parse_meme, element)
-        for element in document.css("div.content > section > article.resource-object")
+        for element in document.css("main article.article")
     ]
     memes = [meme for meme in memes if meme is not None]
 
     title = document.css("title::text").get()
     next_page_url = "/jbzd/page/" + get_last_part_url(
-        document.css(".btn-next-page::attr(href)").get()
+        document.css(".pagination-next::attr(href)").get()
     )
     return Page(title, memes, next_page_url)
 
 
 def parse_content(html):
-    image = html.css("img.resource-image::attr(src)").get()
+    image = html.css(".article-image img::attr(src)").get()
 
     if image is not None:
         return ImageContent(image)
@@ -43,11 +43,11 @@ def parse_content(html):
 
 
 def parse_meme(m):
-    title = m.css(".title > a::text").get().strip()
-    url = m.css(".title > a::attr(href)").get().strip()
+    title = m.css(".article-title > a::text").get().strip()
+    url = m.css(".article-title > a::attr(href)").get().strip()
 
     tags = [
-        Tag(tag.css("::text").get(), tag.attrib["href"]) for tag in m.css(".tags > a")
+        Tag(tag.css("::text").get(), tag.attrib["href"]) for tag in m.css(".article-tags > a")
     ]
 
     points = None
@@ -59,14 +59,14 @@ def parse_meme(m):
 
     comment_count = None
     comments_count_text = (
-        remove_big_whitespaces_selector(m.css("span.comments")).css("::text").get()
+        remove_big_whitespaces_selector(m.css(".article-comments-count")).css("::text").get()
     )
     try:
         comment_count = int(comments_count_text)
     except:
         pass
 
-    content = parse_content(m.css(".media"))
+    content = parse_content(m.css(".article-container"))
     if content is None:
         return None
 
