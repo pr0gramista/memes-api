@@ -1,6 +1,7 @@
 from parsel import Selector
 from utils import download, remove_big_whitespaces_selector, catch_errors
 from data import TextContent, Meme, Author, Page
+from utils import find_id_in_url
 
 
 def scrap(url):
@@ -15,9 +16,8 @@ def parse(html):
     ]
     memes = [meme for meme in memes if meme is not None]
     title = document.css("title::text").get()
-    next_page_url = (
-        "/anonimowe/page"
-        + document.css("nav.pagination > div.next > a::attr(href)").get()
+    next_page_url = "/anonimowe/page/" + find_id_in_url(
+        document.css("nav.pagination > div.next > a::attr(href)").get()
     )
     return Page(title, memes, next_page_url)
 
