@@ -11,10 +11,6 @@ import re
 
 
 ROOT = "https://m.demotywatory.pl"
-GALLERY_IMAGE_SCRIPT = re.compile(
-    r"<img\\n\\tclass=\\\"rsImg \\\"\\n\\tsrc=\\\"(.+?)\.jpg"
-)
-GALLERY_VIDEO_SCRIPT = re.compile(r"<source\\n\\t\\t\\tsrc=\\\"(.+?)\.mp4")
 
 
 def scrap(url):
@@ -37,20 +33,30 @@ def parse(html):
 
 
 def parse_gallery(html):
-    title = html.css("img::attr(alt)").get()
+    title = html.css("a::text").get()
     url = html.css("a::attr(href)").get()
     slides = []
 
     gallery_html = download(ROOT + url)
-    results = GALLERY_IMAGE_SCRIPT.finditer(gallery_html)
-    for result in results:
-        slide = result.group(1).replace("\\/", "/").replace("//upl", "/upl") + ".jpg"
+    gallery_page_document = Selector(text=gallery_html)
+    for slide_element in gallery_page_document.css(".rsSlideContent"):
+        slide = slide_element.css("img::attr(src)").get()
         slides = slides + [slide]
 
-    results = GALLERY_VIDEO_SCRIPT.finditer(gallery_html)
-    for result in results:
-        slide = result.group(1).replace("\\/", "/").replace("//upl", "/upl") + ".mp4"
-        slides = slides + [slide]
+    next_gallery_page_url = gallery_page_document.css(
+        ".gall_next_page > a::attr(href)"
+    ).get()
+    while next_gallery_page_url is not None:
+        gallery_html = download(ROOT + url + next_gallery_page_url)
+        gallery_page_document = Selector(text=gallery_html)
+        for slide_element in gallery_page_document.css(".rsSlideContent"):
+            slide = slide_element.css("img::attr(src)").get()
+            slides = slides + [slide]
+        next_gallery_page_url = gallery_page_document.css(
+            ".gall_next_page > a::attr(href)"
+        ).get()
+
+    slides = [slide for slide in slides if slide is not None]
 
     return (title, url, GalleryContent(slides), None)
 
