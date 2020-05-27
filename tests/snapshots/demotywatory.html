@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#000000" />
 <link rel="manifest" href="/manifest.json">
 <meta name="job-offer" content="Robisz w PHP, znasz MySQL, tworzysz UI z pomocą JS, szukasz pracy? Może właśnie ją znalazłeś! Ślij CV na praca@mmg.pl" />
-<link href="/res/assets/mobile-revisioneb958b9ba5bd8dcae17a40e5b4eee74b.css" rel="stylesheet" media="screen" />
+<link href="/res/assets/mobile-revisione51a7474e4bab132ed7ef04d57203656.css" rel="stylesheet" media="screen" />
 <script>
 			var logged_in = 0;
 			var username = '';
@@ -32,8 +32,8 @@
 
 	ga('send', 'pageview');
 </script>
-<script src="/res/assets/mobile-revision04aa047af5cf811deb9ea5579fad90b3.js"></script>
-<script src="https://static.demotywatory.pl/res/js/privacy_policy.js?d=052216" async></script>
+<script src="/res/assets/mobile-revisioncc6fc2d263c14f9351fcbf9b29e5901f.js"></script>
+<script src="https://static.demotywatory.pl/res/js/privacy_policy.js?d=052722" async></script>
 <script>
 				if (MMG.isAdblockDisabled()) {
 					var googletag = googletag || {};
@@ -49,14 +49,19 @@
 					})();
 				}
 			</script>
+<div id="sas_58376"></div>
 <script>
 	if (g_ads_enabled && MMG.isAdblockDisabled()) {
-		document.write('<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></s'+'cript>');
-		(adsbygoogle = window.adsbygoogle || []).push({
-			google_ad_client: 'ca-pub-8241049497608997',
-			enable_page_level_ads: true,
-			overlays: {google_ad_channel: '7230059661'}
-		});
+		var sas = sas || {};
+		sas.cmd = sas.cmd || [];
+		sas.cmd.push(
+			function () {
+				sas.call(
+					{ siteId: 170496, pageId: 1214964, formatId: 58376, tagId: "sas_58376" },
+					{ networkId: 2422, domain: "https://www14.smartadserver.com" /*, onNoad: function() {} */ }
+				);
+			}
+		);
 	}
 </script>
 <script>
@@ -123,7 +128,7 @@
 						window.fbAsyncInit = function() {
 				FB.init({
 					appId:  "1596783780558475",
-					version    : 'v2.8',
+					version    : 'v4.0',
 					status: true,
 					cookie: true,
 					xfbml:  true,
@@ -156,6 +161,9 @@
 <a href="/polecane">Polecane</a>
 </li>
 <li>
+<a href="/galerie" glowna>Galerie</a>
+</li>
+<li>
 <a href="/top">Top</a>
 </li>
 </ul>
@@ -178,6 +186,25 @@
 <a href="#" id="showSearchForm">Szukaj</a>
 </div>
 </form>
+<div id="notifs">
+<span id="notif_ring" title="powiadomienia" hidden="hidden" data-ringing="false"></span>
+<div id="notifs_menu" hidden="hidden">
+<div class="title">Powiadomienia</div>
+<div class="notif_show_all">
+<a href="/powiadomienia">
+pokaż wszystkie </a>
+</div>
+<div class="notifs_list_menu"></div>
+</div>
+</div>
+<script>
+	(function(){
+		var notifs_count = parseInt($.cookie('notifs_count'));
+		if (logged_in && notifs_count > 0) {
+			$('#notif_ring').attr('data-unread_notifs_count', notifs_count);
+		}
+	})();
+</script>
 </header>
 <div id="mobile-container" data-role="page">
 <div id="mobile-content" data-role="content">
@@ -185,15 +212,12 @@
 </div>
 <div>
 <div class="demotivator demot_pic
-	image	" data-id="4928409">
+	image	" data-id="5001038">
 <div class="pic_container ">
 <div class="picwrapper">
-<a href="/4928409">
-<img src="https://img1.dmty.pl//uploads/201905/1558436940_irx34k_500.jpg" alt="Kiedyś to byli bohaterowie..." class="demot_pic " />
+<a href="/5001038">
+<img src="https://img18.dmty.pl//uploads/202005/1590503102_lresuz_500.jpg" alt="Miłość nie ma ceny" class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-vilakazi	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -207,23 +231,43 @@ vilakazi	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928409">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928409/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">96</span>
-<span class="total_votes">102</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/kot">#kot</a></li>
+<li><a href="/tag/pies">#pies</a></li>
+<li><a href="/tag/atak">#atak</a></li>
+<li><a href="/tag/rany">#rany</a></li>
+<li><a href="/tag/weterynarz">#weterynarz</a></li>
+<li><a href="/tag/%C5%82apa">#łapa</a></li>
+<li><a href="/tag/komp">#komp</a></li>
+<li><a href="/tag/decyzja">#decyzja</a></li>
+<li><a href="/tag/mi%C5%82o%C5%9B%C4%87">#miłość</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/ania5757">
+ania5757 </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928409/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5001038">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001038/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">827</span>
+<span class="total_votes">844</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001038/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928409/Kiedys-to-byli-bohaterowie">
-4 </a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001038/Milosc-nie-ma-ceny">
+25 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928409#comments">
-2 </a>
+<a href="/5001038#comments">
+14 </a>
 </div>
 </div>
 </div>
@@ -247,15 +291,12 @@ vilakazi	</div>
 	});
 </script>
 <div class="demotivator demot_pic
-	image	" data-id="4928673">
+	image	" data-id="5001084">
 <div class="pic_container ">
 <div class="picwrapper">
-<a href="/4928673">
-<img src="https://img1.dmty.pl//uploads/201905/1558529456_ic1cfl_500.jpg" alt="Co widzisz, gdy patrzysz na dzieci..." class="demot_pic " />
+<a href="/5001084">
+<img src="https://img18.dmty.pl//uploads/202005/1590401551_u7gxnn_500.jpg" alt="Trylogia polskiego rządu:" class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-Meav	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -269,39 +310,51 @@ Meav	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928673">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928673/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">53</span>
-<span class="total_votes">57</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/trylogia">#trylogia</a></li>
+<li><a href="/tag/obiad">#obiad</a></li>
+<li><a href="/tag/pedofil">#pedofil</a></li>
+<li><a href="/tag/b%C3%B3l">#ból</a></li>
+<li><a href="/tag/mem">#mem</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/Wired">
+Wired </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928673/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5001084">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001084/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">511</span>
+<span class="total_votes">544</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001084/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928673/Co-widzisz-gdy-patrzysz-na-dzieci">
-</a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001084/Trylogia-polskiego-rzadu-">
+48 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928673#comments">
-0 </a>
+<a href="/5001084#comments">
+1 </a>
 </div>
 </div>
 </div>
 </div>
 <div class="demotivator demot_pic
-	image_gallery	" data-id="4928340">
+	image_gallery	" data-id="5000363">
 <div class="pic_container pic_600">
 <div class="picwrapper">
-<a href="/4928340">
-<img src="https://img1.dmty.pl//uploads/201905/1558491856_zvnw1s_500.jpg" alt="15 najciekawszych wiadomości 
-z zeszłego tygodnia, które 
-mogliście przegapić #71" class="demot_pic " />
+<a href="/5000363">
+<img src="https://img18.dmty.pl//uploads/202005/1590053135_tvrvza_500.jpg" alt="Głupota nie boli, a szkoda,
+bo powinna" class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-Revel	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -315,23 +368,38 @@ Revel	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928340">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928340/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">69</span>
-<span class="total_votes">77</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/g%C5%82upota">#głupota</a></li>
+<li><a href="/tag/gif">#gif</a></li>
+<li><a href="/tag/b%C3%B3l">#ból</a></li>
+<li><a href="/tag/faile">#faile</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/leylla25">
+leylla25 </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928340/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5000363">
+<a href="https://m.demotywatory.pl/demotivator/vote/5000363/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">112</span>
+<span class="total_votes">125</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5000363/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928340/15-najciekawszych-wiadomosci-z-zeszlego-tygodnia-ktore">
-14 </a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5000363/Glupota-nie-boli-a-szkoda-bo-powinna">
+17 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928340#comments">
-6 </a>
+<a href="/5000363#comments">
+12 </a>
 </div>
 </div>
 </div>
@@ -355,16 +423,12 @@ Revel	</div>
 	});
 </script>
 <div class="demotivator demot_pic
-	image	" data-id="4928478">
+	image	" data-id="5001079">
 <div class="pic_container ">
 <div class="picwrapper">
-<a href="/4928478">
-<img src="https://img1.dmty.pl//uploads/201905/1558456408_ujmlmg_500.jpg" alt="Opuszczony rollercoaster 
-przejęty przez naturę" class="demot_pic " />
+<a href="/5001079">
+<img src="https://img18.dmty.pl//uploads/202005/1590400689_q3tew5_500.jpg" alt="Z dziećmi już tak jest..." class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-Hesher	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -378,22 +442,38 @@ Hesher	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928478">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928478/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">96</span>
-<span class="total_votes">101</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/dzieci">#dzieci</a></li>
+<li><a href="/tag/nauka">#nauka</a></li>
+<li><a href="/tag/m%C3%B3wienie">#mówienie</a></li>
+<li><a href="/tag/logika">#logika</a></li>
+<li><a href="/tag/mem">#mem</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/Hesher">
+Hesher </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928478/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5001079">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001079/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">489</span>
+<span class="total_votes">499</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001079/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928478/Opuszczony-rollercoaster-przejety-przez-nature">
-2 </a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001079/Z-dziecmi-juz-tak-jest">
+40 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928478#comments">
+<a href="/5001079#comments">
 0 </a>
 </div>
 </div>
@@ -402,119 +482,122 @@ Hesher	</div>
 <article>
 <h2 id="top-comments">Najlepsze komentarze</h2>
 <div id="top-comments-widget">
-<div data-author="RealSimon" class="
+<div data-author="singri" class="
 		comment-box
-		comment_10878978					comment
+		comment_11378813					comment
 			">
 <div class="comment-left">
-<a href="/4927958#comment_10878978-anchor">
-<div class="thumb-container" style="background-image: url('https://img7.dmty.pl/uploads/201905/1558277481_8n68f4_120.jpg')"></div>
+<a href="/5001081#comment_11378813-anchor">
+<div class="thumb-container" style="background-image: url('https://img20.dmty.pl/uploads/202005/1590401211_c28jkd_120.jpg')"></div>
 </a>
 </div>
 <div class="comment-right">
-<p class="comment-content commcontent commcontent_10878978">
+<p class="comment-content commcontent commcontent_11378813">
 <span class="comment-author-container">
-<a href="/user/RealSimon" class="comment-author" title="Użytkownik">
-RealSimon</a>
+<a href="/user/singri" class="comment-author" title="Użytkownik">
+singri</a>
 </span>
-<a href="/4927958#comment_10878978-anchor">
-"Trans" to mogą być tłuszcze a płcie są dwie niezachodzące na siebie. Koniec tematu. </a>
+<a href="/5001081#comment_11378813-anchor">
+Kask powinien mieć i mam nadzieję, że nikt nie będzie próbował z tym polemizować.
+Ale dzieci, do ciężkiej cholery, się pilnuje!!! Co ta mała tam robiła? A jakby Dominik nie zdążył i ją&#8230; </a>
 </p>
 <p class="comments-votes">
-<span class="points">+110</span>
-<span class="count">(182)</span>
+<span class="points">+51</span>
+<span class="count">(59)</span>
 </p>
 </div>
-<div data-author="Nicram6323" class="
+<div data-author="esbek2" class="
 		comment-box
-		comment_10879972					comment
+		comment_11378769					comment
 			">
 <div class="comment-left">
-<a href="/4928181#comment_10879972-anchor">
-<div class="thumb-container" style="background-image: url('https://img6.demotywatoryfb.pl/uploads/201905/1558349155_kqb476_120.jpg')"></div>
+<a href="/5001078#comment_11378769-anchor">
+<div class="thumb-container" style="background-image: url('https://img4.dmty.pl/uploads/202005/1590400629_qoemm0_120.jpg')"></div>
 </a>
 </div>
 <div class="comment-right">
-<p class="comment-content commcontent commcontent_10879972">
+<p class="comment-content commcontent commcontent_11378769">
 <span class="comment-author-container">
-<a href="/user/Nicram6323" class="comment-author" title="Użytkownik">
-Nicram6323</a>
+<a href="/user/esbek2" class="comment-author" title="Użytkownik">
+esbek2</a>
 </span>
-<a href="/4928181#comment_10879972-anchor">
-Co to za mafia co każdy ją oczernia i nikt się jej nie boi. A on nie lepszy? Jego ojciec to były komuch. Poza tym jest zwykłym pajacem i nigdy nie rozumiałem, po co ludzie oglądają jego&#8230; </a>
+<a href="/5001078#comment_11378769-anchor">
+W każdym rozmiarze można wyglądać pięknie dopóki coś na dupie nie pęknie. </a>
 </p>
 <p class="comments-votes">
-<span class="points">+52</span>
-<span class="count">(72)</span>
+<span class="points">+42</span>
+<span class="count">(42)</span>
 </p>
 </div>
-<div data-author="igloo_72" class="
+<div data-author="MajorKaza" class="
 		comment-box
-		comment_10879095					comment
+		comment_11378780					comment
 			">
 <div class="comment-left">
-<a href="/4927984#comment_10879095-anchor">
-<div class="thumb-container" style="background-image: url('https://img3.demotywatoryfb.pl/uploads/201905/1558287803_ilso9t_120.jpg')"></div>
+<a href="/5001076#comment_11378780-anchor">
+<div class="thumb-container" style="background-image: url('https://img6.dmty.pl/uploads/202005/1590400370_wpnipd_120.jpg')"></div>
 </a>
 </div>
 <div class="comment-right">
-<p class="comment-content commcontent commcontent_10879095">
+<p class="comment-content commcontent commcontent_11378780">
 <span class="comment-author-container">
-<a href="/user/igloo_72" class="comment-author" title="Użytkownik">
-igloo_72</a>
+<a href="/user/MajorKaza" class="comment-author" title="Użytkownik">
+MajorKaza</a>
 </span>
-<a href="/4927984#comment_10879095-anchor">
-bo to jest konkurs transwizji </a>
+<a href="/5001076#comment_11378780-anchor">
+Nic tak nie mówi "dyskryminacja" jak światowe korporacje chcące Ci się przypodobać. </a>
 </p>
 <p class="comments-votes">
-<span class="points">+47</span>
-<span class="count">(65)</span>
+<span class="points">+36</span>
+<span class="count">(44)</span>
 </p>
 </div>
-<div data-author="agronomista" class="
+<div data-author="zjebmaker" class="
 		comment-box
-		comment_10879147					comment
+		comment_11379413					comment
 			">
 <div class="comment-left">
-<a href="/4927983#comment_10879147-anchor">
-<div class="thumb-container" style="background-image: url('https://img19.demotywatoryfb.pl/uploads/201905/1558288299_24hrl9_120.jpg')"></div>
+<a href="/5001127#comment_11379413-anchor">
+<div class="thumb-container" style="background-image: url('https://img5.demotywatoryfb.pl/uploads/202005/1590421446_aihbzy_120.jpg')"></div>
 </a>
 </div>
 <div class="comment-right">
-<p class="comment-content commcontent commcontent_10879147">
+<p class="comment-content commcontent commcontent_11379413">
 <span class="comment-author-container">
-<a href="/user/agronomista" class="comment-author" title="Użytkownik">
-agronomista</a>
+<a href="/user/zjebmaker" class="comment-author" title="Użytkownik">
+zjebmaker</a>
 </span>
-<a href="/4927983#comment_10879147-anchor">
-Masz coś do kasjerek w sklepie? Czy ten zawód to jakaś obelga? Synonim upadku? Co z podejściem, że żadna praca nie hańbi? </a>
+<a href="/5001127#comment_11379413-anchor">
+Do pewnych rzeczy trzeba dorosnąć.
+Niektórzy nie dorosną całe życie.
+Ok, aborcja jako ostateczność, ale traktowanie jej jako antykoncepcji to już zakrawa na pewnego rodzaju skrzywienie.&#8230; </a>
 </p>
 <p class="comments-votes">
 <span class="points">+33</span>
 <span class="count">(43)</span>
 </p>
 </div>
-<div data-author="ZrytyRyj" class="
+<div data-author="irek256" class="
 		comment-box
-		comment_10880515					comment
+		comment_11380217					comment
 			">
 <div class="comment-left">
-<a href="/4928257#comment_10880515-anchor">
-<div class="thumb-container" style="background-image: url('https://img11.demotywatoryfb.pl/uploads/201905/1558453884_ou3ic0_120.jpg')"></div>
+<a href="/5000634#comment_11380217-anchor">
+<div class="thumb-container" style="background-image: url('https://img2.demotywatoryfb.pl/uploads/202005/1590234468_6batvr_120.jpg')"></div>
 </a>
 </div>
 <div class="comment-right">
-<p class="comment-content commcontent commcontent_10880515">
+<p class="comment-content commcontent commcontent_11380217">
 <span class="comment-author-container">
-<a href="/user/ZrytyRyj" class="comment-author" title="Użytkownik">
-ZrytyRyj</a>
+<a href="/user/irek256" class="comment-author" title="Użytkownik">
+irek256</a>
 </span>
-<a href="/4928257#comment_10880515-anchor">
-I na to , zaprawdę powiadam wam , należy się 3000+ . Bez podtekstów . Szczęśliwy tata znajduje się pod troskliwą opieką lekarzy </a>
+<a href="/5000634#comment_11380217-anchor">
+A kierowca autobusu się nie zatrzymał, i nie bił brawo? </a>
 </p>
 <p class="comments-votes">
-<span class="points">+31</span>
-<span class="count">(41)</span>
+<span class="points">+29</span>
+<span class="count">(37)</span>
 </p>
 </div>
 </div>
@@ -522,32 +605,86 @@ I na to , zaprawdę powiadam wam , należy się 3000+ . Bez podtekstów . Szczę
 <article>
 <div class="demotivator">
 <div class="center abox-view-content">
+<div class="advert-container">
 <h2><center>
-<a style=color:#FF0033 href="https://advmanager.techfun.pl/redirect/-49-50-50-56-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fprom-288-dzien-mamy-2019%2Ffiltr-kategoria%2BKoszulki.html%3Futm_source%3Ddemotywatory%26utm_medium%3Drectangle%26utm_campaign%3Ddzien-mamy" target=_blank>Spraw mamie extra niespodziankę i kup jej koszulkę<br>przygotowaną specjalnie dla niej!<br>Dzień Mamy już 26 maja! Nie czekaj i zamów już dziś »
-<br> </a></center><br>
+<a style=color:#FF2828 href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Fwszystkie.html%3Fq%3Drower%26utm_source%3Ddemotywtory%26utm_campaign%3Drower" target=_blank>
+<br>
+Wodoodporne sakwy rowerowe z kieszeniami i pokrowcem na smartfona,<br> to praktyczny sposób na korzystanie z telefonu podczas deszczu. Sprawdź »»»
+<br> <font size="5px"><s></s> </font>
+</a></center><br>
 </h2>
-<div align="center"><a href="https://advmanager.techfun.pl/redirect/-49-50-50-56-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fprom-288-dzien-mamy-2019%2Ffiltr-kategoria%2BKoszulki.html%3Futm_source%3Ddemotywatory%26utm_medium%3Drectangle%26utm_campaign%3Ddzien-mamy" target=_blank><img src="https://demotywatory.pl/res/files/splukana-kosz.gif" border="1" class="demot demot_pic" alt=""><br><br><h2 style=color:#FF0033><center> Sprawdź więcej wzorów »»»</h2></a></div>
+<div align="center"><a href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Fwszystkie.html%3Fq%3Drower%26utm_source%3Ddemotywtory%26utm_campaign%3Drower" target=_blank><img src="https://demotywatory.pl/res/files/sakwa.jpg" border="1" width="600" alt=""><br><br><h2 style=color:#FF2828><center>Kliknij po więcej »»»</h2></a></div>
+</div>
+<div class="advert-container">
+<h2><center>
+<a style=color:#FFFF00 href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Ffiltr-rozmiar%2Bone_size%26marka%2BPewex.html%3Fq%3Dczapka%26utm_source%3Ddemotywatory%26utm_campaign%3Dczapeczki" target=_blank>
+<br>
+OldSchool rządzi! Pewex King:) Czapeczki Pewex taniej o 20 PLN!
+<br> <font size="5px"><s></s> </font>
+</a></center><br>
+</h2>
+<div align="center"><a href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Ffiltr-rozmiar%2Bone_size%26marka%2BPewex.html%3Fq%3Dczapka%26utm_source%3Ddemotywatory%26utm_campaign%3Dczapeczki" target=_blank><img src="https://demotywatory.pl/res/files/czapeczkol.jpg" border="1" width="600" alt=""><br><br><h2 style=color:#FFFF00><center>Sprawdź i wspieraj polską markę »»»</h2></a></div>
+</div>
+<div class="advert-container">
+<h2><center>
+<a style=color:#FF0039 href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fprodukt%2F440995-rowerowe-jaja-smieszne.html%3Futm_source%3Ddemotywatory%26utm_campaign%3Djaja" target=_blank>
+<br>
+Rowerowe Jaja, czyli niezwykle "jajcarska" i praktyczna lampka rowerowa LED,
+obok której nie przemkniesz obojętnie:)
+<br> <font size="5px"><s></s> </font>
+</a></center><br>
+</h2>
+<div align="center"><a href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fprodukt%2F440995-rowerowe-jaja-smieszne.html%3Futm_source%3Ddemotywatory%26utm_campaign%3Djaja" target=_blank><img src="https://demotywatory.pl/res/files/jaja.gif" border="1" width="600" alt=""><br><br><h2 style=color:#FF0039><center>Kliknij, sprawdź »»»</h2></a></div>
+</div>
+<div class="advert-container">
+<h2><center>
+<a style=color:#FF0039 href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Fkolejnosc-nowe-rosnaco.html%3Fq%3Dukulele%26utm_source%3Ddemotywatory%26utm_campaign%3Dukulele" target=_blank>
+<br>
+Dzień Dziecka tuż, tuż! <br> Polecamy UKULELE! To bardzo piękny i zarazem prosty do nauki instrument.
+
+<br> <font size="5px"><s></s> </font>
+</a></center><br>
+</h2>
+<div align="center"><a href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Fkolejnosc-nowe-rosnaco.html%3Fq%3Dukulele%26utm_source%3Ddemotywatory%26utm_campaign%3Dukulele" target=_blank><img src="https://demotywatory.pl/res/files/ukulelekolorkol.jpg" border="1" width="600" alt=""><br><br><h2 style=color:#FF0039><center>Kliknij, sprawdź i graj »»»</h2></a></div>
+</div>
+<div class="advert-container">
+<h2><center>
+<a style=color:#FFFF00 href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Fwszystkie.html%3Fq%3Dskarpety%26utm_source%3Dmmg%26utm_campaign%3Dskarpety" target=_blank>
+<br>
+Lubisz oryginalne rzeczy? Co powiesz na zestaw burgeroskarpetek opakowanych w papier i hamburgerowe pudełko?:)
+<br> <font size="5px"><s></s> </font>
+</a></center><br>
+</h2>
+<div align="center"><a href="https://advmanager.techfun.pl/redirect/-49-53-51-57-/qrzbgljngbel?url=https%3A%2F%2Fpewex.pl%2Fszukaj%2Fwszystkie.html%3Fq%3Dskarpety%26utm_source%3Dmmg%26utm_campaign%3Dskarpety" target=_blank><img src="https://demotywatory.pl/res/files/kolazburger.jpg" border="1" width="600" alt=""><br><br><h2 style=color:#FFFF00><center>Sprawdź ten fikuśny zestaw »»»</h2></a></div>
+</div>
 </div>
 </div>
 </article>
-<img src="https://advmanager.techfun.pl/cp/-49-50-50-56-/qrzbgljngbel" />
-<div class="mcnetwork mcnetwork--intertext" data-attr-width="640" data-attr-height="360" data-attr-category="175-demotywatory" data-attr-vast="https://myao.adocean.pl/ad.xml?id=Xbw7wxO8OLrbzwh4T3KHX9WLTNaNXBCC4k7mV6INdmn.t7/aocodetype=2" data-attr-a="true" data-attr-h="0" data-attr-nv="true"></div>
+<img src="https://advmanager.techfun.pl/cp/-49-53-51-57-/qrzbgljngbel" />
+<div class="mcnetwork mcnetwork--intertext" data-attr-width="640" data-attr-height="360" data-attr-category="175-demotywatory-M" data-attr-dis="true" data-attr-nv="true" data-attr-a="true" data-attr-h="0"></div>
 <script type="text/javascript">
-	if (MMG.isAdblockDisabled()) {
-		!function(){function e(){if(t&&!(document.readyState!==t&&document.readyState[3]<t[3])){t=!1;var e=Date.now(),n=document.head||document.documentElement.childNodes[0],a=document.createElement("script");a.type="text/javascript",a.src="https://mrex.exs.pl/script/bup-player.min.js?"+e,n.appendChild(a),a=document.createElement("link"),a.setAttribute("rel","stylesheet"),a.setAttribute("href","https://mrex.exs.pl/script/mainINTpre2.css?"+e),a.setAttribute("media","screen"),n.appendChild(a)}}var t="loading";e(),t&&(document.addEventListener?document.addEventListener("readystatechange",e,!1):window.attachEvent?document.attachEvent("onreadystatechange",e):document.onreadystatechange=e)}();
-	}
-</script>
-<div class="demotivator demot_pic
-	image_gallery	" data-id="4928431">
+  if (MMG.isAdblockDisabled()) {
+    ! function() {
+      function e() {
+        if (t && !(document.readyState !== t && document.readyState[3] < t[3])) {
+          t = !1;
+          var e = Date.now(),
+            n = document.head || document.documentElement.childNodes[0],
+            a = document.createElement("script");
+          a.type = "text/javascript", a.src = "https://mrex.exs.pl/script/bup-player.min.js?" + e, n.appendChild(a), a = document.createElement("link"), a.setAttribute("rel", "stylesheet"), a.setAttribute("href", "https://mrex.exs.pl/script/mainINTpre2.css?" + e), a.setAttribute("media", "screen"), n.appendChild(a)
+        }
+      }
+      var t = "loading";
+      e(), t && (document.addEventListener ? document.addEventListener("readystatechange", e, !1) : window.attachEvent ? document.attachEvent("onreadystatechange", e) : document.onreadystatechange = e)
+    }();
+  }
+</script><div class="demotivator demot_pic
+	image_gallery	" data-id="5000921">
 <div class="pic_container pic_600">
 <div class="picwrapper">
-<a href="/4928431">
-<img src="https://img1.dmty.pl//uploads/201905/1558444493_wv0dcz_500.jpg" alt="19 dziwnych i prawdziwych rzeczy,
-które zobaczysz tylko w Indiach" class="demot_pic " />
+<a href="/5000921">
+<img src="https://img18.dmty.pl//uploads/202005/1590346218_krwnfr_500.jpg" alt="Życie amerykańskiego adwokata od spraw rozwodowych może być naprawdę śmiechu warte" class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-leylla25	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -561,43 +698,50 @@ leylla25	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928431">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928431/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">72</span>
-<span class="total_votes">76</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/ameryka%C5%84scy">#amerykańscy</a></li>
+<li><a href="/tag/adwokaci">#adwokaci</a></li>
+<li><a href="/tag/sprawy">#sprawy</a></li>
+<li><a href="/tag/rozwodowe">#rozwodowe</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/opolko">
+opolko </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928431/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5000921">
+<a href="https://m.demotywatory.pl/demotivator/vote/5000921/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">90</span>
+<span class="total_votes">100</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5000921/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928431/19-dziwnych-i-prawdziwych-rzeczy-ktore-zobaczysz-tylko-w-Indiach">
-</a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5000921/Zycie-amerykanskiego-adwokata-od-spraw-rozwodowych-moze-byc-naprawde-smiechu-warte">
+3 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928431#comments">
+<a href="/5000921#comments">
 1 </a>
 </div>
 </div>
 </div>
 </div>
 <div class="demotivator demot_pic
-	image	" data-id="4928677">
-<div class="pic_container ">
+	image_gallery	" data-id="5000912">
+<div class="pic_container pic_600">
 <div class="picwrapper">
-<a href="/4928677">
-<img src="https://img1.dmty.pl//uploads/201905/1558531638_509zhg_500.jpg" alt="W 2015 roku 68-letnia Joy Milne z Perth ogłosiła, że potrafi wywąchać 
-chorobę Parkinsona Aby to sprawdzić lekarze poddali 
-ją testowi - dali do powąchania 
-12 koszulek, z których połowa należała do osób chorych na tę chorobę, a 
-druga połowa do osób zdrowych. 
-Milne prawidłowo rozpoznała 
-6 koszulek osób chorych..." class="demot_pic " />
+<a href="/5000912">
+<img src="https://img18.dmty.pl//uploads/202005/1590344133_kppfr3_500.jpg" alt="14 ciekawych faktów ze świata, 
+które dla większości mogą okazać się dużym zaskoczeniem" class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-Mudzina	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -611,23 +755,37 @@ Mudzina	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928677">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928677/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">65</span>
-<span class="total_votes">67</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/fakty">#fakty</a></li>
+<li><a href="/tag/ciekawe">#ciekawe</a></li>
+<li><a href="/tag/%C5%9Bwiat">#świat</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/lejdipank">
+lejdipank </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928677/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5000912">
+<a href="https://m.demotywatory.pl/demotivator/vote/5000912/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">79</span>
+<span class="total_votes">82</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5000912/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928677/W-2015-roku-68-letnia-Joy-Milne-z-Perth-oglosila-ze-potrafi">
+<a class="demot-share-count" data-url="https://demotywatory.pl/5000912/14-ciekawych-faktow-ze-swiata-ktore-dla-wiekszosci-moga">
 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928677#comments">
-0 </a>
+<a href="/5000912#comments">
+7 </a>
 </div>
 </div>
 </div>
@@ -645,16 +803,12 @@ Mudzina	</div>
 	</script>
 </div>
 <div class="demotivator demot_pic
-	image_gallery	" data-id="4928484">
-<div class="pic_container pic_600">
+	image	" data-id="5001434">
+<div class="pic_container ">
 <div class="picwrapper">
-<a href="/4928484">
-<img src="https://img1.dmty.pl//uploads/201905/1558490761_wrscsz_500.jpg" alt="40 najlepszych gifów, jakie 
-ostatnio pojawiły się w sieci" class="demot_pic " />
+<a href="/5001434">
+<img src="https://img18.dmty.pl//uploads/202005/1590586799_5vl7er_500.jpg" alt="To właśnie dziś - historyczne wydarzenie dla lotów załogowych w Kosmos!" class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-FlashbackFM	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -668,38 +822,175 @@ FlashbackFM	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928484">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928484/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">67</span>
-<span class="total_votes">73</span>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/NASA">#NASA</a></li>
+<li><a href="/tag/lot">#lot</a></li>
+<li><a href="/tag/kosmos">#kosmos</a></li>
+<li><a href="/tag/news">#news</a></li>
+<li><a href="/tag/historia">#historia</a></li>
+<li><a href="/tag/wydarzenie">#wydarzenie</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/Quartermaster">
+Quartermaster </a>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928484/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5001434">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001434/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">100</span>
+<span class="total_votes">102</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001434/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928484/40-najlepszych-gifow-jakie-ostatnio-pojawily-sie-w-sieci">
-9 </a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001434/To-wlasnie-dzis-wydarzenie-historyczne-w-lotach-zalogowych-w">
+</a>
 </div>
 <div class="demot-comments">
-<a href="/4928484#comments">
+<a href="/5001434#comments">
+7 </a>
+</div>
+</div>
+</div>
+</div>
+<div class="demotivator demot_pic
+	image	" data-id="5001395">
+<div class="pic_container ">
+<div class="picwrapper">
+<a href="/5001395">
+<img src="https://img18.dmty.pl//uploads/202005/1590573503_zn7t56_500.jpg" alt="Na to czekało wiele osób... Od 30 maja zniesiony zostanie 
+nakaz noszenia maseczek 
+w przestrzeni publicznej" class="demot_pic " />
+</a>
+</div>
+<script>
+		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
+		var $container = $(this).parents('.demotivator_inner_video_wrapper');
+
+		this.play();
+
+		if (!this.paused) {
+			$container.addClass('playing');
+		}
+	});
+</script>
+</div>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/maska">#maska</a></li>
+<li><a href="/tag/maseczka">#maseczka</a></li>
+<li><a href="/tag/news">#news</a></li>
+<li><a href="/tag/koronawirus">#koronawirus</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/Skylander">
+Skylander </a>
+</div>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5001395">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001395/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">118</span>
+<span class="total_votes">122</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001395/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-points">
+<div class="demot-fbshare">
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001395/Na-to-czekalo-wiele-osob-Od-30-maja-zniesiony-zostanie">
+1140 </a>
+</div>
+<div class="demot-comments">
+<a href="/5001395#comments">
+6 </a>
+</div>
+</div>
+</div>
+</div>
+<div class="demotivator demot_pic
+	video_mp4	" data-id="5001113" data-pv_video="/c/-53-48-48-49-49-49-51-/demotivator_video">
+<div class="pic_container ">
+<a href="/5001113" class="demot_link">
+<div class="picwrapper fake_demot">
+<div class="demotivator_inner_video_wrapper video_mp4_wrapper">
+<div class="play_mp4_button"></div>
+<span class="mp4_duration">
+0:24 </span>
+<video preload="metadata" poster="https://img18.dmty.pl//uploads/202005/1590413839_59mpwf.mp4" loop muted height="auto" width="100%" class="" data-mp4_player_properties="1" data-mp4_is_paused_by_user="0">
+<source src="https://img18.dmty.pl//uploads/202005/1590413843_5ikh1j.mp4" type="video/mp4" />
+</video>
+</div>
+<h2 class="demot_title bigger">
+Ciekawski lisek arktyczny </h2>
+<h2 class="demot_description">
+</h2>
+<span class="footer">www.demotywatory.pl</span>
+</div>
+</a>
+<script>
+		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
+		var $container = $(this).parents('.demotivator_inner_video_wrapper');
+
+		this.play();
+
+		if (!this.paused) {
+			$container.addClass('playing');
+		}
+	});
+</script>
+</div>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/lis">#lis</a></li>
+<li><a href="/tag/aparat">#aparat</a></li>
+</ul>
+</section>
+<div class="demot-nick">
+<span>od</span>
+<a href="/user/Elfines">
+Elfines </a>
+</div>
+</div>
+<div class="demot-caption">
+<div class="demot-voting" data-demot_id="5001113">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001113/up" class="demot-voting-up">+</a>
+<div class="up_total_votes">
+<span class="up_votes">278</span>
+<span class="total_votes">279</span>
+</div>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001113/down" class="demot-voting-down">-</a>
+</div>
+<div class="demot-points">
+<div class="demot-fbshare">
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001113/Ciekawski-lisek-arktyczny">
+10 </a>
+</div>
+<div class="demot-comments">
+<a href="/5001113#comments">
 1 </a>
 </div>
 </div>
 </div>
 </div>
 <div class="demotivator demot_pic
-	image	" data-id="4928503">
+	image	" data-id="5001305">
 <div class="pic_container ">
 <div class="picwrapper">
-<a href="/4928503">
-<img src="https://img1.dmty.pl//uploads/201905/1558461673_kzm58t_500.jpg" alt="Pożegnalne zdjęcie obsady 
-Gry o tron" class="demot_pic " />
+<a href="/5001305">
+<img src="https://img18.dmty.pl//uploads/202005/1590515360_dnqgl7_500.jpg" alt="Oczywiście obyło się bez pacyfikowania i mandatów. Pewnie &quot;Zero&quot; już upomniał milicjantów za niewłaściwe traktowanie lepszego sortu." class="demot_pic " />
 </a>
-<div class="demot-nick">
-<span>by</span>
-Venkman	</div>
 </div>
 <script>
 		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
@@ -713,111 +1004,38 @@ Venkman	</div>
 	});
 </script>
 </div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928503">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928503/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">73</span>
-<span class="total_votes">89</span>
-</div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928503/down" class="demot-voting-down">-</a>
-</div>
-<div class="demot-points">
-<div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928503/Pozegnalne-zdjecie-obsady-Gry-o-tron">
-</a>
-</div>
-<div class="demot-comments">
-<a href="/4928503#comments">
-3 </a>
-</div>
-</div>
-</div>
-</div>
-<div class="demotivator demot_pic
-	image	" data-id="4928328">
-<div class="pic_container ">
-<div class="picwrapper">
-<a href="/4928328">
-<img src="https://img1.dmty.pl//uploads/201905/1558419592_ogjjb4_500.jpg" alt="Skorzystał z okazji" class="demot_pic " />
-</a>
+<div class="demot-infobox">
+<section class="tags">
+<ul>
+<li><a href="/tag/news">#news</a></li>
+<li><a href="/tag/pielgrzymka">#pielgrzymka</a></li>
+<li><a href="/tag/policja">#policja</a></li>
+<li><a href="/tag/maseczki">#maseczki</a></li>
+</ul>
+</section>
 <div class="demot-nick">
-<span>by</span>
-Borgman	</div>
+<span>od</span>
+<a href="/user/nowygregor">
+nowygregor </a>
 </div>
-<script>
-		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
-		var $container = $(this).parents('.demotivator_inner_video_wrapper');
-
-		this.play();
-
-		if (!this.paused) {
-			$container.addClass('playing');
-		}
-	});
-</script>
 </div>
 <div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928328">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928328/up" class="demot-voting-up">+</a>
+<div class="demot-voting" data-demot_id="5001305">
+<a href="https://m.demotywatory.pl/demotivator/vote/5001305/up" class="demot-voting-up">+</a>
 <div class="up_total_votes">
-<span class="up_votes">123</span>
-<span class="total_votes">132</span>
+<span class="up_votes">313</span>
+<span class="total_votes">386</span>
 </div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928328/down" class="demot-voting-down">-</a>
+<a href="https://m.demotywatory.pl/demotivator/vote/5001305/down" class="demot-voting-down">-</a>
 </div>
 <div class="demot-points">
 <div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928328/Skorzystal-z-okazji">
-2 </a>
+<a class="demot-share-count" data-url="https://demotywatory.pl/5001305/Oczywiscie-obylo-sie-bez-pacyfikowania-i-mandatow-Pewnie">
+17 </a>
 </div>
 <div class="demot-comments">
-<a href="/4928328#comments">
-1 </a>
-</div>
-</div>
-</div>
-</div>
-<div class="demotivator demot_pic
-	image	" data-id="4928540">
-<div class="pic_container ">
-<div class="picwrapper">
-<a href="/4928540">
-<img src="https://img1.dmty.pl//uploads/201905/1558489497_edljkb_500.jpg" alt="Tak obrywa się chmura" class="demot_pic " />
-</a>
-<div class="demot-nick">
-<span>by</span>
-Melotte	</div>
-</div>
-<script>
-		$('.demotivator_inner_video_wrapper:not(.playing) video.autoplay').each(function () {
-		var $container = $(this).parents('.demotivator_inner_video_wrapper');
-
-		this.play();
-
-		if (!this.paused) {
-			$container.addClass('playing');
-		}
-	});
-</script>
-</div>
-<div class="demot-caption">
-<div class="demot-voting" data-demot_id="4928540">
-<a href="https://m.demotywatory.pl/demotivator/vote/4928540/up" class="demot-voting-up">+</a>
-<div class="up_total_votes">
-<span class="up_votes">110</span>
-<span class="total_votes">112</span>
-</div>
-<a href="https://m.demotywatory.pl/demotivator/vote/4928540/down" class="demot-voting-down">-</a>
-</div>
-<div class="demot-points">
-<div class="demot-fbshare">
-<a class="demot-share-count" data-url="https://demotywatory.pl/4928540/Tak-obrywa-sie-chmura">
-2 </a>
-</div>
-<div class="demot-comments">
-<a href="/4928540#comments">
-0 </a>
+<a href="/5001305#comments">
+22 </a>
 </div>
 </div>
 </div>
@@ -838,7 +1056,7 @@ Melotte	</div>
 <div id="footer">
 <a href="https://demotywatory.pl" class="desktop_version">wersja pełna serwisu</a>
 <br /><br />
-&copy; 2009-2019 Demotywatory.pl
+&copy; 2009-2020 Demotywatory.pl
 </div>
 </body>
 </html>
