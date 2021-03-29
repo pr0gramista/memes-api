@@ -59,7 +59,7 @@ def parse_meme(m):
 
     comment_count = None
     comments_count_text = (
-        remove_big_whitespaces_selector(m.css(".article-comments-count")).css("::text").get()
+        remove_big_whitespaces_selector(m.css(".article-title-comments-count")).css("::text").get()
     )
     try:
         comment_count = int(comments_count_text)
