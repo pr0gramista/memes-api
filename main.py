@@ -1,5 +1,5 @@
 import jsons
-from parsers import kwejk, jbzd, demoty, mistrzowie, anonimowe, ninegag
+from parsers import kwejk, jbzd, demoty, mistrzowie, anonimowe, ninegag, ifunnyco
 from flask import Flask
 from flask_cors import CORS
 
@@ -109,6 +109,22 @@ def ninegagnsfw_page(page):
                 page
             ),
             nsfw=True,
+        )
+    )
+
+
+@app.route("/ifunnyco")
+def ifunnyco_root():
+    return to_response(
+        ifunnyco.scrap("https://ifunny.co/api/v1/feeds?page=1&type=featured", 1)
+    )
+
+
+@app.route("/ifunnyco/page/<page>")
+def ifunnyco_page(page):
+    return to_response(
+        ifunnyco.scrap(
+            "https://ifunny.co/api/v1/feeds?page={}&type=featured".format(page), page
         )
     )
 
