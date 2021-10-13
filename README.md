@@ -6,7 +6,8 @@ Currently supports:
 * [kwejk.pl](http://kwejk.pl)
 * [mistrzowie.org](http://mistrzowie.org)
 * [jbzd.pl](https://jbzdy.pl)
-* [9gag.com](http://9gag.com)
+* [9gag.com](https://9gag.com)
+* [ifunny.co](https://ifunny.co)
 
 No sites to be supported, suggest one?
 
@@ -16,11 +17,14 @@ No sites to be supported, suggest one?
 Response: available sites
 ```
 [
-  "/demotywatory",
   "/kwejk",
-  "/mistrzowie",
   "/jbzd",
-  "/9gag"
+  "/9gag",
+  "/9gagnsfw",
+  "/demotywatory",
+  "/mistrzowie",
+  "/anonimowe",
+  "/ifunnyco"
 ]
 ```
 
