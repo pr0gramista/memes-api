@@ -22,6 +22,7 @@ def hello():
             "/demotywatory",
             "/mistrzowie",
             "/anonimowe",
+            "/ifunnyco",
         ]
     )
 
