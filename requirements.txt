@@ -9,7 +9,7 @@ idna==2.10
 itsdangerous==2.0.1
 jinja2==3.0.1
 jsons==1.4.0
-lxml==4.6.3
+lxml==4.9.1
 markupsafe==2.0.1
 parsel==1.6.0
 requests==2.25.1
