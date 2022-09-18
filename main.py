@@ -117,7 +117,7 @@ def ninegagnsfw_page(page):
 @app.route("/ifunnyco")
 def ifunnyco_root():
     return to_response(
-        ifunnyco.scrap("https://ifunny.co/api/v1/feeds?page=1&type=featured", 1)
+        ifunnyco.scrap("https://ifunny.co/api/v1/feeds/featured?page=1", 1)
     )
 
 
@@ -125,7 +125,7 @@ def ifunnyco_root():
 def ifunnyco_page(page):
     return to_response(
         ifunnyco.scrap(
-            "https://ifunny.co/api/v1/feeds?page={}&type=featured".format(page), page
+            "https://ifunny.co/api/v1/feeds/featured?page={}".format(page), page
         )
     )
 
