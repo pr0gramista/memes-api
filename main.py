@@ -39,12 +39,12 @@ def kwejk_page(page):
 
 @app.route("/jbzd")
 def jbzd_root():
-    return to_response(jbzd.scrap("https://jbzdy.cc"))
+    return to_response(jbzd.scrap("https://jbzd.com.pl"))
 
 
 @app.route("/jbzd/page/<page>")
 def jbzd_page(page):
-    return to_response(jbzd.scrap("https://jbzdy.cc/str/{}".format(page)))
+    return to_response(jbzd.scrap("https://jbzd.com.pl/str/{}".format(page)))
 
 
 @app.route("/mistrzowie")
