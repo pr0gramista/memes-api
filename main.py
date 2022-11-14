@@ -1,5 +1,14 @@
 import jsons
-from parsers import kwejk, jbzd, demoty, mistrzowie, anonimowe, ninegag, ifunnyco
+from parsers import (
+    kwejk,
+    jbzd,
+    demoty,
+    mistrzowie,
+    anonimowe,
+    ninegag,
+    ifunnyco,
+    faktopedia,
+)
 from flask import Flask
 from flask_cors import CORS
 
@@ -23,6 +32,7 @@ def hello():
             "/mistrzowie",
             "/anonimowe",
             "/ifunnyco",
+            "/faktopedia",
         ]
     )
 
@@ -75,6 +85,16 @@ def demotywatory_root():
 @app.route("/demotywatory/page/<page>")
 def demotywatory_page(page):
     return to_response(demoty.scrap("https://m.demotywatory.pl/page/{}".format(page)))
+
+
+@app.route("/faktopedia")
+def faktopedia_root():
+    return to_response(faktopedia.scrap("https://m.faktopedia.pl"))
+
+
+@app.route("/faktopedia/page/<page>")
+def faktopedia_page(page):
+    return to_response(faktopedia.scrap("https://m.faktopedia.pl/page/{}".format(page)))
 
 
 @app.route("/9gag")
