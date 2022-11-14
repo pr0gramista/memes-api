@@ -73,7 +73,7 @@ Then you can access them by accessing fe. `/kwejk`
 ```
 
 ## Development
-1. Install dependencies with [pipenv](https://github.com/pypa/pipenv.)
+1. Install dependencies with [pipenv](https://github.com/pypa/pipenv)
 2. Run development server with `python main.py`
 3. Make your changes
 4. Write and run tests with `pytest` in project directory
