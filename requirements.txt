@@ -1,5 +1,5 @@
 -i https://pypi.org/simple/
-certifi==2021.5.30
+certifi==2022.12.7
 chardet==4.0.0
 click==8.0.1
 cssselect==1.1.0
