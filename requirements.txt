@@ -17,4 +17,4 @@ six==1.16.0
 typish==1.9.2
 urllib3==1.26.5
 w3lib==1.22.0
-werkzeug==2.0.1
+werkzeug==2.2.3
